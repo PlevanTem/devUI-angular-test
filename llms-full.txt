@@ -1,0 +1,778 @@
+============================================================
+llms-full.txt - DevUI Component Library Documentation
+============================================================
+
+---
+title: "DevUI for Angular - Complete Component Library Documentation"
+description: "Complete API specifications, design tokens, usage patterns, and constraints for DevUI Angular component library"
+---
+
+# 1. METADATA | 元数据
+# Project identification for LLM context | LLM 快速识别项目信息
+
+PROJECT_NAME: DevUI (ng-devui)
+FRAMEWORK: Angular
+LANGUAGE: TypeScript
+VERSION: 18.0.0
+LAST_UPDATE: 2026-02-06
+RESTRICTION_LEVEL: STRICT  # Enforces strict compliance - no violations allowed | 严格模式，禁止所有违规写法
+OFFICIAL_DOCS: https://devui.design/components/zh-cn/get-start
+GITHUB_REPO: https://github.com/DevCloudFE/ng-devui
+NPM_PACKAGE: ng-devui
+
+---
+
+# 2. AI GENERATION CONSTRAINTS | AI 生成强制约束
+# HIGHEST PRIORITY RULES | 核心规则，优先级最高
+
+## 2.1 Component Usage Constraints | 组件使用约束
+
+1. **Only use official library components | 仅使用官方组件**
+   - Importing and using components from ng-devui is MANDATORY
+   - Do NOT create custom implementations using native HTML elements (div, button, input, etc.)
+   - 仅允许导入并使用 ng-devui 暴露的官方组件，禁止手写原生 HTML 标签重构组件
+   - Example: Use `<d-button>` instead of `<button>`, use `<d-text-input>` instead of `<input>`
+
+2. **Strict import paths | 严格导入路径**
+   ```typescript
+   // ✅ CORRECT - Import specific module
+   import { ButtonModule } from 'ng-devui/button';
+   import { CardModule } from 'ng-devui/card';
+   import { TextInputModule } from 'ng-devui/text-input';
+   
+   // ✅ CORRECT - Import all modules (NgModule only)
+   import { DevUIModule } from 'ng-devui';
+   
+   // ❌ WRONG - Do not use relative paths or custom aliases
+   // import { ButtonModule } from './components/button';
+   ```
+
+3. **Module import in standalone components | Standalone 组件中的模块导入**
+   ```typescript
+   // Standalone Component Pattern
+   import { Component } from '@angular/core';
+   import { ButtonModule } from 'ng-devui/button';
+   
+   @Component({
+     selector: 'app-example',
+     imports: [ButtonModule],  // Import module in standalone component
+     template: `<d-button bsStyle="primary">按钮</d-button>`
+   })
+   export class ExampleComponent {}
+   ```
+
+4. **No style overrides | 禁止样式覆盖**
+   - Inheritance, rewriting, or overriding of component built-in styles is FORBIDDEN
+   - Never use `!important` syntax
+   - 禁止继承、重写、覆盖组件库内置样式，不允许使用 !important 语法
+   - Use component props/inputs to customize appearance instead
+
+## 2.2 Styling Constraints | 样式约束
+# Design Tokens Only - Zero Hardcoding | 绑定设计令牌，杜绝硬编码
+
+1. **No inline styles or hardcoded values | 禁止内联样式和硬编码**
+   - ❌ Inline `[style]` or `[ngStyle]` attributes for component styling
+   - ❌ Hardcoded colors (#xxx, rgb, rgba) in templates
+   - ❌ Hardcoded dimensions (px, rem without variables) for component sizing
+   - ❌ Hardcoded border-radius, shadows, spacing
+   - ✅ Use component props: `bsStyle`, `bsSize`, `cssClass` etc.
+   - ✅ Use design tokens via CSS variables when available
+
+2. **Design token enforcement | 强制使用设计令牌**
+   - ✅ Component official Props/Inputs (bsStyle, bsSize, etc.)
+   - ✅ Design token CSS variables (when available)
+   - ✅ Theme configuration via DevUI theme system
+   - ✅ Component built-in style classes
+
+3. **No custom stylesheets for components | 禁止为组件创建自定义样式表**
+   - Do NOT create independent CSS/SCSS files to override component styles
+   - 不允许编写独立的 CSS/SCSS 文件来覆盖组件样式
+   - Use component configuration props instead
+
+4. **Built-in responsiveness only | 仅使用内置响应式规则**
+   - Use component library's built-in responsive props and breakpoint rules
+   - 响应式适配仅使用组件库内置的响应式属性/工具类
+
+## 2.3 Code Standards Constraints | 代码规范约束
+
+1. **TypeScript strict mode | TypeScript 严格模式**
+   - Use TypeScript type definitions throughout
+   - Adhere to project ESLint and Stylelint rules
+   - 统一使用 TS 类型定义，遵循项目 ESLint/Stylelint 规则
+
+2. **Stable APIs only | 仅使用稳定版 API**
+   - Never use deprecated Props or methods
+   - Only use stable, documented APIs
+   - 禁用组件库已废弃的 Props/方法，仅使用稳定版 API
+   - Deprecated: `bsPosition` in Button (use ButtonGroup instead)
+
+3. **Standardized event handlers | 标准化事件处理**
+   - Follow Angular event binding conventions: `(eventName)="handler($event)"`
+   - Use component-specific event outputs (e.g., `btnClick`, `valueChange`)
+   - 交互逻辑遵循 Angular 事件绑定规范
+
+4. **Animation support required | 需要动画支持**
+   - Must import `provideAnimations()` in app.config.ts
+   - DevUI components require Angular Animations module
+   - 必须在 app.config.ts 中导入 provideAnimations()
+
+---
+
+# 3. GLOBAL DESIGN TOKENS | 全局设计令牌
+# Single Source of Truth - Unified Style Data Source | 样式唯一数据源
+
+## 3.1 Color System | 颜色系统
+
+COLOR: {
+  "primary": "#165DFF",
+  "primary-hover": "#4080FF",
+  "success": "#00B42A",
+  "warning": "#FF7D00",
+  "danger": "#F53F3F",
+  "info": "#165DFF",
+  "text-primary": "#1D2129",
+  "text-secondary": "#4E5969",
+  "text-disabled": "#86909C",
+  "bg-page": "#F2F3F5",
+  "bg-container": "#FFFFFF",
+  "border": "#E5E6EB"
+}
+
+## 3.2 Typography System | 排版系统
+
+TYPOGRAPHY: {
+  "font-family": "Inter, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+  "font-size-h1": "32px",
+  "font-size-h2": "24px",
+  "font-size-h3": "20px",
+  "font-size-h4": "16px",
+  "font-size-body": "14px",
+  "font-size-small": "12px",
+  "font-weight-normal": 400,
+  "font-weight-medium": 500,
+  "font-weight-semibold": 600,
+  "line-height-base": 1.5
+}
+
+## 3.3 Layout & Decoration | 布局与装饰
+
+SPACING: { 
+  "xs": "4px", 
+  "sm": "8px", 
+  "md": "16px", 
+  "lg": "24px", 
+  "xl": "32px",
+  "xxl": "48px"
+}
+
+BORDER_RADIUS: { 
+  "sm": "2px", 
+  "md": "4px", 
+  "lg": "8px", 
+  "full": "9999px" 
+}
+
+BOX_SHADOW: { 
+  "card": "0 2px 8px rgba(0,0,0,0.08)", 
+  "modal": "0 4px 16px rgba(0,0,0,0.12)",
+  "dropdown": "0 2px 8px rgba(0,0,0,0.1)"
+}
+
+SIZE: {
+  "xs": "xs",
+  "sm": "sm", 
+  "md": "md",
+  "lg": "lg"
+}
+
+---
+
+# 4. CORE COMPONENT SPECIFICATIONS | 核心组件规范库
+# High-frequency components with API, semantic structure, and usage examples
+# 高频组件 API + 语义结构 + 使用示例
+
+---
+
+COMPONENT: Button
+IMPORT_PATH: ng-devui/button
+SELECTOR: d-button
+MODULE: ButtonModule
+DOCS: https://devui.design/components/zh-cn/button/demo
+
+CORE_PROPS: {
+  "bsStyle": "common | primary | text | text-dark | danger | success | warning",
+  "bsSize": "lg | md | sm | xs",
+  "type": "button | submit | reset",
+  "disabled": "boolean",
+  "icon": "string",
+  "showLoading": "boolean",
+  "bordered": "boolean",
+  "shape": "circle",
+  "width": "string",
+  "autofocus": "boolean"
+}
+
+OUTPUTS: {
+  "btnClick": "EventEmitter<MouseEvent>"
+}
+
+SEMANTIC_NODES: root(根容器), button-element(按钮元素), icon(图标容器), content(文本区域)
+
+USAGE_EXAMPLE: |
+  <d-button bsStyle="primary" bsSize="md" (btnClick)="handleClick()">
+    主要按钮
+  </d-button>
+  
+  <d-button bsStyle="success" [disabled]="isDisabled">
+    <d-icon name="icon-check"></d-icon>
+    成功按钮
+  </d-button>
+
+FORBIDDEN: [
+  "使用原生 <button> 标签",
+  "使用 bsPosition (已废弃，使用 ButtonGroup 代替)",
+  "内联样式覆盖按钮样式"
+]
+
+---
+
+COMPONENT: Card
+IMPORT_PATH: ng-devui/card
+SELECTOR: d-card
+MODULE: CardModule
+DOCS: https://devui.design/components/zh-cn/card/demo
+
+CORE_PROPS: {
+  "interactive": "boolean"
+}
+
+SUB_COMPONENTS: {
+  "d-card-header": "CardHeaderComponent",
+  "d-card-title": "CardTitleDirective",
+  "d-card-subtitle": "CardSubtitleDirective",
+  "d-card-content": "CardContentDirective",
+  "d-card-actions": "CardActionsDirective",
+  "d-card-avatar": "CardAvatarDirective",
+  "d-card-meta": "CardMetaDirective",
+  "d-card-extend": "CardExtendComponent"
+}
+
+SEMANTIC_NODES: root(根容器), header(头部), body(主体), footer(底部), actions(操作区)
+
+USAGE_EXAMPLE: |
+  <d-card>
+    <d-card-header>
+      <d-card-title>卡片标题</d-card-title>
+      <d-card-subtitle>副标题</d-card-subtitle>
+    </d-card-header>
+    <d-card-content>
+      卡片内容区域
+    </d-card-content>
+    <d-card-actions align="end">
+      <d-button bsStyle="primary">操作</d-button>
+    </d-card-actions>
+  </d-card>
+
+FORBIDDEN: [
+  "使用原生 div 创建卡片布局",
+  "自定义 CSS 覆盖卡片样式"
+]
+
+---
+
+COMPONENT: TextInput
+IMPORT_PATH: ng-devui/text-input
+SELECTOR: d-text-input
+MODULE: TextInputModule
+DOCS: https://devui.design/components/zh-cn/text-input/demo
+
+CORE_PROPS: {
+  "placeholder": "string",
+  "disabled": "boolean",
+  "readonly": "boolean",
+  "size": "lg | md | sm",
+  "maxLength": "number",
+  "cssClass": "string",
+  "autofocus": "boolean"
+}
+
+OUTPUTS: {
+  "valueChange": "EventEmitter<string>",
+  "focus": "EventEmitter<FocusEvent>",
+  "blur": "EventEmitter<FocusEvent>"
+}
+
+SEMANTIC_NODES: root(根容器), input-wrapper(输入框包装器), input-element(输入元素)
+
+USAGE_EXAMPLE: |
+  <d-text-input 
+    placeholder="请输入内容"
+    [disabled]="false"
+    size="md"
+    (valueChange)="onValueChange($event)">
+  </d-text-input>
+
+FORBIDDEN: [
+  "使用原生 <input> 标签",
+  "硬编码颜色和尺寸值"
+]
+
+---
+
+COMPONENT: Select
+IMPORT_PATH: ng-devui/select
+SELECTOR: d-select
+MODULE: SelectModule
+DOCS: https://devui.design/components/zh-cn/select/demo
+
+CORE_PROPS: {
+  "options": "any[]",
+  "isSearch": "boolean",
+  "multiple": "boolean",
+  "disabled": "boolean",
+  "placeholder": "string",
+  "filterKey": "string",
+  "valueKey": "string",
+  "labelKey": "string",
+  "size": "lg | md | sm",
+  "scrollHight": "string"
+}
+
+OUTPUTS: {
+  "toggleChange": "EventEmitter<boolean>",
+  "valueChange": "EventEmitter<any>",
+  "loadMore": "EventEmitter<any>"
+}
+
+SEMANTIC_NODES: root(根容器), select-trigger(触发器), dropdown-menu(下拉菜单), option-item(选项项)
+
+USAGE_EXAMPLE: |
+  <d-select
+    [options]="options"
+    [isSearch]="true"
+    [multiple]="false"
+    placeholder="请选择"
+    (valueChange)="onSelectChange($event)">
+  </d-select>
+
+FORBIDDEN: [
+  "使用原生 <select> 标签",
+  "自定义下拉菜单样式"
+]
+
+---
+
+COMPONENT: Modal
+IMPORT_PATH: ng-devui/modal
+SELECTOR: d-modal
+MODULE: ModalModule
+DOCS: https://devui.design/components/zh-cn/modal/demo
+
+CORE_PROPS: {
+  "id": "string",
+  "width": "string",
+  "zIndex": "number",
+  "backdropCloseable": "boolean",
+  "draggable": "boolean",
+  "placement": "center | top | bottom",
+  "showAnimation": "boolean",
+  "escapable": "boolean",
+  "cssClass": "string"
+}
+
+SERVICE: DialogService (for programmatic modal creation)
+
+SEMANTIC_NODES: root(根容器), backdrop(背景遮罩), modal-container(模态框容器), header(头部), body(主体), footer(底部)
+
+USAGE_EXAMPLE: |
+  <!-- Template Modal -->
+  <d-modal #modal [backdropCloseable]="true">
+    <d-modal-header>
+      <h4>模态框标题</h4>
+    </d-modal-header>
+    <d-modal-body>
+      模态框内容
+    </d-modal-body>
+    <d-modal-footer>
+      <d-button (btnClick)="modal.hide()">取消</d-button>
+      <d-button bsStyle="primary" (btnClick)="handleConfirm()">确认</d-button>
+    </d-modal-footer>
+  </d-modal>
+  
+  <!-- Service Modal -->
+  this.dialogService.open({
+    id: 'my-modal',
+    width: '600px',
+    // ...
+  });
+
+FORBIDDEN: [
+  "使用原生 dialog 元素",
+  "自定义模态框定位和动画"
+]
+
+---
+
+COMPONENT: DataTable
+IMPORT_PATH: ng-devui/data-table
+SELECTOR: d-data-table
+MODULE: DataTableModule
+DOCS: https://devui.design/components/zh-cn/table/demo
+
+CORE_PROPS: {
+  "dataSource": "any[]",
+  "columns": "TableColumn[]",
+  "checkable": "boolean",
+  "checkOptionsRelated": "boolean",
+  "pageable": "boolean",
+  "pageSize": "number",
+  "pageSizeOptions": "number[]",
+  "sortable": "boolean",
+  "filterable": "boolean"
+}
+
+OUTPUTS: {
+  "cellClick": "EventEmitter<any>",
+  "rowClick": "EventEmitter<any>",
+  "checkChange": "EventEmitter<any>",
+  "sortChange": "EventEmitter<any>"
+}
+
+SEMANTIC_NODES: root(根容器), table-header(表头), table-body(表体), table-row(行), table-cell(单元格)
+
+USAGE_EXAMPLE: |
+  <d-data-table
+    [dataSource]="dataSource"
+    [columns]="columns"
+    [checkable]="true"
+    [pageable]="true"
+    [pageSize]="10"
+    (rowClick)="onRowClick($event)">
+  </d-data-table>
+
+FORBIDDEN: [
+  "使用原生 <table> 标签",
+  "自定义表格样式和布局"
+]
+
+---
+
+COMPONENT: Form
+IMPORT_PATH: ng-devui/form
+SELECTOR: d-form
+MODULE: FormModule
+DOCS: https://devui.design/components/zh-cn/form/demo
+
+CORE_PROPS: {
+  "labelSize": "sm | md | lg",
+  "layout": "horizontal | vertical",
+  "labelWidth": "string",
+  "labelAlign": "start | center | end"
+}
+
+SEMANTIC_NODES: root(根容器), form-item(表单项), form-label(标签), form-control(控件)
+
+USAGE_EXAMPLE: |
+  <d-form [layout]="'horizontal'" [labelSize]="'md'">
+    <d-form-item>
+      <d-form-label>用户名</d-form-label>
+      <d-form-control>
+        <d-text-input [(ngModel)]="username"></d-text-input>
+      </d-form-control>
+    </d-form-item>
+  </d-form>
+
+FORBIDDEN: [
+  "使用原生 <form> 标签",
+  "自定义表单布局样式"
+]
+
+---
+
+COMPONENT: Pagination
+IMPORT_PATH: ng-devui/pagination
+SELECTOR: d-pagination
+MODULE: PaginationModule
+DOCS: https://devui.design/components/zh-cn/pagination/demo
+
+CORE_PROPS: {
+  "total": "number",
+  "pageSize": "number",
+  "pageIndex": "number",
+  "pageSizeOptions": "number[]",
+  "canChangePageSize": "boolean",
+  "canJumpPage": "boolean",
+  "showJumpButton": "boolean",
+  "size": "lg | md | sm"
+}
+
+OUTPUTS: {
+  "pageIndexChange": "EventEmitter<number>",
+  "pageSizeChange": "EventEmitter<number>"
+}
+
+SEMANTIC_NODES: root(根容器), page-size-selector(每页条数选择器), page-list(页码列表), jump-input(跳转输入)
+
+USAGE_EXAMPLE: |
+  <d-pagination
+    [total]="100"
+    [pageSize]="10"
+    [pageIndex]="currentPage"
+    [canChangePageSize]="true"
+    [canJumpPage]="true"
+    (pageIndexChange)="onPageChange($event)"
+    (pageSizeChange)="onPageSizeChange($event)">
+  </d-pagination>
+
+FORBIDDEN: [
+  "使用原生分页控件",
+  "自定义分页样式"
+]
+
+---
+
+COMPONENT: Toast
+IMPORT_PATH: ng-devui/toast
+SELECTOR: d-toast
+MODULE: ToastModule
+SERVICE: ToastService
+DOCS: https://devui.design/components/zh-cn/toast/demo
+
+SERVICE_METHODS: {
+  "open": "(options: ToastOptions) => ToastRef",
+  "success": "(message: string, options?: ToastOptions) => ToastRef",
+  "error": "(message: string, options?: ToastOptions) => ToastRef",
+  "warning": "(message: string, options?: ToastOptions) => ToastRef",
+  "info": "(message: string, options?: ToastOptions) => ToastRef"
+}
+
+USAGE_EXAMPLE: |
+  // Service Usage
+  constructor(private toastService: ToastService) {}
+  
+  showSuccess() {
+    this.toastService.success('操作成功！');
+  }
+  
+  showError() {
+    this.toastService.error('操作失败！', {
+      life: 3000,
+      lifeMode: 'global'
+    });
+  }
+
+FORBIDDEN: [
+  "使用原生 alert 或自定义提示组件",
+  "自定义 Toast 样式和位置"
+]
+
+---
+
+COMPONENT: Loading
+IMPORT_PATH: ng-devui/loading
+SELECTOR: d-loading
+MODULE: LoadingModule
+SERVICE: LoadingService
+DOCS: https://devui.design/components/zh-cn/loading/demo
+
+CORE_PROPS: {
+  "backdrop": "boolean",
+  "message": "string",
+  "positionType": "relative | absolute | fixed",
+  "zIndex": "number"
+}
+
+USAGE_EXAMPLE: |
+  <!-- Template Usage -->
+  <div dLoading [backdrop]="true" [message]="'加载中...'">
+    内容区域
+  </div>
+  
+  <!-- Service Usage -->
+  constructor(private loadingService: LoadingService) {}
+  
+  showLoading() {
+    this.loadingService.open();
+  }
+  
+  hideLoading() {
+    this.loadingService.close();
+  }
+
+FORBIDDEN: [
+  "使用原生 loading 实现",
+  "自定义加载动画样式"
+]
+
+---
+
+# 5. FORBIDDEN LIST | 禁用清单
+# LLM must NEVER use these syntaxes/APIs | LLM 绝对禁止使用的语法/API
+
+FORBIDDEN_LIST: [
+  "内联 [style] 或 [ngStyle] 属性覆盖组件样式 | Inline [style] or [ngStyle] attributes for component styling",
+  "硬编码颜色值（#、rgb、rgba）| Hardcoded color values",
+  "硬编码尺寸数值（px/rem 无变量）| Hardcoded dimensions without variables",
+  "!important 样式优先级 | !important style priority",
+  "组件库废弃API | Deprecated component APIs: bsPosition in Button (use ButtonGroup instead)",
+  "自定义原生HTML组件替代库组件 | Custom native HTML replacing library components: <button>, <input>, <select>, <table>, <form>",
+  "自定义 CSS/SCSS 文件覆盖组件样式 | Custom CSS/SCSS files to override component styles",
+  "不使用组件库模块导入 | Not importing component modules",
+  "在 standalone 组件中直接使用 DevUIModule (应使用具体组件模块) | Using DevUIModule directly in standalone components (use specific component modules instead)"
+]
+
+---
+
+# 6. ENGINEERING VALIDATION RULES | 工程化校验规则
+# CI/CD baseline standards - LLM generated code must satisfy these
+# CI/CD 兜底标准，LLM 生成代码需满足
+
+LINT_RULES: [
+  "TypeScript: strict mode enabled",
+  "ESLint: @angular-eslint/no-inline-styles: error",
+  "Stylelint: color-no-hex: true (when custom styles needed)",
+  "仅允许使用组件库官方 Props 和设计令牌 | Only component library official Props and design tokens allowed",
+  "必须导入组件模块 | Component modules must be imported",
+  "Standalone 组件必须使用 imports 数组导入模块 | Standalone components must import modules via imports array"
+]
+
+---
+
+# 7. INSTALLATION & SETUP | 安装与配置
+
+## 7.1 Installation | 安装
+
+```bash
+npm install ng-devui @angular/animations
+```
+
+## 7.2 Configuration | 配置
+
+### app.config.ts
+```typescript
+import { ApplicationConfig } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideAnimations()  // Required for DevUI components
+  ]
+};
+```
+
+### angular.json
+```json
+{
+  "styles": [
+    "node_modules/ng-devui/devui.min.css"
+  ]
+}
+```
+
+### Standalone Component Usage
+```typescript
+import { Component } from '@angular/core';
+import { ButtonModule } from 'ng-devui/button';
+
+@Component({
+  selector: 'app-example',
+  imports: [ButtonModule],
+  template: `<d-button bsStyle="primary">按钮</d-button>`
+})
+export class ExampleComponent {}
+```
+
+### NgModule Usage
+```typescript
+import { NgModule } from '@angular/core';
+import { DevUIModule } from 'ng-devui';
+
+@NgModule({
+  imports: [DevUIModule],
+  // ...
+})
+export class AppModule {}
+```
+
+---
+
+# 8. UPDATE LOG | 更新说明
+
+UPDATE_LOG:
+- v18.0.0: Current stable version, supports Angular ^18.0.0
+- Button: bsPosition deprecated, use ButtonGroup instead
+- All components: Use module-based imports in standalone components
+
+---
+
+# 9. ADDITIONAL RESOURCES | 其他资源
+
+## 9.1 Official Documentation | 官方文档
+- Getting Started: https://devui.design/components/zh-cn/get-start
+- Component Overview: https://devui.design/components/zh-cn/overview
+- Design Tokens: https://devui.design/design-tokens/zh-cn/overview
+- GitHub: https://github.com/DevCloudFE/ng-devui
+
+## 9.2 Component Categories | 组件分类
+- Basic: Button, Card, Icon, Badge, Avatar
+- Form: TextInput, Textarea, Select, Checkbox, Radio, Toggle, InputNumber, Slider, DatePicker, TimePicker, Upload, Form
+- Data Display: DataTable, Tree, Pagination, Tags, Progress, Loading, Empty
+- Feedback: Modal, Drawer, Toast, Alert, Tooltip, Popover
+- Navigation: Menu, Tabs, Breadcrumb, Anchor, BackTop
+- Layout: Layout, Splitter
+
+## 9.3 Common Patterns | 常见模式
+
+### Form with Validation
+```typescript
+<d-form [layout]="'horizontal'">
+  <d-form-item>
+    <d-form-label>用户名</d-form-label>
+    <d-form-control>
+      <d-text-input 
+        [(ngModel)]="username"
+        [required]="true"
+        placeholder="请输入用户名">
+      </d-text-input>
+    </d-form-control>
+  </d-form-item>
+</d-form>
+```
+
+### Data Table with Pagination
+```typescript
+<d-data-table
+  [dataSource]="dataSource"
+  [columns]="columns"
+  [pageable]="true"
+  [pageSize]="10">
+</d-data-table>
+<d-pagination
+  [total]="total"
+  [pageSize]="10"
+  [pageIndex]="currentPage"
+  (pageIndexChange)="onPageChange($event)">
+</d-pagination>
+```
+
+### Modal with Form
+```typescript
+<d-modal #modal>
+  <d-modal-header>
+    <h4>编辑</h4>
+  </d-modal-header>
+  <d-modal-body>
+    <d-form>
+      <!-- form content -->
+    </d-form>
+  </d-modal-body>
+  <d-modal-footer>
+    <d-button (btnClick)="modal.hide()">取消</d-button>
+    <d-button bsStyle="primary" (btnClick)="handleSave()">保存</d-button>
+  </d-modal-footer>
+</d-modal>
+```
+
+---
+
+**End of llms-full.txt**

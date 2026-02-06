@@ -1,0 +1,300 @@
+============================================================
+llms.txt - DevUI Component Library Quick Reference
+============================================================
+
+# DevUI for Angular - Quick Reference | 快速参考
+
+PROJECT_NAME: DevUI (ng-devui)
+FRAMEWORK: Angular
+LANGUAGE: TypeScript
+VERSION: 18.0.0
+LAST_UPDATE: 2026-02-06
+DOCUMENTATION_URL: https://devui.design/components/zh-cn/get-start
+GITHUB: https://github.com/DevCloudFE/ng-devui
+
+---
+
+## Component Catalog | 组件目录
+
+### Basic Components | 基础组件
+
+- **Button** (`ng-devui/button`)
+  - Selector: `d-button`
+  - Module: `ButtonModule`
+  - Docs: https://devui.design/components/zh-cn/button/demo
+
+- **Card** (`ng-devui/card`)
+  - Selector: `d-card`
+  - Module: `CardModule`
+  - Docs: https://devui.design/components/zh-cn/card/demo
+
+- **Icon** (`ng-devui/icon`)
+  - Selector: `d-icon`
+  - Module: `IconModule`
+  - Docs: https://devui.design/components/zh-cn/icon/demo
+
+- **Badge** (`ng-devui/badge`)
+  - Selector: `d-badge`
+  - Module: `BadgeModule`
+  - Docs: https://devui.design/components/zh-cn/badge/demo
+
+- **Avatar** (`ng-devui/avatar`)
+  - Selector: `d-avatar`
+  - Module: `AvatarModule`
+  - Docs: https://devui.design/components/zh-cn/avatar/demo
+
+### Form Components | 表单组件
+
+- **TextInput** (`ng-devui/text-input`)
+  - Selector: `d-text-input`
+  - Module: `TextInputModule`
+  - Docs: https://devui.design/components/zh-cn/text-input/demo
+
+- **Textarea** (`ng-devui/textarea`)
+  - Selector: `d-textarea`
+  - Module: `TextareaModule`
+  - Docs: https://devui.design/components/zh-cn/textarea/demo
+
+- **Select** (`ng-devui/select`)
+  - Selector: `d-select`
+  - Module: `SelectModule`
+  - Docs: https://devui.design/components/zh-cn/select/demo
+
+- **Checkbox** (`ng-devui/checkbox`)
+  - Selector: `d-checkbox`
+  - Module: `CheckBoxModule`
+  - Docs: https://devui.design/components/zh-cn/checkbox/demo
+
+- **Radio** (`ng-devui/radio`)
+  - Selector: `d-radio`
+  - Module: `RadioModule`
+  - Docs: https://devui.design/components/zh-cn/radio/demo
+
+- **Switch/Toggle** (`ng-devui/toggle`)
+  - Selector: `d-toggle`
+  - Module: `ToggleModule`
+  - Docs: https://devui.design/components/zh-cn/toggle/demo
+
+- **InputNumber** (`ng-devui/input-number`)
+  - Selector: `d-input-number`
+  - Module: `InputNumberModule`
+  - Docs: https://devui.design/components/zh-cn/input-number/demo
+
+- **Slider** (`ng-devui/slider`)
+  - Selector: `d-slider`
+  - Module: `SliderModule`
+  - Docs: https://devui.design/components/zh-cn/slider/demo
+
+- **DatePicker** (`ng-devui/datepicker`)
+  - Selector: `d-datepicker`
+  - Module: `DatepickerModule`
+  - Docs: https://devui.design/components/zh-cn/datepicker/demo
+
+- **TimePicker** (`ng-devui/time-picker`)
+  - Selector: `d-time-picker`
+  - Module: `TimePickerModule`
+  - Docs: https://devui.design/components/zh-cn/time-picker/demo
+
+- **Upload** (`ng-devui/upload`)
+  - Selector: `d-upload`
+  - Module: `UploadModule`
+  - Docs: https://devui.design/components/zh-cn/upload/demo
+
+- **Form** (`ng-devui/form`)
+  - Selector: `d-form`
+  - Module: `FormModule`
+  - Docs: https://devui.design/components/zh-cn/form/demo
+
+### Data Display | 数据展示
+
+- **Table** (`ng-devui/data-table`)
+  - Selector: `d-data-table`
+  - Module: `DataTableModule`
+  - Docs: https://devui.design/components/zh-cn/table/demo
+
+- **Tree** (`ng-devui/tree`)
+  - Selector: `d-tree`
+  - Module: `TreeModule`
+  - Docs: https://devui.design/components/zh-cn/tree/demo
+
+- **Pagination** (`ng-devui/pagination`)
+  - Selector: `d-pagination`
+  - Module: `PaginationModule`
+  - Docs: https://devui.design/components/zh-cn/pagination/demo
+
+- **Tags** (`ng-devui/tags`)
+  - Selector: `d-tags`
+  - Module: `TagsModule`
+  - Docs: https://devui.design/components/zh-cn/tags/demo
+
+- **Progress** (`ng-devui/progress`)
+  - Selector: `d-progress`
+  - Module: `ProgressModule`
+  - Docs: https://devui.design/components/zh-cn/progress/demo
+
+- **Loading** (`ng-devui/loading`)
+  - Selector: `d-loading`
+  - Module: `LoadingModule`
+  - Docs: https://devui.design/components/zh-cn/loading/demo
+
+- **Empty** (`ng-devui/common`)
+  - Selector: `d-empty`
+  - Module: `DCommonModule`
+  - Docs: https://devui.design/components/zh-cn/empty/demo
+
+### Feedback | 反馈
+
+- **Modal** (`ng-devui/modal`)
+  - Selector: `d-modal`
+  - Module: `ModalModule`
+  - Docs: https://devui.design/components/zh-cn/modal/demo
+
+- **Drawer** (`ng-devui/drawer`)
+  - Selector: `d-drawer`
+  - Module: `DrawerModule`
+  - Docs: https://devui.design/components/zh-cn/drawer/demo
+
+- **Toast** (`ng-devui/toast`)
+  - Selector: `d-toast`
+  - Module: `ToastModule`
+  - Docs: https://devui.design/components/zh-cn/toast/demo
+
+- **Alert** (`ng-devui/alert`)
+  - Selector: `d-alert`
+  - Module: `AlertModule`
+  - Docs: https://devui.design/components/zh-cn/alert/demo
+
+- **Tooltip** (`ng-devui/tooltip`)
+  - Selector: `d-tooltip`
+  - Module: `TooltipModule`
+  - Docs: https://devui.design/components/zh-cn/tooltip/demo
+
+- **Popover** (`ng-devui/popover`)
+  - Selector: `d-popover`
+  - Module: `PopoverModule`
+  - Docs: https://devui.design/components/zh-cn/popover/demo
+
+### Navigation | 导航
+
+- **Menu** (`ng-devui/menu`)
+  - Selector: `d-menu`
+  - Module: `MenuModule`
+  - Docs: https://devui.design/components/zh-cn/menu/demo
+
+- **Tabs** (`ng-devui/tabs`)
+  - Selector: `d-tabs`
+  - Module: `TabsModule`
+  - Docs: https://devui.design/components/zh-cn/tabs/demo
+
+- **Breadcrumb** (`ng-devui/breadcrumb`)
+  - Selector: `d-breadcrumb`
+  - Module: `BreadcrumbModule`
+  - Docs: https://devui.design/components/zh-cn/breadcrumb/demo
+
+- **Anchor** (`ng-devui/anchor`)
+  - Selector: `d-anchor`
+  - Module: `AnchorModule`
+  - Docs: https://devui.design/components/zh-cn/anchor/demo
+
+- **BackTop** (`ng-devui/back-top`)
+  - Selector: `d-back-top`
+  - Module: `BackTopModule`
+  - Docs: https://devui.design/components/zh-cn/back-top/demo
+
+### Layout | 布局
+
+- **Layout** (`ng-devui/layout`)
+  - Selector: `d-layout`
+  - Module: `LayoutModule`
+  - Docs: https://devui.design/components/zh-cn/layout/demo
+
+- **Splitter** (`ng-devui/splitter`)
+  - Selector: `d-splitter`
+  - Module: `SplitterModule`
+  - Docs: https://devui.design/components/zh-cn/splitter/demo
+
+### Other | 其他
+
+- **Accordion** (`ng-devui/accordion`)
+- **Carousel** (`ng-devui/carousel`)
+- **Transfer** (`ng-devui/transfer`)
+- **Cascader** (`ng-devui/cascader`)
+- **AutoComplete** (`ng-devui/auto-complete`)
+- **Gantt** (`ng-devui/gantt`)
+- **Dashboard** (`ng-devui/dashboard`)
+- **StepsGuide** (`ng-devui/steps-guide`)
+- **UserGuide** (`ng-devui/user-guide`)
+
+---
+
+## Quick Start | 快速开始
+
+### Installation | 安装
+
+```bash
+npm install ng-devui @angular/animations
+```
+
+### Import Module | 导入模块
+
+```typescript
+// Standalone Component
+import { ButtonModule } from 'ng-devui/button';
+
+@Component({
+  imports: [ButtonModule],
+  // ...
+})
+
+// Or use DevUIModule (NgModule)
+import { DevUIModule } from 'ng-devui';
+
+@NgModule({
+  imports: [DevUIModule],
+  // ...
+})
+```
+
+### Import Styles | 导入样式
+
+In `angular.json`:
+```json
+{
+  "styles": [
+    "node_modules/ng-devui/devui.min.css"
+  ]
+}
+```
+
+### Basic Usage | 基本用法
+
+```html
+<d-button bsStyle="primary" bsSize="md">主要按钮</d-button>
+<d-card>
+  <d-card-header>
+    <d-card-title>卡片标题</d-card-title>
+  </d-card-header>
+  <d-card-content>卡片内容</d-card-content>
+</d-card>
+```
+
+---
+
+## Documentation Links | 文档链接
+
+- **Getting Started**: https://devui.design/components/zh-cn/get-start
+- **Component Overview**: https://devui.design/components/zh-cn/overview
+- **Design Tokens**: https://devui.design/design-tokens/zh-cn/overview
+- **GitHub Repository**: https://github.com/DevCloudFE/ng-devui
+
+---
+
+## Key Constraints | 关键约束
+
+⚠️ **IMPORTANT**: Always use official DevUI components. Do NOT create custom implementations using native HTML elements.
+
+⚠️ **重要提示**: 始终使用官方 DevUI 组件。禁止使用原生 HTML 元素创建自定义实现。
+
+For complete constraints and API specifications, see `llms-full.txt`.
+
+完整的约束和 API 规范，请参阅 `llms-full.txt`。
