@@ -4,6 +4,8 @@
 
 This project is an experimental playground for exploring different UI implementation strategies using **Angular** and the **DevUI** component library. It focuses on comparing methodologies for reproducing high-fidelity designs, specifically evaluating the trade-offs between strict component usage and custom implementations.
 
+![alt text](image.png)
+
 ## 🎯 Project Objectives
 
 - **Evaluate UI Fidelity**: Compare how well different approaches match original design specifications.
@@ -44,6 +46,8 @@ Each experiment (Case Study) implements the same design target using three disti
 | **Page V1** | Full Page Layout | `src/app/page-experiment/` | ✅ Done |
 | **Page V2** | Dashboard Page | `src/app/page-experiment-v2/` | ✅ Done |
 | **Page V3** | Cloud Config Wizard (Hybrid) | `src/app/page-experiment-v3/` | ✅ **New** |
+
+![alt text](image-1.png)
 
 ## 🚀 Getting Started
 

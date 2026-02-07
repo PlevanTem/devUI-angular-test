@@ -4,6 +4,8 @@
 
 本项目是一个基于 **Angular** 和 **DevUI** 组件库的界面开发实践与探索项目。其核心目标是探索在高保真还原设计稿的过程中，如何平衡严格使用组件库与自定义开发之间的关系，并总结出一套最佳实践方法论。
 
+![alt text](image.png)
+
 ## 🎯 项目目标
 
 - **UI 还原度评估**：对比不同开发方案在还原设计稿上的表现。
@@ -44,6 +46,8 @@
 | **Page V1** | 整页布局还原 | `src/app/page-experiment/` | ✅ 完成 |
 | **Page V2** | 仪表盘页面 | `src/app/page-experiment-v2/` | ✅ 完成 |
 | **Page V3** | 云配置向导页 (Hybrid) | `src/app/page-experiment-v3/` | ✅ **新实验** |
+
+![alt text](image-1.png)
 
 ## 🚀 快速开始
 
