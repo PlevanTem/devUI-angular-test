@@ -1,0 +1,207 @@
+/* 使用DevUI设计令牌的样式 */
+
+.devui-card {
+  position: relative;
+  width: 400px;
+  min-height: 180px;
+  overflow: hidden;
+}
+
+/* Header Content */
+.card-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+}
+
+/* App Icon - 使用DevUI颜色系统 */
+.app-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  background-color: #F53F3F; /* danger color from DevUI */
+  border-radius: 9999px; /* full radius */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.app-icon {
+  color: #FFFFFF;
+  font-size: 18px;
+}
+
+/* Title Block */
+.title-block {
+  flex: 1;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+/* 使用DevUI排版系统 */
+d-card-title {
+  font-size: 16px; /* font-size-h4 */
+  font-weight: 600; /* font-weight-semibold */
+  color: #1D2129; /* text-primary */
+  line-height: 1.5;
+}
+
+d-card-subtitle {
+  font-size: 12px; /* font-size-small */
+  font-weight: 400; /* font-weight-normal */
+  color: #4E5969; /* text-secondary */
+  line-height: 1.5;
+}
+
+.status-indicator {
+  width: 14px;
+  height: 14px;
+  background-color: #E5E6EB; /* border color */
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 1px;
+  background-color: #86909C; /* text-disabled */
+}
+
+/* Timestamp - 使用DevUI文本颜色 */
+.timestamp {
+  font-size: 12px; /* font-size-small */
+  font-weight: 400;
+  color: #86909C; /* text-disabled */
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 16px; /* md spacing */
+}
+
+/* Description - 使用DevUI文本颜色 */
+.description {
+  font-size: 14px; /* font-size-body */
+  font-weight: 400;
+  color: #1D2129; /* text-primary */
+  margin-bottom: 16px; /* md spacing */
+  line-height: 1.5; /* line-height-base */
+}
+
+/* Details Section - 使用DevUI间距系统 */
+.details-section {
+  margin-bottom: 16px; /* md spacing */
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 40px; /* sm vertical, custom horizontal */
+}
+
+.detail-item {
+  display: flex;
+  align-items: baseline;
+  gap: 4px; /* xs spacing */
+}
+
+.detail-key {
+  font-size: 12px; /* font-size-small */
+  font-weight: 400;
+  color: #4E5969; /* text-secondary */
+}
+
+.detail-value {
+  font-size: 12px; /* font-size-small */
+  font-weight: 400;
+  color: #1D2129; /* text-primary */
+}
+
+/* Actions - 使用DevUI间距 */
+.card-actions-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.action-left,
+.action-right {
+  display: flex;
+  align-items: center;
+}
+
+.action-icon {
+  color: #86909C; /* text-disabled */
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.action-icon:hover {
+  color: #4E5969; /* text-secondary */
+}
+
+.ellipsis-icon {
+  font-size: 14px;
+  color: #86909C; /* text-disabled */
+  line-height: 1;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.ellipsis-icon:hover {
+  color: #4E5969; /* text-secondary */
+}
+
+/* Decorative Wave - 使用DevUI背景色 */
+.wave-decoration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 80px;
+  background: linear-gradient(
+    135deg,
+    #F2F3F5 0%, /* bg-page */
+    #F2F3F5 30%,
+    transparent 70%
+  );
+  border-radius: 8px 0 0 0; /* lg border-radius */
+  clip-path: ellipse(180px 100px at 100% 100%);
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.wave-decoration::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 60px;
+  background: radial-gradient(
+    ellipse 150px 60px at 100% 100%,
+    #F2F3F5 0%, /* bg-page */
+    transparent 70%
+  );
+  border-radius: 8px 0 0 0; /* lg border-radius */
+}

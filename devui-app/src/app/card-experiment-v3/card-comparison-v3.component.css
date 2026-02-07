@@ -1,0 +1,367 @@
+/* Global Layout */
+.comparison-container {
+    padding: 40px;
+    background-color: #f3f4f5;
+    min-height: 100vh;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.view-switcher {
+    margin-bottom: 40px;
+    display: flex;
+    gap: 16px;
+}
+
+/* =========================================
+   V1: Pixel Perfect Restoration (Manual CSS)
+   ========================================= */
+.v1-card {
+    width: 400px;
+    height: 220px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    position: relative;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    /* For watermark */
+}
+
+/* Watermark Effect */
+.v1-watermark {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px;
+    height: 80px;
+    background: radial-gradient(circle at bottom right, rgba(240, 245, 255, 0.8) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    border-bottom-right-radius: 8px;
+}
+
+/* Header */
+.v1-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.v1-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.9);
+    /* Inner border effect */
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.v1-title-group {
+    flex: 1;
+}
+
+.v1-title-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.v1-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 8px;
+}
+
+.v1-status-badge {
+    width: 16px;
+    height: 16px;
+    background: #ccc;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.v1-subtitle {
+    font-size: 12px;
+    color: #999;
+}
+
+.v1-date {
+    font-size: 12px;
+    color: #ccc;
+    margin-left: auto;
+    /* Push to right */
+    margin-top: 4px;
+    /* Align visually */
+}
+
+/* Content */
+.v1-content {
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.v1-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.v1-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* 3 columns based on space, picture shows 2 rows of items */
+    /* Actually looks like 4 items: Status, Architecture, CPU/Mem, Storage */
+    /* Layout: 
+     Row 1: item1 item2
+     Row 2: item3 item4 
+  */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* Wait, image shows:
+     状态:       已停止    CPU架构:   arm
+     CPU内存:    4U8G     存储:      5GB
+  */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.v1-info-item {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.v1-info-label {
+    color: #999;
+}
+
+.v1-info-value {
+    color: #666;
+    font-weight: 500;
+    text-align: left;
+    width: 60px;
+    /* Fixed width for alignment */
+}
+
+
+/* Footer Actions */
+.v1-footer {
+    position: absolute;
+    bottom: 16px;
+    /* Absolute to bottom */
+    left: 24px;
+    right: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+.v1-action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: #ccc;
+    transition: all 0.2s;
+}
+
+.v1-action-btn:hover {
+    color: #666;
+}
+
+.v1-play-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.v1-play-icon {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 8px solid #ddd;
+    margin-left: 2px;
+}
+
+
+/* =========================================
+   V2: Standard DevUI Card
+   ========================================= */
+.v2-card-container {
+    width: 400px;
+}
+
+/* Customizing DevUI Card to match layout */
+/* DevUI card is structured: d-card > d-card-header > d-card-content > d-card-actions */
+
+/* =========================================
+   V3: Hybrid Fusion (Tokens + Grid)
+   ========================================= */
+.v3-card {
+    width: 400px;
+    background: var(--devui-bg-container, #FFFFFF);
+    border-radius: var(--devui-border-radius-lg, 8px);
+    /* Use precise shadow token */
+    box-shadow: var(--devui-shadow-card, 0 2px 8px rgba(0, 0, 0, 0.08));
+    position: relative;
+    overflow: hidden;
+    padding: var(--devui-spacing-lg, 24px);
+    /* Font token */
+    font-family: var(--devui-font-family, "Helvetica Neue", Helvetica, Arial, sans-serif);
+}
+
+.v3-watermark {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px;
+    height: 80px;
+    /* Use token-based color if possible, or fallback */
+    background: radial-gradient(circle at bottom right, rgba(94, 124, 224, 0.1) 0%, transparent 70%);
+    /* Primary color hint */
+    pointer-events: none;
+}
+
+.v3-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--devui-spacing-lg, 24px);
+}
+
+.v3-icon-wrapper {
+    margin-right: var(--devui-spacing-md, 16px);
+    /* Custom gradient using tokens? Or fixed visual style */
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+}
+
+.v3-title-area {
+    flex: 1;
+}
+
+.v3-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--devui-spacing-sm, 8px);
+    margin-bottom: 4px;
+}
+
+.v3-title {
+    font-size: var(--devui-font-size-h3, 18px);
+    /* Using H3 token */
+    font-weight: var(--devui-font-weight-bold, 700);
+    color: var(--devui-text-primary, #252B3A);
+}
+
+.v3-subtitle {
+    font-size: var(--devui-font-size-small, 12px);
+    color: var(--devui-text-tertiary, #BABBC0);
+}
+
+.v3-date {
+    font-size: var(--devui-font-size-small, 12px);
+    color: var(--devui-text-disabled, #D7D8DA);
+}
+
+.v3-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2 columns */
+    column-gap: var(--devui-spacing-xl, 32px);
+    row-gap: var(--devui-spacing-sm, 8px);
+    margin-top: var(--devui-spacing-lg, 24px);
+    margin-bottom: var(--devui-spacing-xxl, 48px);
+    /* Space for footer */
+}
+
+.v3-info-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--devui-font-size-body, 12px);
+}
+
+.v3-label {
+    color: var(--devui-text-secondary, #71757F);
+}
+
+.v3-value {
+    color: var(--devui-text-primary, #252B3A);
+    font-weight: var(--devui-font-weight-medium, 500);
+    text-align: right;
+    /* Changed from left to right for cleaner look? Image has them aligned left but spread. */
+    /* Let's stick to image: Image has "Label: Value" with fixed space? No, looks like grid.*/
+    min-width: 60px;
+    text-align: left;
+}
+
+.v3-actions {
+    position: absolute;
+    bottom: var(--devui-spacing-lg, 24px);
+    /* Align with padding */
+    left: var(--devui-spacing-lg, 24px);
+    right: var(--devui-spacing-lg, 24px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Hybrid Button Styles */
+.v3-play-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--devui-border, #ADB0B8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--devui-text-tertiary, #BABBC0);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.v3-play-btn:hover {
+    border-color: var(--devui-primary, #5E7CE0);
+    color: var(--devui-primary, #5E7CE0);
+    background: var(--devui-bg-hover, #F2F2F3);
+}
+
+.v3-more-btn {
+    color: var(--devui-text-tertiary, #BABBC0);
+    cursor: pointer;
+}

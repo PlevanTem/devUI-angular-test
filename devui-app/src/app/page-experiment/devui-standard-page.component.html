@@ -1,0 +1,126 @@
+<div class="devui-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-icon">
+      <d-icon name="icon-cloud" class="header-icon-svg"></d-icon>
+    </div>
+    <h1 class="page-title">{{ pageData.title }}</h1>
+  </div>
+
+  <div class="page-content-wrapper">
+    <!-- Left Sidebar Navigation -->
+    <div class="sidebar">
+      <div class="step-item" *ngFor="let step of pageData.steps; let i = index">
+        <div class="step-connector" *ngIf="i > 0"></div>
+        <div class="step-content" [class.active]="step.active">
+          <div class="step-icon" [class.completed]="step.completed" [class.active]="step.active">
+            <d-icon *ngIf="step.completed" name="icon-check" class="step-icon-svg"></d-icon>
+            <d-icon *ngIf="step.active" name="icon-file" class="step-icon-svg"></d-icon>
+          </div>
+          <span class="step-name" [class.active]="step.active">{{ step.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <d-card class="content-card">
+        <d-card-header>
+          <d-card-title class="section-title">{{ pageData.currentStep }}</d-card-title>
+        </d-card-header>
+        
+        <d-card-content>
+          <form class="devui-form" [attr.data-layout]="'horizontal'">
+            <!-- Source Selection -->
+            <d-form-item>
+              <d-form-label class="required-label">*来源:</d-form-label>
+              <d-form-control>
+                <div class="radio-group">
+                  <d-radio 
+                    [name]="'source'" 
+                    [value]="'sample'"
+                    [(ngModel)]="pageData.source"
+                    (ngModelChange)="selectSource('sample')">
+                    样例工程
+                  </d-radio>
+                  <d-radio 
+                    [name]="'source'" 
+                    [value]="'private'"
+                    [(ngModel)]="pageData.source"
+                    (ngModelChange)="selectSource('private')">
+                    私有仓库
+                  </d-radio>
+                  <d-radio 
+                    [name]="'source'" 
+                    [value]="'none'"
+                    [(ngModel)]="pageData.source"
+                    (ngModelChange)="selectSource('none')">
+                    不创建工程
+                  </d-radio>
+                </div>
+              </d-form-control>
+            </d-form-item>
+
+            <!-- Project Name Input -->
+            <d-form-item>
+              <d-form-label class="required-label">*工程名称:</d-form-label>
+              <d-form-control>
+                <d-text-input 
+                  [(ngModel)]="pageData.projectName"
+                  placeholder="可以输入字母、数字、连字符、下划线,字符介于1~127之间">
+                </d-text-input>
+              </d-form-control>
+            </d-form-item>
+
+            <!-- Template Search -->
+            <d-form-item>
+              <d-form-label class="required-label">*工程模板:</d-form-label>
+              <d-form-control>
+                <div class="search-input-wrapper">
+                  <d-icon name="icon-search" class="search-icon"></d-icon>
+                  <d-text-input 
+                    [(ngModel)]="pageData.templateSearch"
+                    placeholder="请输入关键字搜索模板"
+                    class="search-input">
+                  </d-text-input>
+                </div>
+              </d-form-control>
+            </d-form-item>
+          </form>
+
+          <!-- Template Cards Grid -->
+          <div class="template-grid">
+            <d-card 
+              class="template-card" 
+              *ngFor="let template of pageData.templates"
+              [class.selected]="template.selected"
+              (click)="selectTemplate(template.id)">
+              <div class="template-selected-indicator" *ngIf="template.selected"></div>
+              <d-card-content>
+                <d-card-title class="template-title">{{ template.title }}</d-card-title>
+                <p class="template-description">{{ template.description }}</p>
+                <div class="template-tags">
+                  <span class="tag" *ngFor="let tag of template.tags">{{ tag }}</span>
+                </div>
+              </d-card-content>
+            </d-card>
+          </div>
+        </d-card-content>
+      </d-card>
+    </div>
+  </div>
+
+  <!-- Page Footer -->
+  <div class="page-footer">
+    <div class="cost-display">
+      <span class="cost-label">配置费用</span>
+      <span class="cost-value">{{ pageData.cost }}</span>
+      <d-icon name="icon-help" class="cost-info-icon"></d-icon>
+    </div>
+    <div class="footer-actions">
+      <d-button bsStyle="common" bsSize="md">上一步</d-button>
+      <d-button bsStyle="common" bsSize="md">取消</d-button>
+      <d-button bsStyle="primary" bsSize="md">确定</d-button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="pixel-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4" width="16" height="16" rx="3" fill="#4080FF" opacity="0.2"/>
+        <path d="M8 12L10 14L16 8" stroke="#4080FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1 class="page-title">{{ pageData.title }}</h1>
+  </div>
+
+  <div class="page-content-wrapper">
+    <!-- Left Sidebar Navigation -->
+    <div class="sidebar">
+      <div class="step-item" *ngFor="let step of pageData.steps; let i = index">
+        <div class="step-connector" *ngIf="i > 0"></div>
+        <div class="step-content" [class.active]="step.active">
+          <div class="step-icon" [class.completed]="step.completed" [class.active]="step.active">
+            <svg *ngIf="step.completed" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="8" fill="#165DFF"/>
+              <path d="M5 8L7 10L11 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg *ngIf="step.active" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="12" height="12" rx="2" fill="#4080FF" opacity="0.2"/>
+              <path d="M6 6L8 8L10 6" stroke="#4080FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="step-name" [class.active]="step.active">{{ step.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <div class="content-card">
+        <h2 class="section-title">{{ pageData.currentStep }}</h2>
+
+        <!-- Source Selection -->
+        <div class="form-group">
+          <label class="form-label required">*来源:</label>
+          <div class="radio-group">
+            <label class="radio-option" [class.selected]="pageData.source === 'sample'">
+              <input type="radio" name="source" value="sample" [checked]="pageData.source === 'sample'" (change)="selectSource('sample')">
+              <span class="radio-label">样例工程</span>
+            </label>
+            <label class="radio-option" [class.selected]="pageData.source === 'private'">
+              <input type="radio" name="source" value="private" [checked]="pageData.source === 'private'" (change)="selectSource('private')">
+              <span class="radio-label">私有仓库</span>
+            </label>
+            <label class="radio-option" [class.selected]="pageData.source === 'none'">
+              <input type="radio" name="source" value="none" [checked]="pageData.source === 'none'" (change)="selectSource('none')">
+              <span class="radio-label">不创建工程</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Project Name Input -->
+        <div class="form-group">
+          <label class="form-label required">*工程名称:</label>
+          <input 
+            type="text" 
+            class="form-input" 
+            placeholder="可以输入字母、数字、连字符、下划线,字符介于1~127之间"
+            [(ngModel)]="pageData.projectName">
+        </div>
+
+        <!-- Template Search -->
+        <div class="form-group">
+          <label class="form-label required">*工程模板:</label>
+          <div class="search-input-wrapper">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="7" cy="7" r="5" stroke="#999999" stroke-width="1.5"/>
+              <path d="M11 11L14 14" stroke="#999999" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input 
+              type="text" 
+              class="form-input search-input" 
+              placeholder="请输入关键字搜索模板"
+              [(ngModel)]="pageData.templateSearch">
+          </div>
+        </div>
+
+        <!-- Template Cards Grid -->
+        <div class="template-grid">
+          <div 
+            class="template-card" 
+            *ngFor="let template of pageData.templates"
+            [class.selected]="template.selected"
+            (click)="selectTemplate(template.id)">
+            <div class="template-selected-indicator" *ngIf="template.selected"></div>
+            <h3 class="template-title">{{ template.title }}</h3>
+            <p class="template-description">{{ template.description }}</p>
+            <div class="template-tags">
+              <span class="tag" *ngFor="let tag of template.tags">{{ tag }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Footer -->
+  <div class="page-footer">
+    <div class="cost-display">
+      <span class="cost-label">配置费用</span>
+      <span class="cost-value">{{ pageData.cost }}</span>
+      <div class="cost-info-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7" stroke="#165DFF" stroke-width="1"/>
+          <path d="M8 6V8M8 10V10.01" stroke="#165DFF" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="footer-actions">
+      <button class="btn btn-secondary">上一步</button>
+      <button class="btn btn-secondary">取消</button>
+      <button class="btn btn-primary">确定</button>
+    </div>
+  </div>
+</div>

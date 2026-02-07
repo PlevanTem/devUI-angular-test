@@ -1,0 +1,78 @@
+<!-- 方案3：Hybrid融合方案 - 结合DevUI组件和灵活布局 -->
+<d-card class="hybrid-card">
+  <!-- 使用DevUI Card Header，但内部使用原生布局实现精确控制 -->
+  <d-card-header>
+    <div class="card-header-content">
+      <div class="header-left">
+        <!-- 主图标 - 使用原生div实现精确样式 -->
+        <div class="primary-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 4L4 6L6 8M10 4L12 6L10 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <!-- 使用DevUI Card Title和Subtitle组件 -->
+        <div class="title-group">
+          <div class="title-row">
+            <d-card-title class="primary-title">{{ cardData.title }}</d-card-title>
+            <!-- 小圆点图标 - 原生实现 -->
+            <div class="minus-icon">
+              <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                <line x1="2" y1="4" x2="6" y2="4" stroke="#666666" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <d-card-subtitle class="secondary-text">{{ cardData.subtitle }}</d-card-subtitle>
+        </div>
+      </div>
+      
+      <!-- 时间戳 - 原生实现 -->
+      <div class="timestamp">{{ cardData.timestamp }}</div>
+    </div>
+  </d-card-header>
+  
+  <!-- 使用DevUI Card Content -->
+  <d-card-content>
+    <div class="description">{{ cardData.description }}</div>
+    
+    <!-- 详情信息 - 使用原生grid布局实现精确控制 -->
+    <div class="details-section">
+      <div class="detail-column">
+        <div class="detail-item">
+          <span class="detail-label">状态:</span>
+          <span class="detail-value">{{ cardData.status }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">CPU内存:</span>
+          <span class="detail-value">{{ cardData.cpuMemory }}</span>
+        </div>
+      </div>
+      <div class="detail-column">
+        <div class="detail-item">
+          <span class="detail-label">CPU架构:</span>
+          <span class="detail-value">{{ cardData.cpuArch }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">存储:</span>
+          <span class="detail-value">{{ cardData.storage }}</span>
+        </div>
+      </div>
+    </div>
+  </d-card-content>
+  
+  <!-- 使用DevUI Card Actions，但使用原生按钮实现精确样式 -->
+  <d-card-actions align="spaceBetween">
+    <button class="play-button" type="button">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M3 2L9 6L3 10V2Z" fill="#666666"/>
+      </svg>
+    </button>
+    <button class="menu-button" type="button">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="4" cy="8" r="1" fill="#666666"/>
+        <circle cx="8" cy="8" r="1" fill="#666666"/>
+        <circle cx="12" cy="8" r="1" fill="#666666"/>
+      </svg>
+    </button>
+  </d-card-actions>
+</d-card>

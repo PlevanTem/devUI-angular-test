@@ -1,0 +1,75 @@
+<!-- 方案1：像素级还原方案 - 100%还原图片效果 -->
+<div class="pixel-card">
+  <!-- 头部区域 -->
+  <div class="card-header">
+    <div class="header-left">
+      <!-- 主图标 -->
+      <div class="primary-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4L4 6L6 8M10 4L12 6L10 8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <div class="title-group">
+        <div class="title-row">
+          <span class="primary-title">{{ cardData.title }}</span>
+          <!-- 小圆点图标 -->
+          <div class="minus-icon">
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+              <line x1="2" y1="4" x2="6" y2="4" stroke="#666666" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <span class="secondary-text">{{ cardData.subtitle }}</span>
+      </div>
+    </div>
+    
+    <!-- 时间戳 -->
+    <div class="timestamp">{{ cardData.timestamp }}</div>
+  </div>
+  
+  <!-- 内容区域 -->
+  <div class="card-content">
+    <div class="description">{{ cardData.description }}</div>
+    
+    <!-- 详情信息 -->
+    <div class="details-section">
+      <div class="detail-column">
+        <div class="detail-item">
+          <span class="detail-label">状态:</span>
+          <span class="detail-value">{{ cardData.status }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">CPU内存:</span>
+          <span class="detail-value">{{ cardData.cpuMemory }}</span>
+        </div>
+      </div>
+      <div class="detail-column">
+        <div class="detail-item">
+          <span class="detail-label">CPU架构:</span>
+          <span class="detail-value">{{ cardData.cpuArch }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">存储:</span>
+          <span class="detail-value">{{ cardData.storage }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部操作区 -->
+  <div class="card-footer">
+    <button class="play-button" type="button">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M3 2L9 6L3 10V2Z" fill="#666666"/>
+      </svg>
+    </button>
+    <button class="menu-button" type="button">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="4" cy="8" r="1" fill="#666666"/>
+        <circle cx="8" cy="8" r="1" fill="#666666"/>
+        <circle cx="12" cy="8" r="1" fill="#666666"/>
+      </svg>
+    </button>
+  </div>
+</div>

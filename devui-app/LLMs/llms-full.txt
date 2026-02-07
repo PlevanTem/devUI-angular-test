@@ -14,11 +14,18 @@ PROJECT_NAME: DevUI (ng-devui)
 FRAMEWORK: Angular
 LANGUAGE: TypeScript
 VERSION: 18.0.0
-LAST_UPDATE: 2026-02-06
+ANGULAR_VERSION: 21.1.0 (实际使用版本，DevUI 18.0.0 声明支持 Angular ^18.0.0)
+LAST_UPDATE: 2026-02-07
 RESTRICTION_LEVEL: STRICT  # Enforces strict compliance - no violations allowed | 严格模式，禁止所有违规写法
 OFFICIAL_DOCS: https://devui.design/components/zh-cn/get-start
 GITHUB_REPO: https://github.com/DevCloudFE/ng-devui
 NPM_PACKAGE: ng-devui
+
+DESIGN_PRINCIPLES:
+- Efficient (高效): Simplify processes and lower barriers for WYSIWYG results.
+- Open (开放): Embrace community contributions and diverse scenarios.
+- Credible (可信): Deliver reliable, consistent, and secure experiences.
+- Fun (乐趣): Create engaging, immersive interactions.
 
 ---
 
@@ -39,6 +46,10 @@ NPM_PACKAGE: ng-devui
    import { ButtonModule } from 'ng-devui/button';
    import { CardModule } from 'ng-devui/card';
    import { TextInputModule } from 'ng-devui/text-input';
+   import { FormModule } from 'ng-devui/form';
+   import { RadioModule } from 'ng-devui/radio';
+   import { IconModule } from 'ng-devui/icon';
+   import { LayoutModule } from 'ng-devui/layout';
    
    // ✅ CORRECT - Import all modules (NgModule only)
    import { DevUIModule } from 'ng-devui';
@@ -61,7 +72,27 @@ NPM_PACKAGE: ng-devui
    export class ExampleComponent {}
    ```
 
-4. **No style overrides | 禁止样式覆盖**
+4. **Known compatibility issue: d-form in standalone components | 已知兼容性问题：standalone 组件中的 d-form**
+   - ⚠️ `d-form` container component may not work in Angular 21 standalone components
+   - ✅ Use native `<form>` element with DevUI form sub-components instead:
+   ```html
+   <!-- ✅ CORRECT - Hybrid approach for forms -->
+   <form class="devui-form">
+     <d-form-item>
+       <d-form-label>标签</d-form-label>
+       <d-form-control>
+         <d-text-input></d-text-input>
+       </d-form-control>
+     </d-form-item>
+   </form>
+   
+   <!-- ❌ AVOID - d-form may not work in standalone components -->
+   <!-- <d-form>
+     <d-form-item>...</d-form-item>
+   </d-form> -->
+   ```
+
+5. **No style overrides | 禁止样式覆盖**
    - Inheritance, rewriting, or overriding of component built-in styles is FORBIDDEN
    - Never use `!important` syntax
    - 禁止继承、重写、覆盖组件库内置样式，不允许使用 !important 语法
@@ -76,11 +107,11 @@ NPM_PACKAGE: ng-devui
    - ❌ Hardcoded dimensions (px, rem without variables) for component sizing
    - ❌ Hardcoded border-radius, shadows, spacing
    - ✅ Use component props: `bsStyle`, `bsSize`, `cssClass` etc.
-   - ✅ Use design tokens via CSS variables when available
+   - ✅ Use design tokens via CSS variables (see section 3)
 
 2. **Design token enforcement | 强制使用设计令牌**
    - ✅ Component official Props/Inputs (bsStyle, bsSize, etc.)
-   - ✅ Design token CSS variables (when available)
+   - ✅ Design token CSS variables (see section 3.4)
    - ✅ Theme configuration via DevUI theme system
    - ✅ Component built-in style classes
 
@@ -88,6 +119,7 @@ NPM_PACKAGE: ng-devui
    - Do NOT create independent CSS/SCSS files to override component styles
    - 不允许编写独立的 CSS/SCSS 文件来覆盖组件样式
    - Use component configuration props instead
+   - Exception: Custom layout containers may use CSS with design tokens
 
 4. **Built-in responsiveness only | 仅使用内置响应式规则**
    - Use component library's built-in responsive props and breakpoint rules
@@ -124,29 +156,31 @@ NPM_PACKAGE: ng-devui
 ## 3.1 Color System | 颜色系统
 
 COLOR: {
-  "primary": "#165DFF",
-  "primary-hover": "#4080FF",
-  "success": "#00B42A",
-  "warning": "#FF7D00",
-  "danger": "#F53F3F",
-  "info": "#165DFF",
-  "text-primary": "#1D2129",
-  "text-secondary": "#4E5969",
-  "text-disabled": "#86909C",
+  "primary": "#5E7CE0",
+  "primary-hover": "#7693F5",
+  "success": "#3AC295",
+  "warning": "#FA9841",
+  "danger": "#F66F6A",
+  "info": "#5E7CE0",
+  "text-primary": "#252B3A",
+  "text-secondary": "#71757F",
+  "text-tertiary": "#BABBC0",
+  "text-disabled": "#CFD0D3",
+  "text-white": "#FFFFFF",
   "bg-page": "#F2F3F5",
   "bg-container": "#FFFFFF",
-  "border": "#E5E6EB"
+  "border": "#ADB0B8"
 }
 
 ## 3.2 Typography System | 排版系统
 
 TYPOGRAPHY: {
-  "font-family": "Inter, 'PingFang SC', 'Microsoft YaHei', sans-serif",
+  "font-family": "Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'HarmonyOS Sans SC', sans-serif",
   "font-size-h1": "32px",
   "font-size-h2": "24px",
   "font-size-h3": "20px",
   "font-size-h4": "16px",
-  "font-size-body": "14px",
+  "font-size-body": "12px",
   "font-size-small": "12px",
   "font-weight-normal": 400,
   "font-weight-medium": 500,
@@ -184,6 +218,65 @@ SIZE: {
   "md": "md",
   "lg": "lg"
 }
+
+## 3.4 CSS Variables | CSS 变量
+# Use these CSS variables in custom styles | 在自定义样式中使用这些 CSS 变量
+
+CSS_VARIABLES: {
+  "Colors": {
+    "--devui-primary": "#5E7CE0",
+    "--devui-danger": "#F66F6A",
+    "--devui-success": "#3AC295",
+    "--devui-warning": "#FA9841",
+    "--devui-base-bg": "#FFFFFF (container) or #F2F3F5 (page)",
+    "--devui-text-primary": "#252B3A",
+    "--devui-text-secondary": "#71757F",
+    "--devui-text-tertiary": "#BABBC0",
+    "--devui-text-disabled": "#CFD0D3",
+    "--devui-text-white": "#FFFFFF",
+    "--devui-border": "#ADB0B8"
+  },
+  "Spacing": {
+    "--devui-spacing-xs": "4px",
+    "--devui-spacing-sm": "8px",
+    "--devui-spacing-md": "16px",
+    "--devui-spacing-lg": "24px",
+    "--devui-spacing-xl": "32px"
+  },
+  "Typography": {
+    "--devui-font-family": "Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'HarmonyOS Sans SC', sans-serif",
+    "--devui-font-size-h2": "24px",
+    "--devui-font-size-h3": "20px",
+    "--devui-font-size-h4": "16px",
+    "--devui-font-size-body": "12px",
+    "--devui-font-size-small": "12px",
+    "--devui-font-weight-normal": "400",
+    "--devui-font-weight-medium": "500",
+    "--devui-font-weight-semibold": "600",
+    "--devui-line-height-base": "1.5"
+  },
+  "Layout": {
+    "--devui-border-radius-lg": "8px",
+    "--devui-shadow-card": "0 2px 8px rgba(0, 0, 0, 0.08)"
+  }
+}
+
+USAGE_EXAMPLE: |
+  /* ✅ CORRECT - Use CSS variables */
+  .custom-container {
+    background-color: var(--devui-base-bg, #FFFFFF);
+    padding: var(--devui-spacing-lg, 24px);
+    border-radius: var(--devui-border-radius-lg, 8px);
+    color: var(--devui-text-primary, #1D2129);
+  }
+  
+  /* ❌ WRONG - Hardcoded values */
+  .custom-container {
+    background-color: #FFFFFF;
+    padding: 24px;
+    border-radius: 8px;
+    color: #1D2129;
+  }
 
 ---
 
@@ -227,6 +320,8 @@ USAGE_EXAMPLE: |
     <d-icon name="icon-check"></d-icon>
     成功按钮
   </d-button>
+  
+  <d-button bsStyle="common" bsSize="sm">取消</d-button>
 
 FORBIDDEN: [
   "使用原生 <button> 标签",
@@ -257,6 +352,10 @@ SUB_COMPONENTS: {
   "d-card-extend": "CardExtendComponent"
 }
 
+CARD_ACTIONS_PROPS: {
+  "align": "start | end | center | spaceBetween"
+}
+
 SEMANTIC_NODES: root(根容器), header(头部), body(主体), footer(底部), actions(操作区)
 
 USAGE_EXAMPLE: |
@@ -271,6 +370,12 @@ USAGE_EXAMPLE: |
     <d-card-actions align="end">
       <d-button bsStyle="primary">操作</d-button>
     </d-card-actions>
+  </d-card>
+  
+  <d-card [interactive]="true" (click)="handleCardClick()">
+    <d-card-content>
+      可交互卡片
+    </d-card-content>
   </d-card>
 
 FORBIDDEN: [
@@ -293,7 +398,8 @@ CORE_PROPS: {
   "size": "lg | md | sm",
   "maxLength": "number",
   "cssClass": "string",
-  "autofocus": "boolean"
+  "autofocus": "boolean",
+  "value": "string"
 }
 
 OUTPUTS: {
@@ -309,12 +415,152 @@ USAGE_EXAMPLE: |
     placeholder="请输入内容"
     [disabled]="false"
     size="md"
+    [(ngModel)]="inputValue"
     (valueChange)="onValueChange($event)">
   </d-text-input>
+  
+  <!-- With icon wrapper -->
+  <div class="search-input-wrapper">
+    <d-icon name="icon-search" class="search-icon"></d-icon>
+    <d-text-input
+      [(ngModel)]="searchValue"
+      placeholder="请输入关键字搜索"
+      class="search-input">
+    </d-text-input>
+  </div>
 
 FORBIDDEN: [
   "使用原生 <input> 标签",
   "硬编码颜色和尺寸值"
+]
+
+---
+
+COMPONENT: Form (Sub-components)
+IMPORT_PATH: ng-devui/form
+MODULE: FormModule
+DOCS: https://devui.design/components/zh-cn/form/demo
+
+⚠️ IMPORTANT: d-form container may not work in Angular 21 standalone components. Use native <form> with DevUI sub-components.
+
+SUB_COMPONENTS: {
+  "d-form-item": "FormItemComponent",
+  "d-form-label": "FormLabelDirective",
+  "d-form-control": "FormControlDirective"
+}
+
+FORM_ITEM_PROPS: {
+  "labelSize": "sm | md | lg",
+  "labelWidth": "string",
+  "labelAlign": "start | center | end"
+}
+
+SEMANTIC_NODES: form-item(表单项), form-label(标签), form-control(控件)
+
+USAGE_EXAMPLE: |
+  <!-- ✅ CORRECT - Hybrid approach -->
+  <form class="devui-form">
+    <d-form-item>
+      <d-form-label class="required-label">* 用户名:</d-form-label>
+      <d-form-control>
+        <d-text-input 
+          [(ngModel)]="username"
+          name="username"
+          placeholder="请输入用户名">
+        </d-text-input>
+      </d-form-control>
+    </d-form-item>
+    
+    <d-form-item>
+      <d-form-label>来源:</d-form-label>
+      <d-form-control>
+        <d-radio 
+          *ngFor="let option of options"
+          [value]="option.value"
+          [(ngModel)]="selectedValue"
+          name="source">
+          {{ option.label }}
+        </d-radio>
+      </d-form-control>
+    </d-form-item>
+  </form>
+
+FORBIDDEN: [
+  "使用原生 <form> 标签替代 d-form (仅在 standalone 组件中允许)",
+  "自定义表单布局样式",
+  "在 standalone 组件中使用 d-form 容器（使用原生 form 代替）"
+]
+
+---
+
+COMPONENT: Radio
+IMPORT_PATH: ng-devui/radio
+SELECTOR: d-radio
+MODULE: RadioModule
+DOCS: https://devui.design/components/zh-cn/radio/demo
+
+CORE_PROPS: {
+  "value": "any",
+  "name": "string",
+  "disabled": "boolean",
+  "cssClass": "string"
+}
+
+OUTPUTS: {
+  "change": "EventEmitter<any>"
+}
+
+USAGE_EXAMPLE: |
+  <d-radio 
+    *ngFor="let option of options"
+    [value]="option.value"
+    [(ngModel)]="selectedValue"
+    name="radioGroup">
+    {{ option.label }}
+  </d-radio>
+  
+  <d-radio 
+    value="option1"
+    [(ngModel)]="value"
+    name="group1"
+    [disabled]="false">
+    选项1
+  </d-radio>
+
+FORBIDDEN: [
+  "使用原生 <input type='radio'> 标签",
+  "自定义单选按钮样式"
+]
+
+---
+
+COMPONENT: Icon
+IMPORT_PATH: ng-devui/icon
+SELECTOR: d-icon
+MODULE: IconModule
+DOCS: https://devui.design/components/zh-cn/icon/demo
+
+CORE_PROPS: {
+  "name": "string (icon name, e.g., 'icon-search', 'icon-check')",
+  "size": "string",
+  "color": "string",
+  "cssClass": "string"
+}
+
+USAGE_EXAMPLE: |
+  <d-icon name="icon-search"></d-icon>
+  <d-icon name="icon-check" class="icon-check"></d-icon>
+  <d-icon name="icon-close" size="16px" color="#666666"></d-icon>
+  
+  <!-- In button -->
+  <d-button bsStyle="primary">
+    <d-icon name="icon-check"></d-icon>
+    确认
+  </d-button>
+
+FORBIDDEN: [
+  "使用 SVG 图标替代 d-icon（除非组件库不提供）",
+  "硬编码图标颜色"
 ]
 
 ---
@@ -378,6 +624,12 @@ CORE_PROPS: {
   "showAnimation": "boolean",
   "escapable": "boolean",
   "cssClass": "string"
+}
+
+SUB_COMPONENTS: {
+  "d-modal-header": "ModalHeaderComponent",
+  "d-modal-body": "ModalBodyComponent",
+  "d-modal-footer": "ModalFooterComponent"
 }
 
 SERVICE: DialogService (for programmatic modal creation)
@@ -453,38 +705,6 @@ USAGE_EXAMPLE: |
 FORBIDDEN: [
   "使用原生 <table> 标签",
   "自定义表格样式和布局"
-]
-
----
-
-COMPONENT: Form
-IMPORT_PATH: ng-devui/form
-SELECTOR: d-form
-MODULE: FormModule
-DOCS: https://devui.design/components/zh-cn/form/demo
-
-CORE_PROPS: {
-  "labelSize": "sm | md | lg",
-  "layout": "horizontal | vertical",
-  "labelWidth": "string",
-  "labelAlign": "start | center | end"
-}
-
-SEMANTIC_NODES: root(根容器), form-item(表单项), form-label(标签), form-control(控件)
-
-USAGE_EXAMPLE: |
-  <d-form [layout]="'horizontal'" [labelSize]="'md'">
-    <d-form-item>
-      <d-form-label>用户名</d-form-label>
-      <d-form-control>
-        <d-text-input [(ngModel)]="username"></d-text-input>
-      </d-form-control>
-    </d-form-item>
-  </d-form>
-
-FORBIDDEN: [
-  "使用原生 <form> 标签",
-  "自定义表单布局样式"
 ]
 
 ---
@@ -570,7 +790,7 @@ FORBIDDEN: [
 
 COMPONENT: Loading
 IMPORT_PATH: ng-devui/loading
-SELECTOR: d-loading
+SELECTOR: d-loading (directive)
 MODULE: LoadingModule
 SERVICE: LoadingService
 DOCS: https://devui.design/components/zh-cn/loading/demo
@@ -606,6 +826,31 @@ FORBIDDEN: [
 
 ---
 
+COMPONENT: Layout
+IMPORT_PATH: ng-devui/layout
+SELECTOR: d-layout, d-layout-header, d-layout-sidebar, d-layout-content, d-layout-footer
+MODULE: LayoutModule
+DOCS: https://devui.design/components/zh-cn/layout/demo
+
+SUB_COMPONENTS: {
+  "d-layout-header": "LayoutHeaderComponent",
+  "d-layout-sidebar": "LayoutSidebarComponent",
+  "d-layout-content": "LayoutContentComponent",
+  "d-layout-footer": "LayoutFooterComponent"
+}
+
+USAGE_EXAMPLE: |
+  <d-layout>
+    <d-layout-header>Header</d-layout-header>
+    <d-layout>
+      <d-layout-sidebar>Sidebar</d-layout-sidebar>
+      <d-layout-content>Content</d-layout-content>
+    </d-layout>
+    <d-layout-footer>Footer</d-layout-footer>
+  </d-layout>
+
+---
+
 # 5. FORBIDDEN LIST | 禁用清单
 # LLM must NEVER use these syntaxes/APIs | LLM 绝对禁止使用的语法/API
 
@@ -615,10 +860,11 @@ FORBIDDEN_LIST: [
   "硬编码尺寸数值（px/rem 无变量）| Hardcoded dimensions without variables",
   "!important 样式优先级 | !important style priority",
   "组件库废弃API | Deprecated component APIs: bsPosition in Button (use ButtonGroup instead)",
-  "自定义原生HTML组件替代库组件 | Custom native HTML replacing library components: <button>, <input>, <select>, <table>, <form>",
+  "自定义原生HTML组件替代库组件 | Custom native HTML replacing library components: <button>, <input>, <select>, <table>, <form> (except form in standalone components)",
   "自定义 CSS/SCSS 文件覆盖组件样式 | Custom CSS/SCSS files to override component styles",
   "不使用组件库模块导入 | Not importing component modules",
-  "在 standalone 组件中直接使用 DevUIModule (应使用具体组件模块) | Using DevUIModule directly in standalone components (use specific component modules instead)"
+  "在 standalone 组件中直接使用 DevUIModule (应使用具体组件模块) | Using DevUIModule directly in standalone components (use specific component modules instead)",
+  "在 standalone 组件中使用 d-form 容器（使用原生 form + DevUI 子组件代替）| Using d-form container in standalone components (use native form + DevUI sub-components instead)"
 ]
 
 ---
@@ -664,6 +910,7 @@ export const appConfig: ApplicationConfig = {
 ```json
 {
   "styles": [
+    "src/styles.css",
     "node_modules/ng-devui/devui.min.css"
   ]
 }
@@ -696,47 +943,77 @@ export class AppModule {}
 
 ---
 
-# 8. UPDATE LOG | 更新说明
+# 8. VERSION COMPATIBILITY | 版本兼容性
 
-UPDATE_LOG:
-- v18.0.0: Current stable version, supports Angular ^18.0.0
-- Button: bsPosition deprecated, use ButtonGroup instead
-- All components: Use module-based imports in standalone components
+## 8.1 Current Version Status | 当前版本状态
+
+- **Angular**: 21.1.0 (实际使用)
+- **DevUI**: 18.0.0 (声明支持 Angular ^18.0.0)
+- **Status**: ⚠️ 版本不匹配但可以运行
+
+## 8.2 Known Issues | 已知问题
+
+### Issue: d-form in Standalone Components
+- **Problem**: `d-form` container component may not work in Angular 21 standalone components
+- **Solution**: Use native `<form>` element with DevUI form sub-components (`d-form-item`, `d-form-label`, `d-form-control`)
+- **Status**: Workaround implemented and working
+
+### Working Components | 正常工作的组件
+- ✅ `d-card` and sub-components
+- ✅ `d-button`
+- ✅ `d-text-input`
+- ✅ `d-radio`
+- ✅ `d-icon`
+- ✅ `d-form-item`, `d-form-label`, `d-form-control`
+- ✅ `d-layout` and sub-components
 
 ---
 
-# 9. ADDITIONAL RESOURCES | 其他资源
+# 9. UPDATE LOG | 更新说明
 
-## 9.1 Official Documentation | 官方文档
+UPDATE_LOG:
+- v18.0.0: Current stable version, supports Angular ^18.0.0 (tested with Angular 21.1.0)
+- Button: bsPosition deprecated, use ButtonGroup instead
+- All components: Use module-based imports in standalone components
+- Form: d-form container has compatibility issues in Angular 21 standalone components, use native form + DevUI sub-components
+- 2026-02-07: Updated with comprehensive CSS variables, design tokens, and component specifications based on actual codebase usage
+
+---
+
+# 10. ADDITIONAL RESOURCES | 其他资源
+
+## 10.1 Official Documentation | 官方文档
 - Getting Started: https://devui.design/components/zh-cn/get-start
 - Component Overview: https://devui.design/components/zh-cn/overview
 - Design Tokens: https://devui.design/design-tokens/zh-cn/overview
+- Design Color: https://devui.design/components/zh-cn/design-color/demo#color
 - GitHub: https://github.com/DevCloudFE/ng-devui
 
-## 9.2 Component Categories | 组件分类
+## 10.2 Component Categories | 组件分类
 - Basic: Button, Card, Icon, Badge, Avatar
-- Form: TextInput, Textarea, Select, Checkbox, Radio, Toggle, InputNumber, Slider, DatePicker, TimePicker, Upload, Form
+- Form: TextInput, Textarea, Select, Checkbox, Radio, Toggle, InputNumber, Slider, DatePicker, TimePicker, Upload, Form (sub-components)
 - Data Display: DataTable, Tree, Pagination, Tags, Progress, Loading, Empty
 - Feedback: Modal, Drawer, Toast, Alert, Tooltip, Popover
 - Navigation: Menu, Tabs, Breadcrumb, Anchor, BackTop
 - Layout: Layout, Splitter
 
-## 9.3 Common Patterns | 常见模式
+## 10.3 Common Patterns | 常见模式
 
-### Form with Validation
+### Form with Validation (Hybrid Approach)
 ```typescript
-<d-form [layout]="'horizontal'">
+<form class="devui-form">
   <d-form-item>
-    <d-form-label>用户名</d-form-label>
+    <d-form-label class="required-label">* 用户名</d-form-label>
     <d-form-control>
       <d-text-input 
         [(ngModel)]="username"
+        name="username"
         [required]="true"
         placeholder="请输入用户名">
       </d-text-input>
     </d-form-control>
   </d-form-item>
-</d-form>
+</form>
 ```
 
 ### Data Table with Pagination
@@ -762,15 +1039,36 @@ UPDATE_LOG:
     <h4>编辑</h4>
   </d-modal-header>
   <d-modal-body>
-    <d-form>
-      <!-- form content -->
-    </d-form>
+    <form class="devui-form">
+      <d-form-item>
+        <d-form-label>名称</d-form-label>
+        <d-form-control>
+          <d-text-input [(ngModel)]="name"></d-text-input>
+        </d-form-control>
+      </d-form-item>
+    </form>
   </d-modal-body>
   <d-modal-footer>
     <d-button (btnClick)="modal.hide()">取消</d-button>
     <d-button bsStyle="primary" (btnClick)="handleSave()">保存</d-button>
   </d-modal-footer>
 </d-modal>
+```
+
+### Card with Actions
+```typescript
+<d-card>
+  <d-card-header>
+    <d-card-title>卡片标题</d-card-title>
+  </d-card-header>
+  <d-card-content>
+    卡片内容
+  </d-card-content>
+  <d-card-actions align="spaceBetween">
+    <d-button bsStyle="text" bsSize="sm">操作1</d-button>
+    <d-button bsStyle="text" bsSize="sm">操作2</d-button>
+  </d-card-actions>
+</d-card>
 ```
 
 ---

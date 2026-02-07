@@ -1,0 +1,66 @@
+<div class="pixel-card">
+  <!-- Header Section -->
+  <div class="card-header">
+    <div class="header-left">
+      <!-- Icon -->
+      <div class="app-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 5L4 7L6 9M14 5L16 7L14 9M10 7L10 13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      
+      <!-- Title Block -->
+      <div class="title-block">
+        <div class="title-row">
+          <h3 class="app-title">{{ cardData.title }}</h3>
+          <div class="status-indicator"></div>
+        </div>
+        <p class="app-subtitle">{{ cardData.subtitle }}</p>
+      </div>
+    </div>
+    
+    <!-- Timestamp -->
+    <div class="timestamp">{{ cardData.timestamp }}</div>
+  </div>
+  
+  <!-- Description -->
+  <div class="description">{{ cardData.description }}</div>
+  
+  <!-- Details Section -->
+  <div class="details-section">
+    <div class="detail-column">
+      <div class="detail-item">
+        <span class="detail-key">状态:</span>
+        <span class="detail-value">{{ cardData.status }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">CPU内存:</span>
+        <span class="detail-value">{{ cardData.cpuMemory }}</span>
+      </div>
+    </div>
+    <div class="detail-column">
+      <div class="detail-item">
+        <span class="detail-key">CPU架构:</span>
+        <span class="detail-value">{{ cardData.cpuArch }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-key">存储:</span>
+        <span class="detail-value">{{ cardData.storage }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="card-footer">
+    <div class="play-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="8" cy="8" r="7.5" stroke="#CCCCCC" stroke-width="1"/>
+        <path d="M6 5L11 8L6 11V5Z" fill="#CCCCCC"/>
+      </svg>
+    </div>
+    <div class="ellipsis-icon">⋯</div>
+  </div>
+  
+  <!-- Decorative Wave -->
+  <div class="wave-decoration"></div>
+</div>

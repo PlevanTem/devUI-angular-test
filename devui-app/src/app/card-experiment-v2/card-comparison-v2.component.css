@@ -1,0 +1,167 @@
+.comparison-container {
+  padding: var(--devui-spacing-lg, 24px);
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: var(--devui-base-bg, #F2F3F5);
+  min-height: 100vh;
+}
+
+.comparison-header {
+  text-align: center;
+  margin-bottom: var(--devui-spacing-xl, 32px);
+}
+
+.comparison-header h1 {
+  font-size: var(--devui-font-size-h2, 24px);
+  font-weight: var(--devui-font-weight-semibold, 600);
+  color: var(--devui-text-primary, #1D2129);
+  margin-bottom: var(--devui-spacing-sm, 8px);
+}
+
+.comparison-header .subtitle {
+  font-size: var(--devui-font-size-body, 14px);
+  color: var(--devui-text-secondary, #4E5969);
+}
+
+/* 三种方案并排展示 */
+.cards-display {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--devui-spacing-lg, 24px);
+  margin-bottom: var(--devui-spacing-xl, 32px);
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-title {
+  font-size: var(--devui-font-size-h4, 16px);
+  font-weight: var(--devui-font-weight-semibold, 600);
+  color: var(--devui-text-primary, #1D2129);
+  margin-bottom: var(--devui-spacing-md, 16px);
+}
+
+/* 对比表格 */
+.comparison-table {
+  background-color: var(--devui-base-bg, #FFFFFF);
+  border-radius: var(--devui-border-radius-lg, 8px);
+  padding: var(--devui-spacing-lg, 24px);
+  margin-bottom: var(--devui-spacing-xl, 32px);
+  box-shadow: var(--devui-shadow-card, 0 2px 8px rgba(0, 0, 0, 0.08));
+}
+
+.comparison-table h2 {
+  font-size: var(--devui-font-size-h3, 20px);
+  font-weight: var(--devui-font-weight-semibold, 600);
+  color: var(--devui-text-primary, #1D2129);
+  margin-bottom: var(--devui-spacing-md, 16px);
+}
+
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: var(--devui-spacing-md, 16px);
+  text-align: left;
+  border-bottom: 1px solid var(--devui-border, #E5E6EB);
+}
+
+.comparison-table th {
+  background-color: var(--devui-base-bg, #F2F3F5);
+  font-weight: var(--devui-font-weight-semibold, 600);
+  color: var(--devui-text-primary, #1D2129);
+}
+
+.comparison-table td {
+  color: var(--devui-text-secondary, #4E5969);
+}
+
+.comparison-table tr:hover {
+  background-color: var(--devui-base-bg, #F2F3F5);
+}
+
+/* 详细说明 */
+.details-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--devui-spacing-lg, 24px);
+}
+
+.detail-card {
+  background-color: var(--devui-base-bg, #FFFFFF);
+  border-radius: var(--devui-border-radius-lg, 8px);
+  padding: var(--devui-spacing-lg, 24px);
+  box-shadow: var(--devui-shadow-card, 0 2px 8px rgba(0, 0, 0, 0.08));
+}
+
+.detail-card h3 {
+  font-size: var(--devui-font-size-h4, 16px);
+  font-weight: var(--devui-font-weight-semibold, 600);
+  color: var(--devui-text-primary, #1D2129);
+  margin-bottom: var(--devui-spacing-sm, 8px);
+}
+
+.detail-card .description {
+  font-size: var(--devui-font-size-body, 14px);
+  color: var(--devui-text-secondary, #4E5969);
+  margin-bottom: var(--devui-spacing-md, 16px);
+}
+
+.pros-cons {
+  margin-bottom: var(--devui-spacing-md, 16px);
+}
+
+.pros-cons h4 {
+  font-size: var(--devui-font-size-body, 14px);
+  font-weight: var(--devui-font-weight-semibold, 600);
+  color: var(--devui-text-primary, #1D2129);
+  margin-bottom: var(--devui-spacing-xs, 4px);
+  margin-top: var(--devui-spacing-md, 16px);
+}
+
+.pros-cons h4:first-child {
+  margin-top: 0;
+}
+
+.pros-cons ul {
+  margin: 0;
+  padding-left: var(--devui-spacing-md, 16px);
+}
+
+.pros-cons li {
+  font-size: var(--devui-font-size-small, 12px);
+  color: var(--devui-text-secondary, #4E5969);
+  line-height: 1.6;
+  margin-bottom: var(--devui-spacing-xs, 4px);
+}
+
+.use-case {
+  font-size: var(--devui-font-size-small, 12px);
+  color: var(--devui-text-secondary, #4E5969);
+  padding-top: var(--devui-spacing-md, 16px);
+  border-top: 1px solid var(--devui-border, #E5E6EB);
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .cards-display,
+  .details-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .comparison-container {
+    padding: var(--devui-spacing-md, 16px);
+  }
+  
+  .comparison-table {
+    overflow-x: auto;
+  }
+}

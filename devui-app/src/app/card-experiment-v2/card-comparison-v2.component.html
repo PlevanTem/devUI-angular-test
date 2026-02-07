@@ -1,0 +1,105 @@
+<div class="comparison-container">
+  <div class="comparison-header">
+    <h1>卡片组件三种实现方案对比</h1>
+    <p class="subtitle">对比像素级还原、DevUI规范和Hybrid融合三种方案</p>
+  </div>
+
+  <!-- 三种方案并排展示 -->
+  <div class="cards-display">
+    <div class="card-wrapper">
+      <h2 class="card-title">方案1：像素级还原</h2>
+      <app-pixel-perfect-card></app-pixel-perfect-card>
+    </div>
+    
+    <div class="card-wrapper">
+      <h2 class="card-title">方案2：DevUI规范</h2>
+      <app-devui-standard-card></app-devui-standard-card>
+    </div>
+    
+    <div class="card-wrapper">
+      <h2 class="card-title">方案3：Hybrid融合</h2>
+      <app-hybrid-card></app-hybrid-card>
+    </div>
+  </div>
+
+  <!-- 方案对比表格 -->
+  <div class="comparison-table">
+    <h2>方案对比</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>对比项</th>
+          <th>像素级还原</th>
+          <th>DevUI规范</th>
+          <th>Hybrid融合</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>还原度</strong></td>
+          <td>⭐⭐⭐⭐⭐ 100%</td>
+          <td>⭐⭐⭐ 80-90%</td>
+          <td>⭐⭐⭐⭐ 95%</td>
+        </tr>
+        <tr>
+          <td><strong>代码量</strong></td>
+          <td>⭐⭐ 多</td>
+          <td>⭐⭐⭐⭐⭐ 少</td>
+          <td>⭐⭐⭐ 中等</td>
+        </tr>
+        <tr>
+          <td><strong>维护性</strong></td>
+          <td>⭐⭐ 低</td>
+          <td>⭐⭐⭐⭐⭐ 高</td>
+          <td>⭐⭐⭐⭐ 较高</td>
+        </tr>
+        <tr>
+          <td><strong>一致性</strong></td>
+          <td>⭐⭐ 可能不一致</td>
+          <td>⭐⭐⭐⭐⭐ 完全一致</td>
+          <td>⭐⭐⭐⭐ 基本一致</td>
+        </tr>
+        <tr>
+          <td><strong>灵活性</strong></td>
+          <td>⭐⭐⭐⭐⭐ 完全灵活</td>
+          <td>⭐⭐⭐ 受限于组件库</td>
+          <td>⭐⭐⭐⭐ 灵活</td>
+        </tr>
+        <tr>
+          <td><strong>组件库功能</strong></td>
+          <td>❌ 无</td>
+          <td>✅ 完整</td>
+          <td>✅ 保留</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 详细说明 -->
+  <div class="details-section">
+    <div class="detail-card" *ngFor="let item of [comparisonData.pixelPerfect, comparisonData.devuiStandard, comparisonData.hybrid]">
+      <h3>{{ item.name }}</h3>
+      <p class="description">{{ item.description }}</p>
+      
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>✅ 优势</h4>
+          <ul>
+            <li *ngFor="let pro of item.pros">{{ pro }}</li>
+          </ul>
+        </div>
+        
+        <div class="cons">
+          <h4>❌ 劣势</h4>
+          <ul>
+            <li *ngFor="let con of item.cons">{{ con }}</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="use-case">
+        <strong>适用场景：</strong>{{ item.useCase }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,209 @@
+/* 像素级还原样式 - 基于图片详细描述 */
+
+.pixel-card {
+  position: relative;
+  width: 400px;
+  min-height: 180px;
+  background-color: #F8F8F8;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  overflow: hidden;
+}
+
+/* Header Section */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+}
+
+/* App Icon - 红色圆形图标 */
+.app-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #EE3E3E;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.app-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Title Block */
+.title-block {
+  flex: 1;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.app-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.app-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: #999999;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Status Indicator - 小圆点带横线 */
+.status-indicator {
+  width: 14px;
+  height: 14px;
+  background-color: #CCCCCC;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 1px;
+  background-color: #666666;
+}
+
+/* Timestamp */
+.timestamp {
+  font-size: 10px;
+  font-weight: 400;
+  color: #AAAAAA;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+/* Description */
+.description {
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Details Section */
+.details-section {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 16px;
+}
+
+.detail-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.detail-item {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.detail-key {
+  font-size: 12px;
+  font-weight: 400;
+  color: #999999;
+}
+
+.detail-value {
+  font-size: 12px;
+  font-weight: 400;
+  color: #333333;
+}
+
+/* Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.play-icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ellipsis-icon {
+  font-size: 14px;
+  color: #CCCCCC;
+  line-height: 1;
+  font-weight: 300;
+}
+
+/* Decorative Wave - 底部右侧波浪装饰 */
+.wave-decoration {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 80px;
+  background: linear-gradient(
+    135deg,
+    #EBEBEB 0%,
+    #EBEBEB 30%,
+    transparent 70%
+  );
+  border-radius: 50% 0 0 0;
+  clip-path: ellipse(180px 100px at 100% 100%);
+  z-index: 0;
+  opacity: 0.8;
+}
+
+/* 更精确的波浪效果 */
+.wave-decoration::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 60px;
+  background: radial-gradient(
+    ellipse 150px 60px at 100% 100%,
+    #EBEBEB 0%,
+    transparent 70%
+  );
+  border-radius: 50% 0 0 0;
+}

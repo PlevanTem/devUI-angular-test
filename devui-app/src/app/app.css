@@ -1,0 +1,87 @@
+.app-menu {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.menu-container {
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
+}
+
+.app-menu h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+}
+
+.menu-description {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 48px;
+}
+
+.menu-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.menu-card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.menu-card h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1D2129;
+  margin-bottom: 12px;
+}
+
+.menu-card p {
+  font-size: 14px;
+  color: #4E5969;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.view-container {
+  position: relative;
+}
+
+.back-button {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .menu-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .app-menu h1 {
+    font-size: 32px;
+  }
+}

@@ -1,0 +1,114 @@
+<!-- 方案1：像素级还原方案 - 100%还原图片效果 -->
+<div class="pixel-page">
+  <!-- 顶部标题栏 -->
+  <div class="page-header">
+    <div class="header-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="4" width="6" height="6" rx="1" fill="#5E7CE0"/>
+        <rect x="14" y="4" width="6" height="6" rx="1" fill="#5E7CE0" fill-opacity="0.3"/>
+        <rect x="4" y="14" width="6" height="6" rx="1" fill="#5E7CE0" fill-opacity="0.3"/>
+        <rect x="14" y="14" width="6" height="6" rx="1" fill="#5E7CE0" fill-opacity="0.3"/>
+      </svg>
+    </div>
+    <h1 class="page-title">{{ pageData.title }}</h1>
+  </div>
+
+  <div class="page-content-wrapper">
+    <!-- 左侧导航栏 -->
+    <div class="sidebar">
+      <div class="step-item" *ngFor="let step of pageData.steps; let i = index">
+        <div class="step-connector" *ngIf="i > 0"></div>
+        <div class="step-content" [class.active]="step.active" [class.completed]="step.completed">
+          <div class="step-icon" [class.completed]="step.completed" [class.active]="step.active">
+            <svg *ngIf="step.completed" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M13.3333 4L6 11.3333L2.66667 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg *ngIf="step.active" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="12" height="12" rx="1" fill="#5E7CE0"/>
+              <rect x="5" y="5" width="6" height="6" rx="1" fill="white"/>
+            </svg>
+          </div>
+          <span class="step-name" [class.active]="step.active">{{ step.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+      <h2 class="section-title">{{ pageData.currentStep }}</h2>
+
+      <!-- 来源选择 -->
+      <div class="form-section">
+        <label class="form-label required">* 来源:</label>
+        <div class="radio-group">
+          <label class="radio-item" *ngFor="let option of pageData.sourceOptions">
+            <input 
+              type="radio" 
+              name="source" 
+              [value]="option.value"
+              [checked]="pageData.source === option.value"
+              (change)="selectSource(option.value)">
+            <span class="radio-label">{{ option.label }}</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 工程名称 -->
+      <div class="form-section">
+        <label class="form-label required">* 工程名称:</label>
+        <input 
+          type="text" 
+          class="form-input"
+          [(ngModel)]="pageData.projectName"
+          placeholder="可以输入字母、数字、连字符、下划线,字符介于1~127之间">
+      </div>
+
+      <!-- 工程模板搜索 -->
+      <div class="form-section">
+        <label class="form-label required">* 工程模板:</label>
+        <div class="search-input-wrapper">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="7" cy="7" r="5" stroke="#999999" stroke-width="1.5"/>
+            <path d="M11 11L14 14" stroke="#999999" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input 
+            type="text" 
+            class="form-input search-input"
+            [(ngModel)]="pageData.templateSearch"
+            placeholder="请输入关键字搜索模板">
+        </div>
+      </div>
+
+      <!-- 模板卡片网格 -->
+      <div class="template-grid">
+        <div 
+          class="template-card" 
+          *ngFor="let template of pageData.templates"
+          [class.selected]="pageData.selectedTemplate === template.id"
+          (click)="selectTemplate(template.id)">
+          <div class="card-selection-indicator" *ngIf="pageData.selectedTemplate === template.id"></div>
+          <h3 class="card-title">{{ template.name }}</h3>
+          <p class="card-description">{{ template.description }}</p>
+          <div class="card-tags">
+            <span class="tag" *ngFor="let tag of template.tags">{{ tag }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部栏 -->
+      <div class="page-footer">
+        <div class="cost-info">
+          <span class="cost-label">配置费用</span>
+          <span class="cost-value">¥{{ pageData.cost.value }}</span>
+          <span class="cost-unit">{{ pageData.cost.unit }}</span>
+          <div class="info-icon">⑦</div>
+        </div>
+        <div class="footer-actions">
+          <button class="btn-secondary">上一步</button>
+          <button class="btn-secondary">取消</button>
+          <button class="btn-primary">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

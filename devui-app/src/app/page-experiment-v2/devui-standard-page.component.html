@@ -1,0 +1,128 @@
+<!-- 方案2：DevUI规范方案 - 使用DevUI组件和设计令牌 -->
+<div class="devui-page">
+  <!-- 顶部标题栏 -->
+  <div class="page-header">
+    <div class="header-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect x="4" y="4" width="6" height="6" rx="1" fill="#165DFF"/>
+        <rect x="14" y="4" width="6" height="6" rx="1" fill="#165DFF" fill-opacity="0.3"/>
+        <rect x="4" y="14" width="6" height="6" rx="1" fill="#165DFF" fill-opacity="0.3"/>
+        <rect x="14" y="14" width="6" height="6" rx="1" fill="#165DFF" fill-opacity="0.3"/>
+      </svg>
+    </div>
+    <h1 class="page-title">{{ pageData.title }}</h1>
+  </div>
+
+  <div class="page-content-wrapper">
+    <!-- 左侧导航栏 -->
+    <div class="sidebar">
+      <div class="step-item" *ngFor="let step of pageData.steps; let i = index">
+        <div class="step-connector" *ngIf="i > 0"></div>
+        <div class="step-content" [class.active]="step.active" [class.completed]="step.completed">
+          <div class="step-icon" [class.completed]="step.completed" [class.active]="step.active">
+            <d-icon *ngIf="step.completed" name="icon-check" class="icon-check"></d-icon>
+            <svg *ngIf="step.active" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="2" width="12" height="12" rx="1" fill="#165DFF"/>
+              <rect x="5" y="5" width="6" height="6" rx="1" fill="white"/>
+            </svg>
+          </div>
+          <span class="step-name" [class.active]="step.active">{{ step.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+      <h2 class="section-title">{{ pageData.currentStep }}</h2>
+
+      <!-- 使用原生form容器 + DevUI子组件 -->
+      <form class="devui-form" [attr.data-layout]="'vertical'">
+        <!-- 来源选择 -->
+        <div class="form-section">
+          <d-form-item>
+            <d-form-label class="required-label">* 来源:</d-form-label>
+            <d-form-control>
+              <div class="radio-group">
+                <d-radio 
+                  *ngFor="let option of pageData.sourceOptions"
+                  [value]="option.value"
+                  [(ngModel)]="pageData.source"
+                  name="source">
+                  {{ option.label }}
+                </d-radio>
+              </div>
+            </d-form-control>
+          </d-form-item>
+        </div>
+
+        <!-- 工程名称 -->
+        <div class="form-section">
+          <d-form-item>
+            <d-form-label class="required-label">* 工程名称:</d-form-label>
+            <d-form-control>
+              <d-text-input
+                [(ngModel)]="pageData.projectName"
+                name="projectName"
+                placeholder="可以输入字母、数字、连字符、下划线,字符介于1~127之间"
+                class="full-width-input">
+              </d-text-input>
+            </d-form-control>
+          </d-form-item>
+        </div>
+
+        <!-- 工程模板搜索 -->
+        <div class="form-section">
+          <d-form-item>
+            <d-form-label class="required-label">* 工程模板:</d-form-label>
+            <d-form-control>
+              <div class="search-input-wrapper">
+                <d-icon name="icon-search" class="search-icon"></d-icon>
+                <d-text-input
+                  [(ngModel)]="pageData.templateSearch"
+                  name="templateSearch"
+                  placeholder="请输入关键字搜索模板"
+                  class="search-input">
+                </d-text-input>
+              </div>
+            </d-form-control>
+          </d-form-item>
+        </div>
+      </form>
+
+      <!-- 模板卡片网格 - 使用DevUI Card -->
+      <div class="template-grid">
+        <d-card 
+          *ngFor="let template of pageData.templates"
+          class="template-card"
+          [class.selected]="pageData.selectedTemplate === template.id"
+          (click)="selectTemplate(template.id)">
+          <div class="card-selection-indicator" *ngIf="pageData.selectedTemplate === template.id"></div>
+          <d-card-header>
+            <d-card-title>{{ template.name }}</d-card-title>
+          </d-card-header>
+          <d-card-content>
+            <p class="card-description">{{ template.description }}</p>
+            <div class="card-tags">
+              <span class="tag" *ngFor="let tag of template.tags">{{ tag }}</span>
+            </div>
+          </d-card-content>
+        </d-card>
+      </div>
+
+      <!-- 底部栏 -->
+      <div class="page-footer">
+        <div class="cost-info">
+          <span class="cost-label">配置费用</span>
+          <span class="cost-value">¥{{ pageData.cost.value }}</span>
+          <span class="cost-unit">{{ pageData.cost.unit }}</span>
+          <div class="info-icon">⑦</div>
+        </div>
+        <div class="footer-actions">
+          <d-button bsStyle="common" bsSize="md">上一步</d-button>
+          <d-button bsStyle="common" bsSize="md">取消</d-button>
+          <d-button bsStyle="primary" bsSize="md">确定</d-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

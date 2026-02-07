@@ -1,0 +1,171 @@
+<div class="comparison-container">
+
+    <div class="view-switcher">
+        <d-button [bsStyle]="currentView() === 'v1' ? 'primary' : 'common'" (click)="setView('v1')">
+            V1: Pixel Perfect (Native)
+        </d-button>
+        <d-button [bsStyle]="currentView() === 'v2' ? 'primary' : 'common'" (click)="setView('v2')">
+            V2: DevUI Standard (Library)
+        </d-button>
+        <d-button [bsStyle]="currentView() === 'v3' ? 'primary' : 'common'" (click)="setView('v3')">
+            V3: Hybrid Fusion (Optimized)
+        </d-button>
+    </div>
+
+    <!-- V1: Pixel Perfect Restoration -->
+    <ng-container *ngIf="currentView() === 'v1'">
+        <div class="v1-card">
+            <div class="v1-watermark"></div>
+
+            <div class="v1-header">
+                <div class="v1-icon">
+                    &lt;/&gt;
+                </div>
+                <div class="v1-title-group">
+                    <div class="v1-title-row">
+                        <span class="v1-title">{{ cardData.title }}</span>
+                        <div class="v1-status-badge">-</div>
+                    </div>
+                    <div class="v1-subtitle">{{ cardData.subtitle }}</div>
+                </div>
+                <div class="v1-date">{{ cardData.date }}</div>
+            </div>
+
+            <div class="v1-content">
+                <div class="v1-desc">{{ cardData.description }}</div>
+
+                <div class="v1-info-grid">
+                    <div class="v1-info-item">
+                        <span class="v1-info-label">状态:</span>
+                        <span class="v1-info-value">{{ cardData.status }}</span>
+                    </div>
+                    <div class="v1-info-item">
+                        <span class="v1-info-label">CPU架构:</span>
+                        <span class="v1-info-value">{{ cardData.cpuArch }}</span>
+                    </div>
+                    <div class="v1-info-item">
+                        <span class="v1-info-label">CPU内存:</span>
+                        <span class="v1-info-value">{{ cardData.cpuMem }}</span>
+                    </div>
+                    <div class="v1-info-item">
+                        <span class="v1-info-label">存储:</span>
+                        <span class="v1-info-value">{{ cardData.storage }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="v1-footer">
+                <button class="v1-action-btn v1-play-btn">
+                    <span class="v1-play-icon"></span>
+                </button>
+                <button class="v1-action-btn">•••</button>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- V2: DevUI Standard -->
+    <ng-container *ngIf="currentView() === 'v2'">
+        <d-card class="v2-card-container">
+            <d-card-header>
+                <div class="card-avatar">
+                    <d-icon name="icon-application" color="#FF5757"></d-icon>
+                </div>
+                <d-card-title>
+                    {{ cardData.title }}
+                    <span style="font-size: 12px; color: #999; margin-left: 8px;">{{ cardData.subtitle }}</span>
+                </d-card-title>
+                <!-- DevUI Card Header doesn't easily support right-aligned date in title row without custom CSS -->
+            </d-card-header>
+            <d-card-content>
+                <div style="font-size: 12px; color: #999; margin-bottom: 16px; text-align: right;">{{ cardData.date }}
+                </div>
+
+                <p style="margin-bottom: 20px;">{{ cardData.description }}</p>
+
+                <!-- Standard Grid using flex -->
+                <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+                    <div style="width: 45%; display: flex; justify-content: space-between;">
+                        <span style="color: #999;">状态</span>
+                        <span>{{ cardData.status }}</span>
+                    </div>
+                    <div style="width: 45%; display: flex; justify-content: space-between;">
+                        <span style="color: #999;">CPU架构</span>
+                        <span>{{ cardData.cpuArch }}</span>
+                    </div>
+                    <div style="width: 45%; display: flex; justify-content: space-between;">
+                        <span style="color: #999;">CPU内存</span>
+                        <span>{{ cardData.cpuMem }}</span>
+                    </div>
+                    <div style="width: 45%; display: flex; justify-content: space-between;">
+                        <span style="color: #999;">存储</span>
+                        <span>{{ cardData.storage }}</span>
+                    </div>
+                </div>
+            </d-card-content>
+            <!-- DevUI Actions usually button group -->
+            <div style="display: flex; justify-content: space-between; width: 100%; padding: 16px;">
+                <d-button icon="icon-run" bsStyle="text-dark" title="Start"></d-button>
+                <d-button icon="icon-more-oper" bsStyle="text-dark" title="More"></d-button>
+            </div>
+        </d-card>
+    </ng-container>
+
+    <!-- V3: Hybrid Fusion -->
+    <ng-container *ngIf="currentView() === 'v3'">
+        <!-- Using d-card as container but with custom internal layout for flexibility -->
+        <d-card class="v3-card">
+            <div class="v3-watermark"></div>
+
+            <div class="v3-header">
+                <div class="v3-icon-wrapper">
+                    <d-icon name="icon-code" [style.fontSize]="'24px'"></d-icon>
+                </div>
+                <div class="v3-title-area">
+                    <div class="v3-title-row">
+                        <span class="v3-title">{{ cardData.title }}</span>
+                        <!-- Using DevUI Icon for status -->
+                        <d-icon name="icon-minus-o" color="var(--devui-text-tertiary)"></d-icon>
+                    </div>
+                    <div class="v3-subtitle">{{ cardData.subtitle }}</div>
+                </div>
+                <div class="v3-date">{{ cardData.date }}</div>
+            </div>
+
+            <d-card-content style="padding: 0;">
+                <div style="color: var(--devui-text-secondary); margin-bottom: var(--devui-spacing-lg);">
+                    {{ cardData.description }}
+                </div>
+
+                <div class="v3-info-grid">
+                    <div class="v3-info-item">
+                        <span class="v3-label">状态:</span>
+                        <span class="v3-value">{{ cardData.status }}</span>
+                    </div>
+                    <div class="v3-info-item">
+                        <span class="v3-label">CPU架构:</span>
+                        <span class="v3-value">{{ cardData.cpuArch }}</span>
+                    </div>
+                    <div class="v3-info-item">
+                        <span class="v3-label">CPU内存:</span>
+                        <span class="v3-value">{{ cardData.cpuMem }}</span>
+                    </div>
+                    <div class="v3-info-item">
+                        <span class="v3-label">存储:</span>
+                        <span class="v3-value">{{ cardData.storage }}</span>
+                    </div>
+                </div>
+            </d-card-content>
+
+            <div class="v3-actions">
+                <div class="v3-play-btn" dTooltip [content]="'启动'">
+                    <!-- Simulated Play Icon using CSS or d-icon -->
+                    <d-icon name="icon-run" [style.fontSize]="'16px'"></d-icon>
+                </div>
+                <div class="v3-more-btn">
+                    <d-icon name="icon-more-oper" [style.fontSize]="'16px'"></d-icon>
+                </div>
+            </div>
+        </d-card>
+    </ng-container>
+
+</div>

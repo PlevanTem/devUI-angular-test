@@ -1,0 +1,258 @@
+<div class="comparison-container">
+    <div class="view-switcher">
+        <d-button [bsStyle]="currentView() === 'v1' ? 'primary' : 'common'" (btnClick)="setView('v1')">
+            方案1: 像素级还原 (V1)
+        </d-button>
+        <d-button [bsStyle]="currentView() === 'v2' ? 'primary' : 'common'" (btnClick)="setView('v2')">
+            方案2: DevUI 规范 (V2)
+        </d-button>
+        <d-button [bsStyle]="currentView() === 'v3' ? 'primary' : 'common'" (btnClick)="setView('v3')">
+            方案3: Hybrid 融合 (V3)
+        </d-button>
+    </div>
+
+    <!-- V1: Pixel Perfect Restoration -->
+    <ng-container *ngIf="currentView() === 'v1'">
+        <div class="v1-page">
+            <div class="v1-sidebar">
+                <div class="v1-step">
+                    <div class="v1-step-icon">✔</div>
+                    基础配置
+                </div>
+                <div class="v1-step">
+                    <div class="v1-step-icon" style="background:#fff; color:#5E7CE0; border:1px solid #5E7CE0;">2</div>
+                    工程配置
+                </div>
+            </div>
+            <div class="v1-content">
+                <h2 class="v1-title">工程配置</h2>
+
+                <div class="v1-form-group">
+                    <label class="v1-label required">来 源 ：</label>
+                    <div class="v1-radio-group">
+                        <label class="v1-radio-label">
+                            <input type="radio" name="source" [checked]="sourceType === 'sample'"
+                                (change)="sourceType = 'sample'">
+                            <span style="margin-left:8px;">样例工程</span>
+                        </label>
+                        <label class="v1-radio-label">
+                            <input type="radio" name="source" [checked]="sourceType === 'private'"
+                                (change)="sourceType = 'private'">
+                            <span style="margin-left:8px;">私有仓库</span>
+                        </label>
+                        <label class="v1-radio-label">
+                            <input type="radio" name="source" [checked]="sourceType === 'none'"
+                                (change)="sourceType = 'none'">
+                            <span style="margin-left:8px;">不创建工程</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="v1-form-group">
+                    <label class="v1-label required">工程名称 ：</label>
+                    <div class="v1-input-wrapper">
+                        <input type="text" class="v1-input" placeholder="可以输入字母、数字、连字符、下划线，字符介于1~127之间"
+                            [(ngModel)]="projectName">
+                    </div>
+                </div>
+
+                <div class="v1-form-group">
+                    <label class="v1-label required">工程模板 ：</label>
+                    <div class="v1-search-wrapper">
+                        <input type="text" class="v1-input" placeholder="请输入关键字搜索模板" style="padding-left: 30px;">
+                        <span style="position:absolute; left:8px; top:6px; color:#999;">🔍</span>
+                    </div>
+
+                    <div class="v1-card-grid">
+                        <div class="v1-card" *ngFor="let t of templates" [class.selected]="t.selected"
+                            (click)="selectTemplate(t.id)">
+                            <div class="v1-card-radio"></div>
+                            <div class="v1-card-title">{{ t.title }}</div>
+                            <div class="v1-card-desc">{{ t.description }}</div>
+                            <div class="v1-tags">
+                                <span class="v1-tag" *ngFor="let tag of t.tags">{{ tag }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="v1-footer">
+                    <div class="v1-price">
+                        配置费用 <span>¥ 1.2049</span> /小时 <span style="color:#999; font-size:12px;">?</span>
+                    </div>
+                    <button class="v1-btn">上一步</button>
+                    <button class="v1-btn">取消</button>
+                    <button class="v1-btn v1-btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- V2: Standard DevUI (Assuming d-form works or using layout) -->
+    <!-- Attempting to use d-form as Standard Spec requires -->
+    <ng-container *ngIf="currentView() === 'v2'">
+        <d-layout class="v2-layout">
+            <d-aside class="v2-sidebar">
+                <!-- Using basic divs for steps as DevUI Steps component might be complex to setup quickly without module import check -->
+                <!-- Assuming d-steps exists, but let's stick to safe simple layout for sidebar -->
+                <div style="font-weight: bold; color: #5e7ce0; margin-bottom: 20px;">1. 基础配置 (Done)</div>
+                <div style="font-weight: bold; color: #5e7ce0;">2. 工程配置 (Active)</div>
+            </d-aside>
+            <d-content class="v2-content">
+                <h2>工程配置</h2>
+
+                <form class="devui-form" [attr.data-layout]="'horizontal'">
+                    <d-form-item>
+                        <d-form-label [required]="true">来源</d-form-label>
+                        <d-form-control>
+                            <div style="display: flex; gap: 16px;">
+                                <d-radio [value]="'sample'" [(ngModel)]="sourceType" name="sourcev2">样例工程</d-radio>
+                                <d-radio [value]="'private'" [(ngModel)]="sourceType" name="sourcev2">私有仓库</d-radio>
+                                <d-radio [value]="'none'" [(ngModel)]="sourceType" name="sourcev2">不创建工程</d-radio>
+                            </div>
+                        </d-form-control>
+                    </d-form-item>
+
+                    <d-form-item>
+                        <d-form-label [required]="true">工程名称</d-form-label>
+                        <d-form-control>
+                            <d-text-input [(ngModel)]="projectName" name="projectName"
+                                placeholder="可以输入字母、数字、连字符、下划线，字符介于1~127之间">
+                            </d-text-input>
+                        </d-form-control>
+                    </d-form-item>
+
+                    <d-form-item>
+                        <d-form-label [required]="true">工程模板</d-form-label>
+                        <d-form-control>
+                            <d-search placeholder="请输入关键字搜索模板" [iconPosition]="'left'"
+                                style="width: 300px; display: block; margin-bottom: 16px;">
+                            </d-search>
+
+                            <div class="v2-card-grid">
+                                <d-card *ngFor="let t of templates" [class.selected]="t.selected"
+                                    (click)="selectTemplate(t.id)" style="cursor: pointer;">
+                                    <d-card-header>
+                                        <d-card-title>
+                                            <div style="display:flex; justify-content:space-between; width:100%">
+                                                {{ t.title }}
+                                                <d-radio [name]="'templateradio'" [ngModel]="t.selected"
+                                                    [value]="true"></d-radio>
+                                            </div>
+                                        </d-card-title>
+                                    </d-card-header>
+                                    <d-card-content>
+                                        <p style="color: #666; font-size: 12px; height: 36px; overflow: hidden;">{{
+                                            t.description }}</p>
+                                        <div style="margin-top: 8px;">
+                                            <span *ngFor="let tag of t.tags"
+                                                style="background:#f2f3f5; color:#5e7ce0; padding:2px 6px; margin-right:4px; font-size:12px; border-radius:10px;">{{
+                                                tag }}</span>
+                                        </div>
+                                    </d-card-content>
+                                </d-card>
+                            </div>
+                        </d-form-control>
+                    </d-form-item>
+                </form>
+
+                <div
+                    style="position: absolute; bottom: 0; width: 100%; border-top: 1px solid #eef0f2; padding: 16px; display: flex; align-items: center; justify-content: flex-end; left:0; background:white;">
+                    <span style="margin-right: auto;">配置费用 <b style="color:red">¥ 1.2049</b> /小时</span>
+                    <d-button bsStyle="common" style="margin-right: 8px;">上一步</d-button>
+                    <d-button bsStyle="common" style="margin-right: 8px;">取消</d-button>
+                    <d-button bsStyle="primary">确定</d-button>
+                </div>
+            </d-content>
+        </d-layout>
+    </ng-container>
+
+    <!-- V3: Hybrid Fusion -->
+    <!-- Native form container + DevUI Sub-components + CSS Tokens -->
+    <ng-container *ngIf="currentView() === 'v3'">
+        <div class="v1-page" style="background: var(--devui-bg-page, #F2F3F5);">
+            <div class="v1-sidebar" style="background: var(--devui-bg-container, #FFFFFF);">
+                <!-- Using Hybrid simple list for sidebar -->
+                <div class="v1-step">
+                    <d-icon name="icon-check" style="margin-right: 8px; color: var(--devui-primary)"></d-icon> 基础配置
+                </div>
+                <div class="v1-step" style="color: var(--devui-primary);">
+                    <span
+                        style="border: 1px solid var(--devui-primary); border-radius: 50%; width: 20px; height: 20px; text-align: center; margin-right: 8px;">2</span>
+                    工程配置
+                </div>
+            </div>
+
+            <div class="v1-content" style="background: #FFFFFF;">
+                <h2 style="font-size: var(--devui-font-size-h3); margin-bottom: var(--devui-spacing-lg);">工程配置</h2>
+
+                <!-- Hybrid Form: Native Container -->
+                <form class="hybrid-form" [attr.data-layout]="'horizontal'">
+
+                    <!-- Form Item: Source -->
+                    <d-form-item>
+                        <d-form-label [required]="true">来 源：</d-form-label>
+                        <d-form-control>
+                            <div style="display: flex; gap: var(--devui-spacing-lg);">
+                                <d-radio name="sourcev3" [value]="'sample'" [(ngModel)]="sourceType">样例工程</d-radio>
+                                <d-radio name="sourcev3" [value]="'private'" [(ngModel)]="sourceType">私有仓库</d-radio>
+                                <d-radio name="sourcev3" [value]="'none'" [(ngModel)]="sourceType">不创建工程</d-radio>
+                            </div>
+                        </d-form-control>
+                    </d-form-item>
+
+                    <!-- Form Item: Project Name -->
+                    <d-form-item>
+                        <d-form-label [required]="true">工程名称：</d-form-label>
+                        <d-form-control>
+                            <d-text-input cssClass="v1-input-wrapper" [(ngModel)]="projectName" name="projectNameV3"
+                                placeholder="可以输入字母、数字、连字符、下划线，字符介于1~127之间">
+                            </d-text-input>
+                        </d-form-control>
+                    </d-form-item>
+
+                    <!-- Form Item: Template -->
+                    <d-form-item>
+                        <d-form-label [required]="true">工程模板：</d-form-label>
+                        <d-form-control>
+                            <div style="max-width: 300px; margin-bottom: var(--devui-spacing-md);">
+                                <d-search placeholder="请输入关键字搜索模板" [iconPosition]="'left'"></d-search>
+                            </div>
+
+                            <div class="hybrid-card-wrapper">
+                                <d-card *ngFor="let t of templates" class="hybrid-card" [class.selected]="t.selected"
+                                    (click)="selectTemplate(t.id)">
+                                    <d-card-content>
+                                        <div class="hybrid-card-header">
+                                            <span class="hybrid-card-title">{{ t.title }}</span>
+                                            <d-radio [name]="'templatev3'" [ngModel]="t.selected" [value]="true"
+                                                [disabled]="true"></d-radio>
+                                            <!-- Disabled radio just for visual checkmark style if clicked -->
+                                        </div>
+                                        <p class="hybrid-card-desc">{{ t.description }}</p>
+                                        <div class="hybrid-tags">
+                                            <span *ngFor="let tag of t.tags" class="hybrid-tag">{{ tag }}</span>
+                                        </div>
+                                    </d-card-content>
+                                </d-card>
+                            </div>
+                        </d-form-control>
+                    </d-form-item>
+
+                </form>
+
+                <!-- Footer -->
+                <div class="hybrid-footer">
+                    <div style="margin-right: auto;">
+                        配置费用 <span style="color: #F66F6A; font-weight: bold; font-size: 18px;">¥ 1.2049</span> /小时
+                        <d-icon name="icon-help" style="color: var(--devui-text-secondary);"></d-icon>
+                    </div>
+                    <d-button bsStyle="common" bsSize="md">上一步</d-button>
+                    <d-button bsStyle="common" bsSize="md">取消</d-button>
+                    <d-button bsStyle="primary" bsSize="md">确定</d-button>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+</div>

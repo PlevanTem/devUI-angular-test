@@ -1,11 +1,106 @@
-<div style="padding: 20px;">
-  <h1>DevUI 安装测试</h1>
-  <p>如果您看到下面的按钮样式正常，说明 DevUI 安装成功！</p>
-  
-  <div style="margin-top: 20px;">
-    <d-button bsStyle="primary" bsSize="md">主要按钮</d-button>
-    <d-button bsStyle="common" bsSize="md" style="margin-left: 10px;">普通按钮</d-button>
-    <d-button bsStyle="success" bsSize="md" style="margin-left: 10px;">成功按钮</d-button>
-    <d-button bsStyle="danger" bsSize="md" style="margin-left: 10px;">危险按钮</d-button>
+@if (currentView() === 'menu') {
+<div class="app-menu">
+  <div class="menu-container">
+    <h1>DevUI 还原实验</h1>
+    <p class="menu-description">选择要查看的实验类型</p>
+
+    <div class="menu-options">
+      <div class="menu-card" (click)="showCardComparison()">
+        <div class="card-icon">📦</div>
+        <h2>卡片组件还原 (V1)</h2>
+        <p>对比卡片组件的两种实现方案</p>
+        <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
+      </div>
+
+      <div class="menu-card" (click)="showCardComparisonV2()">
+        <div class="card-icon">🎨</div>
+        <h2>卡片组件还原 (V2)</h2>
+        <p>对比三种实现方案：像素级还原、DevUI规范、Hybrid融合</p>
+        <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
+      </div>
+
+      <div class="menu-card" (click)="showPageComparison()">
+        <div class="card-icon">📄</div>
+        <h2>页面级还原 (V1)</h2>
+        <p>对比完整页面的两种实现方案</p>
+        <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
+      </div>
+
+      <div class="menu-card" (click)="showPageComparisonV2()">
+        <div class="card-icon">🚀</div>
+        <h2>页面级还原 (V2)</h2>
+        <p>对比三种实现方案：像素级还原、DevUI规范、Hybrid融合</p>
+        <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
+      </div>
+
+      <div class="menu-card" (click)="showPageComparisonV3()">
+        <div class="card-icon">🧪</div>
+        <h2>页面级还原 (V3) [NEW]</h2>
+        <p>DevUI 还原实验 V3：High Fidelity vs DevUI Spec vs Hybrid Fusion</p>
+        <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
+      </div>
+
+      <div class="menu-card" (click)="showCardComparisonV3()">
+        <div class="card-icon">🎴</div>
+        <h2>卡片组件还原 (V3)</h2>
+        <p>对比三种方案：像素级、DevUI规范、Hybrid融合 (Based on Image)</p>
+        <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
+      </div>
+    </div>
   </div>
 </div>
+}
+
+@if (currentView() === 'card') {
+<div class="view-container">
+  <div class="back-button">
+    <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
+  </div>
+  <app-card-comparison></app-card-comparison>
+</div>
+}
+
+@if (currentView() === 'card-v2') {
+<div class="view-container">
+  <div class="back-button">
+    <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
+  </div>
+  <app-card-comparison-v2></app-card-comparison-v2>
+</div>
+}
+
+@if (currentView() === 'page') {
+<div class="view-container">
+  <div class="back-button">
+    <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
+  </div>
+  <app-page-comparison></app-page-comparison>
+</div>
+}
+
+@if (currentView() === 'page-v2') {
+<div class="view-container">
+  <div class="back-button">
+    <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
+  </div>
+  <app-page-comparison-v2></app-page-comparison-v2>
+</div>
+}
+
+@if (currentView() === 'page-v3') {
+<div class="view-container">
+  <div class="back-button">
+    <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
+  </div>
+  <app-page-comparison-v3></app-page-comparison-v3>
+</div>
+}
+
+@if (currentView() === 'card-v3') {
+<div class="view-container">
+  <div class="back-button">
+    <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
+  </div>
+  <app-card-comparison-v3></app-card-comparison-v3>
+</div>
+}

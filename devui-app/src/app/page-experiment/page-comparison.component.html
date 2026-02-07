@@ -1,0 +1,168 @@
+<div class="comparison-container">
+  <div class="experiment-header">
+    <h1>{{ experimentInfo.title }}</h1>
+    <p class="experiment-description">{{ experimentInfo.description }}</p>
+  </div>
+
+  <div class="comparison-tabs">
+    <div class="tab-content">
+      <!-- 方案一：像素级还原 -->
+      <div class="approach-section">
+        <div class="approach-header">
+          <h2>{{ experimentInfo.approach1.title }}</h2>
+          <p class="approach-description">{{ experimentInfo.approach1.description }}</p>
+        </div>
+        
+        <div class="page-wrapper">
+          <app-pixel-perfect-page></app-pixel-perfect-page>
+        </div>
+        
+        <div class="features-list">
+          <h3>特点：</h3>
+          <ul>
+            <li *ngFor="let feature of experimentInfo.approach1.features">{{ feature }}</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 方案二：DevUI规范组件 -->
+      <div class="approach-section">
+        <div class="approach-header">
+          <h2>{{ experimentInfo.approach2.title }}</h2>
+          <p class="approach-description">{{ experimentInfo.approach2.description }}</p>
+        </div>
+        
+        <div class="page-wrapper">
+          <app-devui-standard-page></app-devui-standard-page>
+        </div>
+        
+        <div class="features-list">
+          <h3>特点：</h3>
+          <ul>
+            <li *ngFor="let feature of experimentInfo.approach2.features">{{ feature }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 技术对比表格 -->
+  <div class="comparison-table">
+    <h2>技术对比</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>对比项</th>
+          <th>方案一：像素级还原</th>
+          <th>方案二：DevUI规范</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>布局组件</td>
+          <td>原生HTML + Flexbox/Grid</td>
+          <td>DevUI Layout组件（可选）</td>
+        </tr>
+        <tr>
+          <td>表单组件</td>
+          <td>原生input + 自定义样式</td>
+          <td>d-form + d-text-input + d-radio</td>
+        </tr>
+        <tr>
+          <td>卡片组件</td>
+          <td>原生div + 自定义样式</td>
+          <td>d-card组件</td>
+        </tr>
+        <tr>
+          <td>按钮组件</td>
+          <td>原生button + 自定义样式</td>
+          <td>d-button组件</td>
+        </tr>
+        <tr>
+          <td>标签组件</td>
+          <td>原生span + 自定义样式</td>
+          <td>d-tag组件</td>
+        </tr>
+        <tr>
+          <td>图标</td>
+          <td>自定义SVG图标</td>
+          <td>d-icon组件</td>
+        </tr>
+        <tr>
+          <td>颜色系统</td>
+          <td>硬编码颜色值</td>
+          <td>DevUI设计令牌</td>
+        </tr>
+        <tr>
+          <td>间距系统</td>
+          <td>硬编码像素值</td>
+          <td>DevUI间距令牌</td>
+        </tr>
+        <tr>
+          <td>表单验证</td>
+          <td>需要手动实现</td>
+          <td>组件库内置支持</td>
+        </tr>
+        <tr>
+          <td>可访问性</td>
+          <td>需要手动实现</td>
+          <td>组件库内置支持</td>
+        </tr>
+        <tr>
+          <td>代码量</td>
+          <td>较大（~500行CSS）</td>
+          <td>较小（~200行CSS）</td>
+        </tr>
+        <tr>
+          <td>维护成本</td>
+          <td>高（需要手动维护）</td>
+          <td>低（跟随组件库更新）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 实验记录 -->
+  <div class="experiment-log">
+    <h2>实验记录</h2>
+    <div class="log-content">
+      <h3>实验日期：2026-02-07</h3>
+      <h3>实验目标：</h3>
+      <ul>
+        <li>对比页面级别的像素级还原和DevUI规范组件两种实现方式</li>
+        <li>分析复杂页面场景下两种方案的优缺点</li>
+        <li>为实际项目开发提供参考</li>
+      </ul>
+      
+      <h3>关键发现：</h3>
+      <ul>
+        <li><strong>方案一（像素级还原）</strong>：
+          <ul>
+            <li>能够精确还原设计稿的每个细节</li>
+            <li>对布局和样式有完全控制权</li>
+            <li>需要编写大量自定义CSS代码</li>
+            <li>表单验证、可访问性等功能需要手动实现</li>
+            <li>维护成本高，更新困难</li>
+          </ul>
+        </li>
+        <li><strong>方案二（DevUI规范）</strong>：
+          <ul>
+            <li>使用组件库大大减少代码量</li>
+            <li>自动获得表单验证、可访问性等能力</li>
+            <li>符合设计规范，保持一致性</li>
+            <li>跟随组件库更新自动维护</li>
+            <li>某些特殊设计可能需要调整或使用自定义样式补充</li>
+          </ul>
+        </li>
+        <li><strong>最佳实践建议</strong>：
+          <ul>
+            <li>优先使用DevUI组件库作为基础</li>
+            <li>对于特殊设计需求，使用CSS变量或设计令牌进行定制</li>
+            <li>避免完全重写组件样式，优先使用组件提供的配置选项</li>
+            <li>在必要时结合自定义样式，但保持与设计系统的一致性</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

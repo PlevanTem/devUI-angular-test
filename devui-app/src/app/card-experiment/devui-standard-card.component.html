@@ -1,0 +1,61 @@
+<d-card class="devui-card">
+  <d-card-header>
+    <div class="card-header-content">
+      <div class="header-left">
+        <!-- Avatar/Icon using DevUI Icon -->
+        <div class="app-icon-wrapper">
+          <d-icon name="icon-code" class="app-icon"></d-icon>
+        </div>
+        
+        <div class="title-block">
+          <div class="title-row">
+            <d-card-title>{{ cardData.title }}</d-card-title>
+            <div class="status-indicator"></div>
+          </div>
+          <d-card-subtitle>{{ cardData.subtitle }}</d-card-subtitle>
+        </div>
+      </div>
+      
+      <div class="timestamp">{{ cardData.timestamp }}</div>
+    </div>
+  </d-card-header>
+  
+  <d-card-content>
+    <div class="description">{{ cardData.description }}</div>
+    
+    <div class="details-section">
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="detail-key">状态:</span>
+          <span class="detail-value">{{ cardData.status }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">CPU内存:</span>
+          <span class="detail-value">{{ cardData.cpuMemory }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">CPU架构:</span>
+          <span class="detail-value">{{ cardData.cpuArch }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">存储:</span>
+          <span class="detail-value">{{ cardData.storage }}</span>
+        </div>
+      </div>
+    </div>
+  </d-card-content>
+  
+  <d-card-actions>
+    <div class="card-actions-wrapper">
+      <div class="action-left">
+        <d-icon name="icon-play" class="action-icon"></d-icon>
+      </div>
+      <div class="action-right">
+        <span class="ellipsis-icon">⋯</span>
+      </div>
+    </div>
+  </d-card-actions>
+  
+  <!-- Decorative element using DevUI styles -->
+  <div class="wave-decoration"></div>
+</d-card>

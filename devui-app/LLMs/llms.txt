@@ -8,9 +8,11 @@ PROJECT_NAME: DevUI (ng-devui)
 FRAMEWORK: Angular
 LANGUAGE: TypeScript
 VERSION: 18.0.0
-LAST_UPDATE: 2026-02-06
+ANGULAR_VERSION: 21.1.0 (实际使用版本)
+LAST_UPDATE: 2026-02-07
 DOCUMENTATION_URL: https://devui.design/components/zh-cn/get-start
 GITHUB: https://github.com/DevCloudFE/ng-devui
+NPM_PACKAGE: ng-devui
 
 ---
 
@@ -21,16 +23,19 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
 - **Button** (`ng-devui/button`)
   - Selector: `d-button`
   - Module: `ButtonModule`
+  - Props: `bsStyle`, `bsSize`, `disabled`, `icon`
   - Docs: https://devui.design/components/zh-cn/button/demo
 
 - **Card** (`ng-devui/card`)
   - Selector: `d-card`
   - Module: `CardModule`
+  - Sub-components: `d-card-header`, `d-card-title`, `d-card-subtitle`, `d-card-content`, `d-card-actions`
   - Docs: https://devui.design/components/zh-cn/card/demo
 
 - **Icon** (`ng-devui/icon`)
   - Selector: `d-icon`
   - Module: `IconModule`
+  - Props: `name` (e.g., 'icon-search', 'icon-check')
   - Docs: https://devui.design/components/zh-cn/icon/demo
 
 - **Badge** (`ng-devui/badge`)
@@ -48,6 +53,7 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
 - **TextInput** (`ng-devui/text-input`)
   - Selector: `d-text-input`
   - Module: `TextInputModule`
+  - Props: `placeholder`, `disabled`, `size`, `maxLength`
   - Docs: https://devui.design/components/zh-cn/text-input/demo
 
 - **Textarea** (`ng-devui/textarea`)
@@ -58,6 +64,7 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
 - **Select** (`ng-devui/select`)
   - Selector: `d-select`
   - Module: `SelectModule`
+  - Props: `options`, `isSearch`, `multiple`, `placeholder`
   - Docs: https://devui.design/components/zh-cn/select/demo
 
 - **Checkbox** (`ng-devui/checkbox`)
@@ -68,6 +75,7 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
 - **Radio** (`ng-devui/radio`)
   - Selector: `d-radio`
   - Module: `RadioModule`
+  - Props: `value`, `name`, `disabled`
   - Docs: https://devui.design/components/zh-cn/radio/demo
 
 - **Switch/Toggle** (`ng-devui/toggle`)
@@ -101,15 +109,18 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
   - Docs: https://devui.design/components/zh-cn/upload/demo
 
 - **Form** (`ng-devui/form`)
-  - Selector: `d-form`
+  - ⚠️ Note: `d-form` container may not work in Angular 21 standalone components
+  - Sub-components: `d-form-item`, `d-form-label`, `d-form-control`
   - Module: `FormModule`
   - Docs: https://devui.design/components/zh-cn/form/demo
+  - Workaround: Use native `<form>` with DevUI sub-components
 
 ### Data Display | 数据展示
 
 - **Table** (`ng-devui/data-table`)
   - Selector: `d-data-table`
   - Module: `DataTableModule`
+  - Props: `dataSource`, `columns`, `checkable`, `pageable`
   - Docs: https://devui.design/components/zh-cn/table/demo
 
 - **Tree** (`ng-devui/tree`)
@@ -120,6 +131,7 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
 - **Pagination** (`ng-devui/pagination`)
   - Selector: `d-pagination`
   - Module: `PaginationModule`
+  - Props: `total`, `pageSize`, `pageIndex`
   - Docs: https://devui.design/components/zh-cn/pagination/demo
 
 - **Tags** (`ng-devui/tags`)
@@ -133,8 +145,9 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
   - Docs: https://devui.design/components/zh-cn/progress/demo
 
 - **Loading** (`ng-devui/loading`)
-  - Selector: `d-loading`
+  - Selector: `d-loading` (directive)
   - Module: `LoadingModule`
+  - Service: `LoadingService`
   - Docs: https://devui.design/components/zh-cn/loading/demo
 
 - **Empty** (`ng-devui/common`)
@@ -147,6 +160,8 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
 - **Modal** (`ng-devui/modal`)
   - Selector: `d-modal`
   - Module: `ModalModule`
+  - Sub-components: `d-modal-header`, `d-modal-body`, `d-modal-footer`
+  - Service: `DialogService`
   - Docs: https://devui.design/components/zh-cn/modal/demo
 
 - **Drawer** (`ng-devui/drawer`)
@@ -157,6 +172,7 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
 - **Toast** (`ng-devui/toast`)
   - Selector: `d-toast`
   - Module: `ToastModule`
+  - Service: `ToastService`
   - Docs: https://devui.design/components/zh-cn/toast/demo
 
 - **Alert** (`ng-devui/alert`)
@@ -206,6 +222,7 @@ GITHUB: https://github.com/DevCloudFE/ng-devui
 - **Layout** (`ng-devui/layout`)
   - Selector: `d-layout`
   - Module: `LayoutModule`
+  - Sub-components: `d-layout-header`, `d-layout-sidebar`, `d-layout-content`, `d-layout-footer`
   - Docs: https://devui.design/components/zh-cn/layout/demo
 
 - **Splitter** (`ng-devui/splitter`)
@@ -261,22 +278,92 @@ In `angular.json`:
 ```json
 {
   "styles": [
+    "src/styles.css",
     "node_modules/ng-devui/devui.min.css"
   ]
 }
+```
+
+### Configure Animations | 配置动画
+
+In `app.config.ts`:
+```typescript
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideAnimations()  // Required for DevUI components
+  ]
+};
 ```
 
 ### Basic Usage | 基本用法
 
 ```html
 <d-button bsStyle="primary" bsSize="md">主要按钮</d-button>
+
 <d-card>
   <d-card-header>
     <d-card-title>卡片标题</d-card-title>
   </d-card-header>
   <d-card-content>卡片内容</d-card-content>
+  <d-card-actions align="end">
+    <d-button bsStyle="primary">操作</d-button>
+  </d-card-actions>
 </d-card>
+
+<!-- Form (Hybrid approach for standalone components) -->
+<form class="devui-form">
+  <d-form-item>
+    <d-form-label>标签</d-form-label>
+    <d-form-control>
+      <d-text-input placeholder="请输入内容"></d-text-input>
+    </d-form-control>
+  </d-form-item>
+</form>
 ```
+
+---
+
+## Design Tokens | 设计令牌
+
+### CSS Variables | CSS 变量
+
+Use these CSS variables in custom styles:
+
+**Colors:**
+- `--devui-primary`: #165DFF
+- `--devui-danger`: #F53F3F
+- `--devui-success`: #00B42A
+- `--devui-warning`: #FF7D00
+- `--devui-base-bg`: #FFFFFF (container) or #F2F3F5 (page)
+- `--devui-text-primary`: #1D2129
+- `--devui-text-secondary`: #4E5969
+- `--devui-text-disabled`: #86909C
+- `--devui-border`: #E5E6EB
+
+**Spacing:**
+- `--devui-spacing-xs`: 4px
+- `--devui-spacing-sm`: 8px
+- `--devui-spacing-md`: 16px
+- `--devui-spacing-lg`: 24px
+- `--devui-spacing-xl`: 32px
+
+**Typography:**
+- `--devui-font-family`: Inter, 'PingFang SC', 'Microsoft YaHei', sans-serif
+- `--devui-font-size-h2`: 24px
+- `--devui-font-size-h3`: 20px
+- `--devui-font-size-h4`: 16px
+- `--devui-font-size-body`: 14px
+- `--devui-font-size-small`: 12px
+- `--devui-font-weight-normal`: 400
+- `--devui-font-weight-medium`: 500
+- `--devui-font-weight-semibold`: 600
+- `--devui-line-height-base`: 1.5
+
+**Layout:**
+- `--devui-border-radius-lg`: 8px
+- `--devui-shadow-card`: 0 2px 8px rgba(0, 0, 0, 0.08)
 
 ---
 
@@ -285,6 +372,7 @@ In `angular.json`:
 - **Getting Started**: https://devui.design/components/zh-cn/get-start
 - **Component Overview**: https://devui.design/components/zh-cn/overview
 - **Design Tokens**: https://devui.design/design-tokens/zh-cn/overview
+- **Design Color**: https://devui.design/components/zh-cn/design-color/demo#color
 - **GitHub Repository**: https://github.com/DevCloudFE/ng-devui
 
 ---
@@ -294,6 +382,28 @@ In `angular.json`:
 ⚠️ **IMPORTANT**: Always use official DevUI components. Do NOT create custom implementations using native HTML elements.
 
 ⚠️ **重要提示**: 始终使用官方 DevUI 组件。禁止使用原生 HTML 元素创建自定义实现。
+
+### Version Compatibility | 版本兼容性
+
+- **Angular**: 21.1.0 (实际使用)
+- **DevUI**: 18.0.0 (声明支持 Angular ^18.0.0)
+- **Status**: ⚠️ 版本不匹配但可以运行
+
+### Known Issues | 已知问题
+
+- ⚠️ `d-form` container may not work in Angular 21 standalone components
+- ✅ Use native `<form>` with DevUI sub-components (`d-form-item`, `d-form-label`, `d-form-control`) instead
+
+### Forbidden Practices | 禁止做法
+
+- ❌ Inline styles (`[style]`, `[ngStyle]`)
+- ❌ Hardcoded colors (#xxx, rgb, rgba)
+- ❌ Hardcoded dimensions without variables
+- ❌ Custom CSS overriding component styles
+- ❌ Using native HTML elements instead of DevUI components
+- ❌ Using deprecated APIs (e.g., `bsPosition` in Button)
+
+---
 
 For complete constraints and API specifications, see `llms-full.txt`.
 

@@ -1,0 +1,138 @@
+/* 方案2：DevUI规范方案 - 使用DevUI设计令牌 */
+
+.devui-standard-card {
+  max-width: 400px;
+  /* 使用DevUI设计令牌 */
+  background-color: var(--devui-base-bg, #FFFFFF); /* bg-container */
+  border-radius: var(--devui-border-radius-lg, 8px); /* lg border-radius */
+  box-shadow: var(--devui-shadow-card, 0 2px 8px rgba(0, 0, 0, 0.08)); /* card shadow */
+}
+
+.card-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--devui-spacing-md, 16px); /* md spacing */
+}
+
+/* 主图标 - 使用DevUI danger颜色 */
+.primary-icon {
+  width: 32px;
+  height: 32px;
+  background-color: var(--devui-danger, #F53F3F); /* danger color */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.primary-icon svg {
+  display: block;
+}
+
+.title-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--devui-spacing-xs, 4px); /* xs spacing */
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-sm, 8px); /* sm spacing */
+}
+
+.primary-title {
+  font-size: var(--devui-font-size-h4, 16px); /* font-size-h4 */
+  font-weight: var(--devui-font-weight-semibold, 600); /* font-weight-semibold */
+  color: var(--devui-text-primary, #1D2129); /* text-primary */
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* 小圆点图标 */
+.minus-icon {
+  width: 16px;
+  height: 16px;
+  background-color: var(--devui-border, #E5E6EB); /* border color */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minus-icon svg {
+  display: block;
+}
+
+.secondary-text {
+  font-size: var(--devui-font-size-small, 12px); /* font-size-small */
+  font-weight: var(--devui-font-weight-normal, 400); /* font-weight-normal */
+  color: var(--devui-text-secondary, #4E5969); /* text-secondary */
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* 时间戳 */
+.timestamp {
+  font-size: var(--devui-font-size-small, 12px); /* font-size-small */
+  font-weight: var(--devui-font-weight-normal, 400);
+  color: var(--devui-text-disabled, #86909C); /* text-disabled */
+  white-space: nowrap;
+}
+
+/* 内容区域 */
+.description {
+  font-size: var(--devui-font-size-body, 14px); /* font-size-body */
+  font-weight: var(--devui-font-weight-normal, 400);
+  color: var(--devui-text-secondary, #4E5969); /* text-secondary */
+  margin-bottom: var(--devui-spacing-md, 16px); /* md spacing */
+  line-height: var(--devui-line-height-base, 1.5); /* line-height-base */
+}
+
+/* 详情信息区域 */
+.details-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--devui-spacing-xl, 32px); /* xl spacing - 两列之间的间距 */
+  row-gap: var(--devui-spacing-sm, 8px); /* sm spacing - 行之间的间距 */
+}
+
+.detail-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--devui-spacing-sm, 8px); /* sm spacing */
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-sm, 8px); /* sm spacing - 标签与值之间的间距 */
+}
+
+.detail-label {
+  font-size: var(--devui-font-size-body, 14px); /* font-size-body */
+  font-weight: var(--devui-font-weight-normal, 400);
+  color: var(--devui-text-secondary, #4E5969); /* text-secondary */
+  white-space: nowrap;
+}
+
+.detail-value {
+  font-size: var(--devui-font-size-body, 14px); /* font-size-body */
+  font-weight: var(--devui-font-weight-normal, 400);
+  color: var(--devui-text-primary, #1D2129); /* text-primary */
+}
+
+/* 底部操作区 */
+.play-button,
+.menu-button {
+  min-width: auto;
+  padding: var(--devui-spacing-xs, 4px);
+}
