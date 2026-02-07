@@ -1,1 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* ============================================
+   DevUI Design Tokens - CSS Variables
+   
+   Note: This is a simplified approach for theme configuration.
+   For production apps, consider using DevUI's ThemeService for dynamic theme switching.
+   
+   Current approach: Static CSS Variables
+   - Pros: Simple, direct, no framework dependency
+   - Cons: No dynamic switching, manual updates needed
+   
+   Values aligned with ng-devui v18 official default theme.
+   ============================================ */
+:root {
+    /* Primary Colors */
+    --devui-primary: #5E7CE0;
+    --devui-primary-hover: #7693F5;
+    --devui-primary-active: #344899;
+
+    /* Status Colors */
+    --devui-success: #3AC295;
+    --devui-warning: #FA9841;
+    --devui-danger: #F66F6A;
+    --devui-info: #5E7CE0;
+
+    /* Text Colors */
+    --devui-text: #252B3A;
+    --devui-text-primary: #252B3A;
+    --devui-text-secondary: #71757F;
+    --devui-text-tertiary: #BABBC0;
+    --devui-text-disabled: #CFD0D3;
+    --devui-text-white: #FFFFFF;
+
+    /* Background Colors */
+    --devui-base-bg: #FFFFFF;
+    --devui-bg-page: #F2F3F5;
+    --devui-bg-container: #FFFFFF;
+    --devui-bg-hover: #F2F2F3;
+
+    /* Border & Line */
+    --devui-border: #ADB0B8;
+    --devui-line: #ADB0B8;
+    --devui-dividing-line: #DFE1E6;
+
+    /* Spacing */
+    --devui-spacing-xs: 4px;
+    --devui-spacing-sm: 8px;
+    --devui-spacing-md: 16px;
+    --devui-spacing-lg: 24px;
+    --devui-spacing-xl: 32px;
+    --devui-spacing-xxl: 48px;
+
+    /* Typography */
+    --devui-font-family: Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'HarmonyOS Sans SC', sans-serif;
+    --devui-font-size: 12px;
+    --devui-font-size-small: 12px;
+    --devui-font-size-body: 12px;
+    --devui-font-size-h4: 16px;
+    --devui-font-size-h3: 20px;
+    --devui-font-size-h2: 24px;
+    --devui-font-size-h1: 32px;
+    --devui-font-weight-normal: 400;
+    --devui-font-weight-medium: 500;
+    --devui-font-weight-semibold: 600;
+    --devui-font-weight-bold: 700;
+    --devui-line-height-base: 1.5;
+
+    /* Border Radius */
+    --devui-border-radius-sm: 2px;
+    --devui-border-radius-md: 4px;
+    --devui-border-radius-lg: 8px;
+    --devui-border-radius-full: 9999px;
+
+    /* Shadows */
+    --devui-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --devui-shadow-modal: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --devui-shadow-dropdown: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    /* Button specific overrides to match official theme */
+    --devui-btn-primary-bg: #5E7CE0;
+    --devui-btn-primary-bg-hover: #7693F5;
+    --devui-btn-primary-bg-active: #344899;
+}

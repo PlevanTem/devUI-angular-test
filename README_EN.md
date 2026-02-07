@@ -36,6 +36,8 @@ Each experiment (Case Study) implements the same design target using three disti
   - **Strictly Use Design Tokens** (`var(--devui-*)`) for all styling.
 - **Pros**: High fidelity, system consistency, maintainable, visually robust.
 
+![alt text](image-1.png)
+
 ## 📂 Experiment Catalog
 
 | Experiment | Description | Location | Status |
@@ -46,8 +48,6 @@ Each experiment (Case Study) implements the same design target using three disti
 | **Page V1** | Full Page Layout | `src/app/page-experiment/` | ✅ Done |
 | **Page V2** | Dashboard Page | `src/app/page-experiment-v2/` | ✅ Done |
 | **Page V3** | Cloud Config Wizard (Hybrid) | `src/app/page-experiment-v3/` | ✅ **New** |
-
-![alt text](image-1.png)
 
 ## 🚀 Getting Started
 

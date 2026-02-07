@@ -1,0 +1,329 @@
+<div class="experiment-container">
+    <div class="view-switcher-bar">
+        <d-button [bsStyle]="currentView() === 'v1' ? 'primary' : 'common'" (click)="setView('v1')">
+            V1: Pixel Perfect (Native)
+        </d-button>
+        <d-button [bsStyle]="currentView() === 'v2' ? 'primary' : 'common'" (click)="setView('v2')">
+            V2: DevUI Standard (Library)
+        </d-button>
+        <d-button [bsStyle]="currentView() === 'v3' ? 'primary' : 'common'" (click)="setView('v3')">
+            V3: Hybrid Fusion (Optimized)
+        </d-button>
+    </div>
+
+    <!-- =========================================================================
+       V1: Pixel Perfect Restoration (Manual HTML/CSS)
+       - 100% Fidelity to image
+       - Native div structure
+       - Hardcoded styles
+    ========================================================================= -->
+    <ng-container *ngIf="currentView() === 'v1'">
+        <div class="v1-page">
+            <div class="v1-header">
+                <div class="v1-logo">
+                    <!-- Simulate Logo -->
+                    <span style="color: #ff0000; font-weight: bold; margin-right: 4px;">HUAWEI</span> CLOUD
+                </div>
+                <div class="v1-nav-links">
+                    <span>Console</span>
+                    <span>AP-Singapore ▼</span>
+                    <span>Homepage</span>
+                    <span>Workspace</span>
+                    <span>Services ▼</span>
+                </div>
+                <div class="v1-user-actions">
+                    <span>🔔</span>
+                    <span>?</span>
+                    <span>🌐</span>
+                    <span
+                        style="background:#5e7ce0; color:white; border-radius:50%; width:24px; height:24px; text-align:center;">ME</span>
+                </div>
+            </div>
+
+            <div class="v1-sidebar">
+                <div *ngFor="let item of menuItems" class="v1-nav-item" [class.active]="item.Active">
+                    <!-- Using emoji/text as placeholder for icon to match v1 style without library -->
+                    <span class="v1-nav-icon"></span>
+                    {{ item.title }}
+                </div>
+            </div>
+
+            <div class="v1-content">
+                <div class="v1-breadcrumb">
+                    Home / Nodejs_Project / Check / View Task Details
+                </div>
+
+                <div class="v1-page-header">
+                    <span class="v1-back-arrow">←</span>
+                    <span class="v1-page-title">Nodejs_Demo_Repo</span>
+                    <span class="v1-status-badge">Success</span>
+                    <button class="v1-start-btn">Start Check</button>
+                </div>
+
+                <div class="v1-tabs">
+                    <div class="v1-tab active">Overview</div>
+                    <div class="v1-tab">Issues</div>
+                    <div class="v1-tab">Metrics</div>
+                    <div class="v1-tab">Logs</div>
+                    <div class="v1-tab">Settings</div>
+                </div>
+
+                <div class="v1-info-bar">
+                    <span>95 lines of original code</span>
+                    <span>Checked: {{ metrics.checkedTime }}</span>
+                </div>
+
+                <div class="v1-dashboard-grid">
+                    <!-- Large Gate Result Card -->
+                    <div class="v1-gate-card">
+                        <div class="v1-gate-title">Task-level Gate Result</div>
+                        <div class="v1-gate-status">
+                            Passed
+                            <span class="v1-gate-details-btn">{{ metrics.gatesPassed }} gates passed | Task-level
+                                Details ></span>
+                        </div>
+
+                        <div style="flex: 1;"></div> <!-- Spacer -->
+
+                        <div class="v1-gate-metric">
+                            <span style="font-weight: bold;">Critical</span>
+                            <span style="color: #999;">By requiring ≤ 0</span>
+                            <span style="font-weight: bold; font-size: 18px;">{{ metrics.criticalIssues }}</span>
+                        </div>
+                        <div class="v1-gate-metric">
+                            <span style="font-weight: bold;">Major</span>
+                            <span style="color: #999;">By requiring ≤ 0</span>
+                            <span style="font-weight: bold; font-size: 18px;">{{ metrics.majorIssues }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <!-- Layout: 3 columns x 2 rows -->
+                    <div class="v1-metrics-grid">
+                        <div class="v1-metric-card" *ngFor="let card of metrics.cards">
+                            <div class="v1-card-icon" [style.background-color]="card.color">
+                                <!-- Icon placeholder -->
+                            </div>
+                            <div class="v1-card-label">{{ card.title }}</div>
+                            <div class="v1-card-value">{{ card.value }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- =========================================================================
+       V2: DevUI Standard (Library Components)
+       - Strict usage of d-* components
+       - d-layout, d-accordion? (Trying d-accordion for menu)
+       - d-tabs, d-card
+    ========================================================================= -->
+    <ng-container *ngIf="currentView() === 'v2'">
+        <d-layout>
+            <d-header
+                style="background: #fff; padding: 0 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd; height: 60px;">
+                <d-row style="width: 100%; align-items: center;">
+                    <d-col [dSpan]="4">HUAWEI CLOUD</d-col>
+                    <d-col [dSpan]="16">
+                        <div style="display: flex; gap: 20px;">
+                            <span>Console</span>
+                            <span>Services</span>
+                        </div>
+                    </d-col>
+                    <d-col [dSpan]="4" style="text-align: right;">User Actions</d-col>
+                </d-row>
+            </d-header>
+            <d-layout>
+                <d-aside style="width: 240px; background: #fff; height: calc(100vh - 60px);">
+                    <!-- d-accordion often used for sidebar menu -->
+                    <d-accordion [data]="menuItems" [linkType]="'routerLink'"></d-accordion>
+                </d-aside>
+                <d-content style="background: #f7f8fa; padding: 20px;">
+                    <!-- Breadcrumb -->
+                    <d-breadcrumb>
+                        <d-breadcrumb-item *ngFor="let item of breadcrumbItems">
+                            <a href="#">{{ item.label }}</a>
+                        </d-breadcrumb-item>
+                    </d-breadcrumb>
+
+                    <!-- Header -->
+                    <div style="margin: 20px 0; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center;">
+                            <d-icon name="icon-arrow-left" style="margin-right: 10px;"></d-icon>
+                            <h2 style="margin: 0 10px 0 0;">Nodejs_Demo_Repo</h2>
+                            <d-tag [tag]="'Success'" [labelStyle]="'success'"></d-tag>
+                        </div>
+                        <d-button bsStyle="primary">Start Check</d-button>
+                    </div>
+
+                    <!-- Tabs -->
+                    <d-tabs [type]="'tabs'" [(activeTab)]="activeTab">
+                        <d-tab *ngFor="let tab of tabs" [id]="tab.id" [title]="tab.title"></d-tab>
+                    </d-tabs>
+
+                    <!-- Info -->
+                    <div style="margin: 10px 0; display: flex; justify-content: space-between; color: #999;">
+                        <span>95 lines of original code</span>
+                        <span>Checked: {{ metrics.checkedTime }}</span>
+                    </div>
+
+                    <!-- Layout Grid v2 (using d-row/d-col) -->
+                    <d-row [dGutter]="20">
+                        <d-col [dSpan]="8">
+                            <d-card class="content-card">
+                                <d-card-header>
+                                    <d-card-title>Task-level Gate Result</d-card-title>
+                                </d-card-header>
+                                <d-card-content>
+                                    <div style="font-size: 24px; color: #3ac295;">Passed</div>
+                                    <p>Critical: 0</p>
+                                    <p>Major: 0</p>
+                                </d-card-content>
+                            </d-card>
+                        </d-col>
+                        <d-col [dSpan]="16">
+                            <d-row [dGutter]="16">
+                                <d-col [dSpan]="8" *ngFor="let card of metrics.cards" style="margin-bottom: 16px;">
+                                    <d-card>
+                                        <d-card-content>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <div
+                                                    style="background: #eee; width: 30px; height: 30px; border-radius: 50%;">
+                                                </div>
+                                                <div>
+                                                    <div style="color: #999; font-size: 12px;">{{ card.title }}</div>
+                                                    <div style="font-weight: bold;">{{ card.value }}</div>
+                                                </div>
+                                            </div>
+                                        </d-card-content>
+                                    </d-card>
+                                </d-col>
+                            </d-row>
+                        </d-col>
+                    </d-row>
+                </d-content>
+            </d-layout>
+        </d-layout>
+    </ng-container>
+
+
+    <!-- =========================================================================
+       V3: Hybrid Fusion (Optimized)
+       - Hybrid of Library Components + Native Grid Layout
+       - Strict Token Usage (var(--devui-*))
+    ========================================================================= -->
+    <ng-container *ngIf="currentView() === 'v3'">
+        <div class="hybrid-page-layout">
+            <!-- Sidebar: Native HTML driven by Tokens (More flexible than d-accordion for this visual) -->
+            <div class="hybrid-sidebar">
+                <div style="padding: 24px; font-weight: bold; font-size: 16px; color: var(--devui-text-primary);">
+                    <d-icon name="icon-code" style="margin-right: 8px;"></d-icon> Nodejs_Project
+                </div>
+                <div class="hybrid-menu-list">
+                    <div *ngFor="let item of menuItems" class="hybrid-menu-item" [class.active]="item.Active">
+                        <d-icon [icon]="item.icon" style="margin-right: 12px;"></d-icon>
+                        {{ item.title }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="hybrid-content">
+                <!-- Header Component: Native Flex + Library Buttons/Tags -->
+                <div class="hybrid-breadcrumb"
+                    style="margin-bottom: 16px; font-size: 12px; color: var(--devui-text-tertiary);">
+                    Home / Nodejs_Project / Check / View Task Details
+                </div>
+
+                <div class="hybrid-header-bar">
+                    <div class="hybrid-title-row">
+                        <d-icon name="icon-arrow-left" style="cursor: pointer; font-size: 16px;"></d-icon>
+                        <span class="hybrid-page-title">Nodejs_Demo_Repo</span>
+                        <!-- Generic d-tag doesn't match shape, using badge or native styled span with tokens -->
+                        <!-- Looking at image, it's a badge-like tag. d-status or d-tag? -->
+                        <!-- d-tag is closest -->
+                        <d-tag [tag]="'Success'" [labelStyle]="'success'" [customColor]="'#e6f6ee'"
+                            style="color: var(--devui-success); border: 1px solid var(--devui-success);"></d-tag>
+                        <d-icon name="icon-git-merge"
+                            style="margin-left: 12px; font-size: 12px; color: var(--devui-text-secondary);"></d-icon>
+                        <span style="font-size: 12px; color: var(--devui-text-secondary);">master</span>
+                    </div>
+                    <d-button bsStyle="primary">Start Check</d-button>
+                </div>
+
+                <!-- Library Tabs -->
+                <d-tabs [type]="'tabs'" [(activeTab)]="activeTab" style="margin-bottom: 16px; background: transparent;">
+                    <d-tab *ngFor="let tab of tabs" [id]="tab.id" [title]="tab.title"></d-tab>
+                </d-tabs>
+
+                <div
+                    style="display: flex; justify-content: space-between; font-size: var(--devui-font-size-small); color: var(--devui-text-tertiary);">
+                    <span>95 lines of original code</span>
+                    <span>Checked: {{ metrics.checkedTime }}</span>
+                </div>
+
+                <!-- Hybrid Grid Layout -->
+                <div class="hybrid-dashboard-grid">
+                    <!-- Left Large Card: Hybrid Custom Card -->
+                    <div class="hybrid-gate-card">
+                        <div
+                            style="font-size: 16px; font-weight: bold; margin-bottom: 16px; color: var(--devui-text-primary);">
+                            Task-level Gate Result
+                        </div>
+                        <div
+                            style="font-size: 32px; font-weight: bold; color: var(--devui-success); display: flex; align-items: center;">
+                            Passed
+                            <d-tag [tag]="metrics.gatesPassed + ' gates passed | Task-level Details >'"
+                                [labelStyle]="'success'" style="margin-left: 12px; cursor: pointer;">
+                            </d-tag>
+                        </div>
+
+                        <div style="flex: 1;"></div>
+
+                        <div class="hybrid-metric-row">
+                            <span style="font-weight: bold;">Critical</span>
+                            <span style="color: var(--devui-text-tertiary);">By requiring ≤ 0</span>
+                            <span style="font-weight: bold; font-size: 18px; color: var(--devui-text-primary);">{{
+                                metrics.criticalIssues }}</span>
+                        </div>
+                        <div class="hybrid-metric-row">
+                            <span style="font-weight: bold;">Major</span>
+                            <span style="color: var(--devui-text-tertiary);">By requiring ≤ 0</span>
+                            <span style="font-weight: bold; font-size: 18px; color: var(--devui-text-primary);">{{
+                                metrics.majorIssues }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Grid: d-cards + Native Grid -->
+                    <div class="hybrid-mini-cards-grid">
+                        <d-card *ngFor="let card of metrics.cards"
+                            style="height: 100%; border: none; box-shadow: var(--devui-shadow-card);">
+                            <d-card-content
+                                style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div class="hybrid-metric-icon" [style.background-color]="card.color + '20'">
+                                        <!-- 20% opacity bg -->
+                                        <!-- Using d-icon inside -->
+                                        <d-icon [icon]="card.icon" [color]="card.color"
+                                            [style.fontSize]="'20px'"></d-icon>
+                                    </div>
+                                    <d-icon name="icon-help"
+                                        style="color: var(--devui-text-disabled); font-size: 14px;"></d-icon>
+                                </div>
+                                <div>
+                                    <div
+                                        style="font-size: 12px; color: var(--devui-text-secondary); margin-bottom: 4px;">
+                                        {{ card.title }}</div>
+                                    <div style="font-size: 24px; font-weight: bold; color: var(--devui-text-primary);">
+                                        {{ card.value }}</div>
+                                </div>
+                            </d-card-content>
+                        </d-card>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ng-container>
+</div>

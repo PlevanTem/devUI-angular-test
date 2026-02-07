@@ -42,8 +42,15 @@
 
       <div class="menu-card" (click)="showCardComparisonV3()">
         <div class="card-icon">🎴</div>
-        <h2>卡片组件还原 (V3)</h2>
+        <h2>卡片组件还原 (V3) [Hybrid]</h2>
         <p>对比三种方案：像素级、DevUI规范、Hybrid融合 (Based on Image)</p>
+        <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
+      </div>
+
+      <div class="menu-card" (click)="showPageComparisonV4()">
+        <div class="card-icon">☁️</div>
+        <h2>云服务仪表盘 (V4) [Hybrid]</h2>
+        <p>DevUI 还原实验 V4：Dashboard with Sidebar, Header, Metrics</p>
         <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
       </div>
     </div>
@@ -102,5 +109,14 @@
     <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
   </div>
   <app-card-comparison-v3></app-card-comparison-v3>
+</div>
+}
+
+@if (currentView() === 'page-v4') {
+<div class="view-container">
+  <div class="back-button">
+    <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
+  </div>
+  <app-page-comparison-v4></app-page-comparison-v4>
 </div>
 }

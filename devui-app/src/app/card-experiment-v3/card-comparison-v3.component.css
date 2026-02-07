@@ -1,7 +1,7 @@
 /* Global Layout */
 .comparison-container {
     padding: 40px;
-    background-color: #f3f4f5;
+    background-color: var(--devui-bg-page, #F2F3F5);
     min-height: 100vh;
     display: flex !important;
     flex-direction: column;
@@ -296,7 +296,7 @@
 
 .v3-date {
     font-size: var(--devui-font-size-small, 12px);
-    color: var(--devui-text-disabled, #D7D8DA);
+    color: var(--devui-text-disabled, #CFD0D3);
 }
 
 .v3-info-grid {

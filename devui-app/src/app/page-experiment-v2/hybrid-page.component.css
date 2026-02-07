@@ -3,8 +3,9 @@
 .hybrid-page {
   width: 100%;
   min-height: 100vh;
-  background-color: #FFFFFF; /* 匹配图片 */
-  font-family: var(--devui-font-family, Inter, 'PingFang SC', 'Microsoft YaHei', sans-serif);
+  background-color: var(--devui-bg-container, #FFFFFF);
+  /* Container背景token */
+  font-family: var(--devui-font-family, Helvetica, Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif);
 }
 
 /* 顶部标题栏 */
@@ -12,13 +13,14 @@
   display: flex;
   align-items: center;
   padding: var(--devui-spacing-lg, 24px) var(--devui-spacing-xl, 32px);
-  border-bottom: 1px solid var(--devui-border, #E5E6EB);
+  border-bottom: 1px solid var(--devui-border, #ADB0B8);
 }
 
 .header-icon {
   width: 24px;
   height: 24px;
-  margin-right: 12px; /* 精确匹配图片 */
+  margin-right: 12px;
+  /* 精确匹配图片 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +29,8 @@
 .page-title {
   font-size: var(--devui-font-size-h3, 20px);
   font-weight: var(--devui-font-weight-semibold, 600);
-  color: #333333; /* 匹配图片 */
+  color: #333333;
+  /* 匹配图片 */
   margin: 0;
 }
 
@@ -40,9 +43,10 @@
 /* 左侧导航栏 - 使用精确值匹配图片 */
 .sidebar {
   width: 200px;
-  background-color: #F7F9FC; /* 匹配图片 */
+  background-color: #F7F9FC;
+  /* 匹配图片 */
   padding: var(--devui-spacing-lg, 24px) var(--devui-spacing-md, 16px);
-  border-right: 1px solid var(--devui-border, #E5E6EB);
+  border-right: 1px solid var(--devui-border, #ADB0B8);
 }
 
 .step-item {
@@ -56,7 +60,8 @@
   top: -8px;
   width: 2px;
   height: 16px;
-  background-color: #DCDCDC; /* 匹配图片 */
+  background-color: #DCDCDC;
+  /* 匹配图片 */
 }
 
 .step-content {
@@ -72,40 +77,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 12px; /* 精确匹配图片 */
+  margin-right: 12px;
+  /* 精确匹配图片 */
   flex-shrink: 0;
 }
 
 .step-icon.completed {
-  background-color: #5E7CE0; /* 匹配图片，接近DevUI primary */
+  background-color: #5E7CE0;
+  /* 匹配图片，接近DevUI primary */
 }
 
 .step-icon.active {
-  background-color: #5E7CE0; /* 匹配图片 */
+  background-color: #5E7CE0;
+  /* 匹配图片 */
 }
 
 .step-name {
-  font-size: var(--devui-font-size-body, 14px);
-  color: #333333; /* 匹配图片 */
+  font-size: var(--devui-font-size-body, 12px);
+  color: #333333;
+  /* 匹配图片 */
   font-weight: var(--devui-font-weight-normal, 400);
 }
 
 .step-name.active {
-  color: #5E7CE0; /* 匹配图片 */
+  color: #5E7CE0;
+  /* 匹配图片 */
   font-weight: var(--devui-font-weight-medium, 500);
 }
 
 /* 主内容区域 */
 .main-content {
   flex: 1;
-  padding: var(--devui-spacing-xl, 32px) 40px; /* 使用设计令牌但匹配图片 */
+  padding: var(--devui-spacing-xl, 32px) 40px;
+  /* 使用设计令牌但匹配图片 */
   background-color: #FFFFFF;
 }
 
 .section-title {
   font-size: var(--devui-font-size-h2, 24px);
   font-weight: var(--devui-font-weight-semibold, 600);
-  color: #333333; /* 匹配图片 */
+  color: #333333;
+  /* 匹配图片 */
   margin: 0 0 var(--devui-spacing-xl, 32px) 0;
 }
 
@@ -124,18 +136,21 @@
 
 .devui-form[data-layout="vertical"] d-form-label {
   font-size: var(--devui-font-size-body, 14px);
-  color: #333333; /* 匹配图片 */
+  color: #333333;
+  /* 匹配图片 */
   font-weight: var(--devui-font-weight-normal, 400);
 }
 
 .devui-form[data-layout="vertical"] d-form-control {
   width: 100%;
-  max-width: 650px; /* 精确匹配图片 */
+  max-width: 650px;
+  /* 精确匹配图片 */
 }
 
 .required-label::before {
   content: '*';
-  color: #F56C6C; /* 匹配图片 */
+  color: #F56C6C;
+  /* 匹配图片 */
   margin-right: var(--devui-spacing-xs, 4px);
 }
 
@@ -146,7 +161,8 @@
 /* 单选按钮组 */
 .radio-group {
   display: flex;
-  gap: var(--devui-spacing-xl, 32px); /* 使用设计令牌 */
+  gap: var(--devui-spacing-xl, 32px);
+  /* 使用设计令牌 */
 }
 
 .radio-group d-radio {
@@ -157,7 +173,8 @@
 /* 搜索输入框 */
 .search-input-wrapper {
   position: relative;
-  max-width: 650px; /* 精确匹配图片 */
+  max-width: 650px;
+  /* 精确匹配图片 */
 }
 
 .search-icon {
@@ -170,7 +187,8 @@
 }
 
 .search-input {
-  padding-left: 36px; /* 精确匹配图片 */
+  padding-left: 36px;
+  /* 精确匹配图片 */
 }
 
 .full-width-input {
@@ -190,17 +208,21 @@
   cursor: pointer;
   transition: all 0.2s;
   min-height: 180px;
-  background-color: #F7F9FC; /* 匹配图片 */
-  border: 1px solid #E0E0E0; /* 匹配图片 */
+  background-color: #F7F9FC;
+  /* 匹配图片 */
+  border: 1px solid #E0E0E0;
+  /* 匹配图片 */
 }
 
 .template-card:hover {
-  border-color: #5E7CE0; /* 匹配图片 */
+  border-color: #5E7CE0;
+  /* 匹配图片 */
   box-shadow: 0 2px 8px rgba(94, 124, 224, 0.15);
 }
 
 .template-card.selected {
-  border-color: #5E7CE0; /* 匹配图片 */
+  border-color: #5E7CE0;
+  /* 匹配图片 */
   box-shadow: 0 2px 8px rgba(94, 124, 224, 0.2);
 }
 
@@ -210,14 +232,16 @@
   right: 12px;
   width: 8px;
   height: 8px;
-  background-color: #5E7CE0; /* 匹配图片 */
+  background-color: #5E7CE0;
+  /* 匹配图片 */
   border-radius: 50%;
   z-index: 1;
 }
 
 .card-description {
   font-size: var(--devui-font-size-small, 12px);
-  color: #666666; /* 匹配图片 */
+  color: #666666;
+  /* 匹配图片 */
   line-height: var(--devui-line-height-base, 1.5);
   margin: 0 0 var(--devui-spacing-md, 16px) 0;
 }
@@ -231,8 +255,10 @@
 .tag {
   display: inline-block;
   padding: 2px var(--devui-spacing-sm, 8px);
-  background-color: #E6F0FF; /* 匹配图片 */
-  color: #5E7CE0; /* 匹配图片 */
+  background-color: #E6F0FF;
+  /* 匹配图片 */
+  color: #5E7CE0;
+  /* 匹配图片 */
   border-radius: 12px;
   font-size: var(--devui-font-size-small, 12px);
   line-height: 1.5;
@@ -259,24 +285,28 @@
 
 .cost-label {
   font-size: var(--devui-font-size-body, 14px);
-  color: #333333; /* 匹配图片 */
+  color: #333333;
+  /* 匹配图片 */
 }
 
 .cost-value {
   font-size: var(--devui-font-size-body, 14px);
   font-weight: var(--devui-font-weight-semibold, 600);
-  color: #F56C6C; /* 匹配图片 */
+  color: #F56C6C;
+  /* 匹配图片 */
 }
 
 .cost-unit {
   font-size: var(--devui-font-size-body, 14px);
-  color: #333333; /* 匹配图片 */
+  color: #333333;
+  /* 匹配图片 */
 }
 
 .info-icon {
   width: 16px;
   height: 16px;
-  background-color: #5E7CE0; /* 匹配图片 */
+  background-color: #5E7CE0;
+  /* 匹配图片 */
   color: #FFFFFF;
   border-radius: 50%;
   display: flex;
@@ -288,5 +318,6 @@
 
 .footer-actions {
   display: flex;
-  gap: 12px; /* 精确匹配图片 */
+  gap: 12px;
+  /* 精确匹配图片 */
 }

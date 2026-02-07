@@ -1,0 +1,388 @@
+/* Global Page Container */
+.experiment-container {
+    background-color: var(--devui-bg-page, #F2F3F5);
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.view-switcher-bar {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* =========================================
+   V1: Pixel Perfect Restoration (Manual CSS)
+   ========================================= */
+.v1-page {
+    /* Main Layout */
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 60px 1fr;
+    height: 100%;
+    background: white;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Header */
+.v1-header {
+    grid-column: 1 / 3;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    background: #fff;
+    border-bottom: 1px solid #eef0f2;
+    z-index: 10;
+}
+
+.v1-logo {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 48px;
+}
+
+.v1-nav-links {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+    color: #555;
+    flex: 1;
+}
+
+.v1-user-actions {
+    display: flex;
+    gap: 16px;
+    color: #555;
+}
+
+/* Sidebar */
+.v1-sidebar {
+    background: #fff;
+    border-right: 1px solid #eef0f2;
+    padding: 16px 0;
+    font-size: 14px;
+}
+
+.v1-nav-item {
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    color: #555;
+    cursor: pointer;
+}
+
+.v1-nav-item:hover {
+    background: #f7f8fa;
+}
+
+.v1-nav-item.active {
+    background: #eef0f5;
+    color: #252b3a;
+    font-weight: 500;
+    border-left: 3px solid #5e7ce0;
+}
+
+.v1-nav-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    background: #ccc;
+    /* Placeholder for icon */
+}
+
+/* Content Area */
+.v1-content {
+    background: #f7f8fa;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.v1-breadcrumb {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 16px;
+}
+
+.v1-page-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.v1-back-arrow {
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.v1-page-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 12px;
+}
+
+.v1-status-badge {
+    padding: 2px 8px;
+    background: #e6f6ee;
+    color: #3ac295;
+    border: 1px solid #3ac295;
+    border-radius: 2px;
+    font-size: 12px;
+}
+
+.v1-start-btn {
+    margin-left: auto;
+    background: #5e7ce0;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Tabs */
+.v1-tabs {
+    border-bottom: 1px solid #eef0f2;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 24px;
+    background: white;
+    padding: 0 24px;
+}
+
+.v1-tab {
+    padding: 12px 0;
+    color: #555;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.v1-tab.active {
+    color: #5e7ce0;
+    border-bottom-color: #5e7ce0;
+    font-weight: 500;
+}
+
+.v1-info-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 16px;
+    padding: 0 24px;
+}
+
+/* Dashboard Grid */
+.v1-dashboard-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 24px;
+    padding: 0 24px;
+}
+
+.v1-gate-card {
+    background: #e6f7f2;
+    /* Light green bg from image */
+    border-radius: 8px;
+    padding: 24px;
+    color: #252b3a;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.v1-gate-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.v1-gate-status {
+    font-size: 32px;
+    color: #3ac295;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.v1-gate-details-btn {
+    background: #3ac295;
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 12px;
+    cursor: pointer;
+}
+
+.v1-gate-metric {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.v1-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.v1-metric-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.v1-card-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    color: white;
+    font-size: 16px;
+}
+
+.v1-card-label {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.v1-card-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #252b3a;
+}
+
+/* =========================================
+   V3: Hybrid Fusion (Tokens + Grid)
+   ========================================= */
+
+/* Layout Container */
+.hybrid-page-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: calc(100vh - 48px);
+    /* Adjust for outer padding */
+    background: var(--devui-bg-page, #F2F3F5);
+}
+
+/* Sidebar (Hybrid: Native List driven by Tokens) */
+.hybrid-sidebar {
+    background: var(--devui-bg-container, #FFFFFF);
+    border-right: 1px solid var(--devui-border, #ADB0B8);
+}
+
+.hybrid-menu-item {
+    padding: var(--devui-spacing-md, 12px) var(--devui-spacing-lg, 24px);
+    display: flex;
+    align-items: center;
+    color: var(--devui-text-secondary, #71757F);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.hybrid-menu-item:hover {
+    background: var(--devui-bg-hover, #F2F2F3);
+    color: var(--devui-text-primary, #252B3A);
+}
+
+.hybrid-menu-item.active {
+    background: #eef0f5;
+    /* Light blue specific to theme */
+    color: var(--devui-primary, #5E7CE0);
+    border-left-color: var(--devui-primary, #5E7CE0);
+    font-weight: var(--devui-font-weight-medium, 500);
+}
+
+.hybrid-content {
+    padding: var(--devui-spacing-lg, 24px);
+    overflow-y: auto;
+}
+
+/* Header Area */
+.hybrid-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--devui-spacing-lg, 24px);
+}
+
+.hybrid-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--devui-spacing-md, 16px);
+}
+
+.hybrid-page-title {
+    font-size: var(--devui-font-size-h3, 20px);
+    font-weight: var(--devui-font-weight-bold, 700);
+    color: var(--devui-text-primary, #252B3A);
+}
+
+/* Dashboard Grid System */
+.hybrid-dashboard-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    /* Fixed width + Flexible */
+    gap: var(--devui-spacing-lg, 24px);
+    margin-top: var(--devui-spacing-lg, 24px);
+}
+
+/* Custom Large Card (Hybrid) */
+.hybrid-gate-card {
+    background: linear-gradient(135deg, #e6f7f2 0%, #ffffff 100%);
+    border-radius: var(--devui-border-radius-lg, 8px);
+    padding: var(--devui-spacing-lg, 24px);
+    border: 1px solid var(--devui-success, #3AC295);
+    /* Using success token for border hint */
+    display: flex;
+    flex-direction: column;
+}
+
+.hybrid-metric-row {
+    background: rgba(255, 255, 255, 0.8);
+    padding: var(--devui-spacing-md, 12px);
+    border-radius: var(--devui-border-radius-md, 4px);
+    margin-top: var(--devui-spacing-md, 12px);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Small Cards Grid */
+.hybrid-mini-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: var(--devui-spacing-md, 16px);
+}
+
+/* Small Metric Card styling is handled by d-card content but we apply layout */
+.hybrid-metric-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--devui-spacing-md, 16px);
+    color: #fff;
+}

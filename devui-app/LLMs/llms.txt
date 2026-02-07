@@ -11,6 +11,7 @@ VERSION: 18.0.0
 ANGULAR_VERSION: 21.1.0 (实际使用版本)
 LAST_UPDATE: 2026-02-07
 DOCUMENTATION_URL: https://devui.design/components/zh-cn/get-start
+ICON_LIBRARY: https://devui.design/icon/ruleResource
 GITHUB: https://github.com/DevCloudFE/ng-devui
 NPM_PACKAGE: ng-devui
 
@@ -23,29 +24,64 @@ NPM_PACKAGE: ng-devui
 - **Button** (`ng-devui/button`)
   - Selector: `d-button`
   - Module: `ButtonModule`
-  - Props: `bsStyle`, `bsSize`, `disabled`, `icon`
+  - Props: `bsStyle`, `bsSize`, `disabled`, `icon`, `showLoading`, `bordered`, `shape`
+  - bsStyle: `common | primary | text | text-dark | danger | success | warning`
+  - bsSize: `lg | md | sm | xs`
+  - Output: `btnClick`
   - Docs: https://devui.design/components/zh-cn/button/demo
 
 - **Card** (`ng-devui/card`)
   - Selector: `d-card`
   - Module: `CardModule`
+  - Props: `interactive`
   - Sub-components: `d-card-header`, `d-card-title`, `d-card-subtitle`, `d-card-content`, `d-card-actions`
+  - d-card-actions Props: `align` (start | end | center | spaceBetween)
+  - ⚠️ Note: `d-card-avatar` may not work in standalone components, use native div instead
   - Docs: https://devui.design/components/zh-cn/card/demo
 
 - **Icon** (`ng-devui/icon`)
   - Selector: `d-icon`
   - Module: `IconModule`
-  - Props: `name` (e.g., 'icon-search', 'icon-check')
+  - Props: `icon`, `color`, `cssClass`
+  - ⚠️ IMPORTANT: Use `icon` attribute (not `name`) for binding: `[icon]="iconName"`
+  - ⚠️ For static usage: `<d-icon icon="icon-search"></d-icon>`
+  - Common Icons (prefix with `icon-`):
+    - Navigation: `arrow-left`, `arrow-right`, `arrow-up`, `arrow-down`, `chevron-left`, `chevron-right`
+    - Actions: `add`, `delete`, `edit`, `search`, `close`, `check`, `refresh`, `download`, `upload`
+    - Status: `success`, `error`, `warning`, `info`, `help`, `star`, `star-o`
+    - Files: `folder`, `file`, `document`, `image`, `video`, `audio`
+    - System: `setting`, `user`, `home`, `menu`, `more-oper`, `filter`, `sort`
+    - Dev: `code`, `git`, `git-merge`, `pipeline`, `archive`, `test`, `book`
+    - Cloud: `cloud`, `server`, `database`, `api`, `network`
+    - Media: `play`, `pause`, `stop`, `run`, `terminal`
+  - Icon Reference: https://devui.design/icon/ruleResource
   - Docs: https://devui.design/components/zh-cn/icon/demo
 
 - **Badge** (`ng-devui/badge`)
   - Selector: `d-badge`
   - Module: `BadgeModule`
+  - Props: `count`, `status`, `showDot`, `position`
+  - status: `danger | warning | waiting | success | info`
   - Docs: https://devui.design/components/zh-cn/badge/demo
+
+- **Status** (`ng-devui/status`)
+  - Selector: `d-status`
+  - Module: `StatusModule`
+  - Props: `type`
+  - type: `success | error | warning | initial | waiting | running | invalid`
+  - Docs: https://devui.design/components/zh-cn/status/demo
+
+- **Tag** (`ng-devui/tags`)
+  - Selector: `d-tag`
+  - Module: `TagsModule`
+  - Props: `tag`, `labelStyle`, `deletable`, `customColor`
+  - labelStyle: `default | primary | success | warning | danger`
+  - Docs: https://devui.design/components/zh-cn/tags/demo
 
 - **Avatar** (`ng-devui/avatar`)
   - Selector: `d-avatar`
   - Module: `AvatarModule`
+  - Props: `name`, `width`, `height`, `customText`, `imgSrc`
   - Docs: https://devui.design/components/zh-cn/avatar/demo
 
 ### Form Components | 表单组件
@@ -53,49 +89,68 @@ NPM_PACKAGE: ng-devui
 - **TextInput** (`ng-devui/text-input`)
   - Selector: `d-text-input`
   - Module: `TextInputModule`
-  - Props: `placeholder`, `disabled`, `size`, `maxLength`
+  - Props: `placeholder`, `disabled`, `readonly`, `size`, `maxLength`, `cssClass`, `autofocus`
+  - size: `lg | md | sm`
+  - Outputs: `valueChange`, `focus`, `blur`
   - Docs: https://devui.design/components/zh-cn/text-input/demo
+
+- **Search** (`ng-devui/search`)
+  - Selector: `d-search`
+  - Module: `SearchModule`
+  - Props: `placeholder`, `size`, `isKeyupSearch`, `delay`
+  - Outputs: `searchFn`
+  - Docs: https://devui.design/components/zh-cn/search/demo
 
 - **Textarea** (`ng-devui/textarea`)
   - Selector: `d-textarea`
   - Module: `TextareaModule`
+  - Props: `placeholder`, `disabled`, `maxLength`, `resize`
   - Docs: https://devui.design/components/zh-cn/textarea/demo
 
 - **Select** (`ng-devui/select`)
   - Selector: `d-select`
   - Module: `SelectModule`
-  - Props: `options`, `isSearch`, `multiple`, `placeholder`
+  - Props: `options`, `isSearch`, `multiple`, `disabled`, `placeholder`, `filterKey`, `valueKey`, `labelKey`, `size`
+  - size: `lg | md | sm`
+  - Outputs: `toggleChange`, `valueChange`, `loadMore`
   - Docs: https://devui.design/components/zh-cn/select/demo
 
 - **Checkbox** (`ng-devui/checkbox`)
   - Selector: `d-checkbox`
   - Module: `CheckBoxModule`
+  - Props: `label`, `disabled`, `isShowTitle`, `halfChecked`
   - Docs: https://devui.design/components/zh-cn/checkbox/demo
 
 - **Radio** (`ng-devui/radio`)
   - Selector: `d-radio`
   - Module: `RadioModule`
-  - Props: `value`, `name`, `disabled`
+  - Props: `value`, `name`, `disabled`, `cssClass`
+  - ⚠️ Use with `[(ngModel)]` and `[value]` for proper binding
+  - Output: `change`
   - Docs: https://devui.design/components/zh-cn/radio/demo
 
 - **Switch/Toggle** (`ng-devui/toggle`)
   - Selector: `d-toggle`
   - Module: `ToggleModule`
+  - Props: `disabled`, `size`, `color`
   - Docs: https://devui.design/components/zh-cn/toggle/demo
 
 - **InputNumber** (`ng-devui/input-number`)
   - Selector: `d-input-number`
   - Module: `InputNumberModule`
+  - Props: `min`, `max`, `step`, `size`, `disabled`
   - Docs: https://devui.design/components/zh-cn/input-number/demo
 
 - **Slider** (`ng-devui/slider`)
   - Selector: `d-slider`
   - Module: `SliderModule`
+  - Props: `min`, `max`, `step`, `disabled`
   - Docs: https://devui.design/components/zh-cn/slider/demo
 
 - **DatePicker** (`ng-devui/datepicker`)
   - Selector: `d-datepicker`
   - Module: `DatepickerModule`
+  - Props: `cssClass`, `dateFormat`, `showTime`, `disabled`, `minDate`, `maxDate`
   - Docs: https://devui.design/components/zh-cn/datepicker/demo
 
 - **TimePicker** (`ng-devui/time-picker`)
@@ -106,48 +161,50 @@ NPM_PACKAGE: ng-devui
 - **Upload** (`ng-devui/upload`)
   - Selector: `d-upload`
   - Module: `UploadModule`
+  - Props: `uploadOptions`, `multiple`, `accept`, `disabled`
   - Docs: https://devui.design/components/zh-cn/upload/demo
 
 - **Form** (`ng-devui/form`)
-  - ⚠️ Note: `d-form` container may not work in Angular 21 standalone components
+  - ⚠️ IMPORTANT: `d-form` container may not work in Angular 21 standalone components
+  - ✅ Use native `<form>` with DevUI sub-components instead
   - Sub-components: `d-form-item`, `d-form-label`, `d-form-control`
+  - d-form-item Props: `labelSize`, `labelWidth`, `labelAlign`
   - Module: `FormModule`
   - Docs: https://devui.design/components/zh-cn/form/demo
-  - Workaround: Use native `<form>` with DevUI sub-components
 
 ### Data Display | 数据展示
 
 - **Table** (`ng-devui/data-table`)
   - Selector: `d-data-table`
   - Module: `DataTableModule`
-  - Props: `dataSource`, `columns`, `checkable`, `pageable`
+  - Props: `dataSource`, `columns`, `checkable`, `pageable`, `scrollable`, `lazy`
   - Docs: https://devui.design/components/zh-cn/table/demo
 
 - **Tree** (`ng-devui/tree`)
   - Selector: `d-tree`
   - Module: `TreeModule`
+  - Props: `data`, `checkable`, `expandAll`
   - Docs: https://devui.design/components/zh-cn/tree/demo
 
 - **Pagination** (`ng-devui/pagination`)
   - Selector: `d-pagination`
   - Module: `PaginationModule`
-  - Props: `total`, `pageSize`, `pageIndex`
+  - Props: `total`, `pageSize`, `pageIndex`, `pageSizeOptions`, `showTotal`, `showJumpPage`, `showPageSelector`
+  - Outputs: `pageIndexChange`, `pageSizeChange`
   - Docs: https://devui.design/components/zh-cn/pagination/demo
-
-- **Tags** (`ng-devui/tags`)
-  - Selector: `d-tags`
-  - Module: `TagsModule`
-  - Docs: https://devui.design/components/zh-cn/tags/demo
 
 - **Progress** (`ng-devui/progress`)
   - Selector: `d-progress`
   - Module: `ProgressModule`
+  - Props: `percentage`, `percentageText`, `strokeColor`, `type`
+  - type: `line | circle`
   - Docs: https://devui.design/components/zh-cn/progress/demo
 
 - **Loading** (`ng-devui/loading`)
   - Selector: `d-loading` (directive)
   - Module: `LoadingModule`
   - Service: `LoadingService`
+  - Props: `loading`, `message`, `backdrop`
   - Docs: https://devui.design/components/zh-cn/loading/demo
 
 - **Empty** (`ng-devui/common`)
@@ -167,6 +224,7 @@ NPM_PACKAGE: ng-devui
 - **Drawer** (`ng-devui/drawer`)
   - Selector: `d-drawer`
   - Module: `DrawerModule`
+  - Props: `visible`, `position`, `width`, `showAnimation`
   - Docs: https://devui.design/components/zh-cn/drawer/demo
 
 - **Toast** (`ng-devui/toast`)
@@ -178,16 +236,20 @@ NPM_PACKAGE: ng-devui
 - **Alert** (`ng-devui/alert`)
   - Selector: `d-alert`
   - Module: `AlertModule`
+  - Props: `type`, `showIcon`, `closable`
+  - type: `success | danger | warning | info | simple`
   - Docs: https://devui.design/components/zh-cn/alert/demo
 
 - **Tooltip** (`ng-devui/tooltip`)
-  - Selector: `d-tooltip`
+  - Directive: `dTooltip`
   - Module: `TooltipModule`
+  - Props: `content`, `position`, `showAnimation`
   - Docs: https://devui.design/components/zh-cn/tooltip/demo
 
 - **Popover** (`ng-devui/popover`)
   - Selector: `d-popover`
   - Module: `PopoverModule`
+  - Props: `visible`, `position`, `trigger`
   - Docs: https://devui.design/components/zh-cn/popover/demo
 
 ### Navigation | 导航
@@ -195,17 +257,28 @@ NPM_PACKAGE: ng-devui
 - **Menu** (`ng-devui/menu`)
   - Selector: `d-menu`
   - Module: `MenuModule`
+  - Props: `width`, `collapsed`, `collapsedWidth`
   - Docs: https://devui.design/components/zh-cn/menu/demo
 
 - **Tabs** (`ng-devui/tabs`)
-  - Selector: `d-tabs`
+  - Selector: `d-tabs`, `d-tab`
   - Module: `TabsModule`
+  - Props: `type`, `activeTab`, `closeable`, `addable`
+  - type: `tabs | pills | wrapped | slider | options`
+  - Outputs: `activeTabChange`
   - Docs: https://devui.design/components/zh-cn/tabs/demo
 
 - **Breadcrumb** (`ng-devui/breadcrumb`)
-  - Selector: `d-breadcrumb`
+  - Selector: `d-breadcrumb`, `d-breadcrumb-item`
   - Module: `BreadcrumbModule`
+  - Props: `separatorIcon`
   - Docs: https://devui.design/components/zh-cn/breadcrumb/demo
+
+- **Accordion** (`ng-devui/accordion`)
+  - Selector: `d-accordion`
+  - Module: `AccordionModule`
+  - Props: `data`, `restrictOneOpen`, `linkType`
+  - Docs: https://devui.design/components/zh-cn/accordion/demo
 
 - **Anchor** (`ng-devui/anchor`)
   - Selector: `d-anchor`
@@ -215,14 +288,22 @@ NPM_PACKAGE: ng-devui
 - **BackTop** (`ng-devui/back-top`)
   - Selector: `d-back-top`
   - Module: `BackTopModule`
+  - Props: `bottom`, `right`, `visibleHeight`
   - Docs: https://devui.design/components/zh-cn/back-top/demo
 
 ### Layout | 布局
 
 - **Layout** (`ng-devui/layout`)
-  - Selector: `d-layout`
+  - Selectors: `d-layout`, `d-header`, `d-aside`, `d-content`, `d-footer`
   - Module: `LayoutModule`
-  - Sub-components: `d-layout-header`, `d-layout-sidebar`, `d-layout-content`, `d-layout-footer`
+  - Props (d-aside): `width`, `collapsible`, `collapsed`
+  - Docs: https://devui.design/components/zh-cn/layout/demo
+
+- **Row/Col Grid** (`ng-devui/layout`)
+  - Selectors: `d-row`, `d-col`
+  - Module: `LayoutModule`
+  - d-row Props: `dGutter`, `dAlign`, `dJustify`
+  - d-col Props: `dSpan` (1-24), `dOffset`, `dPush`, `dPull`
   - Docs: https://devui.design/components/zh-cn/layout/demo
 
 - **Splitter** (`ng-devui/splitter`)
@@ -232,15 +313,13 @@ NPM_PACKAGE: ng-devui
 
 ### Other | 其他
 
-- **Accordion** (`ng-devui/accordion`)
-- **Carousel** (`ng-devui/carousel`)
-- **Transfer** (`ng-devui/transfer`)
-- **Cascader** (`ng-devui/cascader`)
-- **AutoComplete** (`ng-devui/auto-complete`)
-- **Gantt** (`ng-devui/gantt`)
-- **Dashboard** (`ng-devui/dashboard`)
-- **StepsGuide** (`ng-devui/steps-guide`)
-- **UserGuide** (`ng-devui/user-guide`)
+- **Carousel** (`ng-devui/carousel`) - 轮播
+- **Transfer** (`ng-devui/transfer`) - 穿梭框
+- **Cascader** (`ng-devui/cascader`) - 级联选择
+- **AutoComplete** (`ng-devui/auto-complete`) - 自动补全
+- **Gantt** (`ng-devui/gantt`) - 甘特图
+- **Dashboard** (`ng-devui/dashboard`) - 仪表盘
+- **StepsGuide** (`ng-devui/steps-guide`) - 操作指引
 
 ---
 
@@ -321,49 +400,59 @@ export const appConfig: ApplicationConfig = {
     </d-form-control>
   </d-form-item>
 </form>
+
+<!-- Icon Usage -->
+<d-icon icon="icon-search"></d-icon>
+<d-icon [icon]="dynamicIconName" color="#5E7CE0"></d-icon>
 ```
 
 ---
 
 ## Design Tokens | 设计令牌
 
-### CSS Variables | CSS 变量
+### Project Configuration | 项目配置
 
-Use these CSS variables in custom styles:
+**Method**: Static CSS Variables in `src/styles.css`  
+**Why**: Simple setup for experimental project (see `app.config.ts` comments for ThemeService alternative)
 
-**Colors:**
-- `--devui-primary`: #165DFF
-- `--devui-danger`: #F53F3F
-- `--devui-success`: #00B42A
-- `--devui-warning`: #FF7D00
-- `--devui-base-bg`: #FFFFFF (container) or #F2F3F5 (page)
-- `--devui-text-primary`: #1D2129
-- `--devui-text-secondary`: #4E5969
-- `--devui-text-disabled`: #86909C
-- `--devui-border`: #E5E6EB
+### AI Quick Reference | AI 快速参考
 
-**Spacing:**
-- `--devui-spacing-xs`: 4px
-- `--devui-spacing-sm`: 8px
-- `--devui-spacing-md`: 16px
-- `--devui-spacing-lg`: 24px
-- `--devui-spacing-xl`: 32px
+When generating UI code, use these most common values:
 
-**Typography:**
-- `--devui-font-family`: Inter, 'PingFang SC', 'Microsoft YaHei', sans-serif
-- `--devui-font-size-h2`: 24px
-- `--devui-font-size-h3`: 20px
-- `--devui-font-size-h4`: 16px
-- `--devui-font-size-body`: 14px
-- `--devui-font-size-small`: 12px
-- `--devui-font-weight-normal`: 400
-- `--devui-font-weight-medium`: 500
-- `--devui-font-weight-semibold`: 600
-- `--devui-line-height-base`: 1.5
+| Category | Value | CSS Variable |
+|----------|-------|-------------|
+| **Primary Color** | `#5E7CE0` | `var(--devui-primary)` |
+| **Text** | `#252B3A` | `var(--devui-text-primary)` |
+| **Background** | `#FFFFFF` / `#F2F3F5` | `var(--devui-bg-container)` / `var(--devui-bg-page)` |
+| **Spacing** | `16px` (md) | `var(--devui-spacing-md)` |
+| **Font Size** | `12px` (body) | `var(--devui-font-size-body)` |
 
-**Layout:**
-- `--devui-border-radius-lg`: 8px
-- `--devui-shadow-card`: 0 2px 8px rgba(0, 0, 0, 0.08)
+**Usage Pattern**:
+```css
+.element {
+  color: var(--devui-text-primary);      /* ✅ Preferred */
+  padding: var(--devui-spacing-lg);       /* ✅ Use tokens */
+  background: #FFFFFF;                    /* ⚠️ OK for V1/V2, avoid in V3 Hybrid */
+}
+```
+
+### Common Mistakes | 常见错误
+
+AI must avoid these incorrect values found in some old references:
+
+| ❌ Wrong | ✅ Correct | Note |
+|----------|-----------|------|
+| `#165DFF` | `#5E7CE0` | Primary color |
+| `#F53F3F` | `#F66F6A` | Danger color |
+| `#00B42A` | `#3AC295` | Success color |
+| `14px` | `12px` | Body font size |
+| `#E5E6EB` | `#ADB0B8` | Border color |
+
+### Full Reference | 完整参考
+
+- **Token Catalog**: https://devui.design/design-tokens/zh-cn/overview
+- **Theme System**: https://devui.design/components/zh-cn/theme/demo
+- **Project Tokens**: See `src/styles.css` for complete list
 
 ---
 
@@ -373,6 +462,7 @@ Use these CSS variables in custom styles:
 - **Component Overview**: https://devui.design/components/zh-cn/overview
 - **Design Tokens**: https://devui.design/design-tokens/zh-cn/overview
 - **Design Color**: https://devui.design/components/zh-cn/design-color/demo#color
+- **Icon Library**: https://devui.design/icon/ruleResource
 - **GitHub Repository**: https://github.com/DevCloudFE/ng-devui
 
 ---
@@ -392,17 +482,21 @@ Use these CSS variables in custom styles:
 ### Known Issues | 已知问题
 
 - ⚠️ `d-form` container may not work in Angular 21 standalone components
-- ✅ Use native `<form>` with DevUI sub-components (`d-form-item`, `d-form-label`, `d-form-control`) instead
+  - ✅ Use native `<form>` with DevUI sub-components (`d-form-item`, `d-form-label`, `d-form-control`) instead
+- ⚠️ `d-icon` uses `icon` attribute (not `name`) for dynamic binding
+  - ✅ Use `[icon]="iconName"` or static `icon="icon-search"`
+- ⚠️ `d-card-avatar` may not work in standalone components
+  - ✅ Use native div with custom styles instead
 
 ### Forbidden Practices | 禁止做法
 
-- ❌ Inline styles (`[style]`, `[ngStyle]`)
-- ❌ Hardcoded colors (#xxx, rgb, rgba)
-- ❌ Hardcoded dimensions without variables
+- ❌ Inline styles (`[style]`, `[ngStyle]`) for component styling
+- ❌ Hardcoded colors (#xxx, rgb, rgba) - use tokens
+- ❌ Hardcoded dimensions without variables - use tokens
 - ❌ Custom CSS overriding component styles
 - ❌ Using native HTML elements instead of DevUI components
 - ❌ Using deprecated APIs (e.g., `bsPosition` in Button)
-
+- ❌ Using wrong color values
 ---
 
 For complete constraints and API specifications, see `llms-full.txt`.

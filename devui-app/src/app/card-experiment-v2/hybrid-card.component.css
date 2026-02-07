@@ -3,10 +3,14 @@
 .hybrid-card {
   max-width: 400px;
   /* 使用DevUI设计令牌，但可以微调 */
-  background-color: #F8F8F8; /* 接近bg-page但更浅，匹配图片 */
-  border-radius: var(--devui-border-radius-lg, 8px); /* lg border-radius */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* 接近DevUI card shadow但更明显 */
-  padding: var(--devui-spacing-md, 16px) 20px; /* md spacing垂直，20px水平匹配图片 */
+  background-color: var(--devui-bg-page, #F2F3F5);
+  /* 使用page背景token */
+  border-radius: var(--devui-border-radius-lg, 8px);
+  /* lg border-radius */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* 接近DevUI card shadow但更明显 */
+  padding: var(--devui-spacing-md, 16px) 20px;
+  /* md spacing垂直，20px水平匹配图片 */
 }
 
 .card-header-content {
@@ -19,14 +23,16 @@
 .header-left {
   display: flex;
   align-items: flex-start;
-  gap: 12px; /* 介于sm和md之间，匹配图片 */
+  gap: 12px;
+  /* 介于sm和md之间，匹配图片 */
 }
 
 /* 主图标 - 使用DevUI danger颜色但精确匹配图片 */
 .primary-icon {
   width: 32px;
   height: 32px;
-  background-color: #EA4C46; /* 接近DevUI danger但匹配图片 */
+  background-color: #EA4C46;
+  /* 接近DevUI danger但匹配图片 */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -37,19 +43,24 @@
 .title-group {
   display: flex;
   flex-direction: column;
-  gap: 2px; /* 精确匹配图片 */
+  gap: 2px;
+  /* 精确匹配图片 */
 }
 
 .title-row {
   display: flex;
   align-items: center;
-  gap: var(--devui-spacing-sm, 8px); /* sm spacing */
+  gap: var(--devui-spacing-sm, 8px);
+  /* sm spacing */
 }
 
 .primary-title {
-  font-size: var(--devui-font-size-h4, 16px); /* font-size-h4 */
-  font-weight: 700; /* 比semibold更粗，匹配图片 */
-  color: #333333; /* 接近text-primary但匹配图片 */
+  font-size: var(--devui-font-size-h4, 16px);
+  /* font-size-h4 */
+  font-weight: 700;
+  /* 比semibold更粗，匹配图片 */
+  color: #333333;
+  /* 接近text-primary但匹配图片 */
   line-height: 1.2;
   margin: 0;
 }
@@ -58,7 +69,8 @@
 .minus-icon {
   width: 16px;
   height: 16px;
-  background-color: #E0E0E0; /* 匹配图片 */
+  background-color: #E0E0E0;
+  /* 匹配图片 */
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -66,61 +78,77 @@
 }
 
 .secondary-text {
-  font-size: var(--devui-font-size-small, 12px); /* font-size-small */
+  font-size: var(--devui-font-size-small, 12px);
+  /* font-size-small */
   font-weight: var(--devui-font-weight-normal, 400);
-  color: #666666; /* 接近text-secondary但匹配图片 */
+  color: #666666;
+  /* 接近text-secondary但匹配图片 */
   line-height: 1.2;
   margin: 0;
 }
 
 /* 时间戳 */
 .timestamp {
-  font-size: var(--devui-font-size-small, 12px); /* font-size-small */
+  font-size: var(--devui-font-size-small, 12px);
+  /* font-size-small */
   font-weight: var(--devui-font-weight-normal, 400);
-  color: #999999; /* 接近text-disabled但匹配图片 */
+  color: #999999;
+  /* 接近text-disabled但匹配图片 */
   white-space: nowrap;
 }
 
 /* 内容区域 */
 .description {
-  font-size: var(--devui-font-size-body, 14px); /* font-size-body */
+  font-size: var(--devui-font-size-body, 12px);
+  /* font-size-body */
   font-weight: var(--devui-font-weight-normal, 400);
-  color: #666666; /* 匹配图片 */
-  margin-bottom: var(--devui-spacing-md, 16px); /* md spacing */
-  line-height: var(--devui-line-height-base, 1.5); /* line-height-base */
+  color: #666666;
+  /* 匹配图片 */
+  margin-bottom: var(--devui-spacing-md, 16px);
+  /* md spacing */
+  line-height: var(--devui-line-height-base, 1.5);
+  /* line-height-base */
 }
 
 /* 详情信息区域 - 使用原生grid实现精确布局 */
 .details-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px; /* 精确匹配图片的两列间距 */
-  row-gap: var(--devui-spacing-sm, 8px); /* sm spacing */
+  gap: 40px;
+  /* 精确匹配图片的两列间距 */
+  row-gap: var(--devui-spacing-sm, 8px);
+  /* sm spacing */
 }
 
 .detail-column {
   display: flex;
   flex-direction: column;
-  gap: var(--devui-spacing-sm, 8px); /* sm spacing */
+  gap: var(--devui-spacing-sm, 8px);
+  /* sm spacing */
 }
 
 .detail-item {
   display: flex;
   align-items: center;
-  gap: 10px; /* 精确匹配图片的标签与值间距 */
+  gap: 10px;
+  /* 精确匹配图片的标签与值间距 */
 }
 
 .detail-label {
-  font-size: var(--devui-font-size-body, 14px); /* font-size-body */
+  font-size: var(--devui-font-size-body, 14px);
+  /* font-size-body */
   font-weight: var(--devui-font-weight-normal, 400);
-  color: #666666; /* 匹配图片 */
+  color: #666666;
+  /* 匹配图片 */
   white-space: nowrap;
 }
 
 .detail-value {
-  font-size: var(--devui-font-size-body, 14px); /* font-size-body */
+  font-size: var(--devui-font-size-body, 14px);
+  /* font-size-body */
   font-weight: var(--devui-font-weight-normal, 400);
-  color: #333333; /* 匹配图片 */
+  color: #333333;
+  /* 匹配图片 */
 }
 
 /* 底部操作区 */
@@ -138,7 +166,8 @@
 .play-button {
   width: 24px;
   height: 24px;
-  border: 1px solid #E0E0E0; /* 匹配图片 */
+  border: 1px solid #E0E0E0;
+  /* 匹配图片 */
   border-radius: 50%;
   transition: all 0.2s;
 }

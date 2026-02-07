@@ -1,563 +1,585 @@
 ---
 skill_name: "gen-llms-txt"
-description: "Autonomously extract and generate standardized llms.txt documentation from official component library websites with browser automation, verification, and quality assurance"
-version: "2.0.0"
+description: "Transform official UI component library documentation into structured llms.txt format for AI UI generation"
+version: "3.0.0"
 last_updated: "2026-02-07"
 tags:
-  - technical-writing
+  - ui-generation
   - documentation
-  - llms-txt
-  - ui-components
   - design-systems
-  - api-documentation
-  - browser-automation
-  - web-scraping
-  - verification
+  - component-library
+  - api-transformation
 author: "UX Design Team"
-capabilities:
-  - autonomous-web-navigation
-  - design-token-extraction
-  - component-api-parsing
-  - cross-reference-validation
-  - screenshot-verification
 ---
 
-# SKILL: Autonomous LLMs.txt Documentation Generator with Web Verification
+# SKILL: LLMs.txt Documentation Generator
 
-You are an AI documentation specialist with **autonomous web browsing capabilities**. Your role is to **independently navigate, extract, verify, and document** UI component library specifications by actively reading official documentation websites, ensuring the generated `llms.txt` files are **complete, accurate, and trustworthy**.
+## 🎯 Purpose | 目的
 
----
+Transform official UI component library documentation into **structured, AI-readable format** for efficient UI code generation.
 
-## Core Capabilities | 核心能力
-
-### 1. **Autonomous Web Navigation | 自主网页导航**
-- Use `browser_subagent` to navigate official documentation sites
-- Click through tabs, menus, and navigation elements to access all pages
-- Scroll through content to capture complete information
-- Take screenshots at key points for verification
-
-### 2. **Intelligent Information Extraction | 智能信息提取**
-- Parse design principles, color systems, typography, spacing tokens
-- Extract component APIs, props, events, and type definitions
-- Capture usage examples and best practices from demo pages
-- Identify deprecated features and migration guides
-
-### 3. **Cross-Reference Validation | 交叉验证**
-- Compare extracted data across multiple pages (Design Guide vs Component Docs)
-- Verify consistency between API documentation and code examples
-- Check design token values in actual CSS/style definitions
-- Validate color hex codes, font families, spacing values
-
-### 4. **Quality Assurance | 质量保证**
-- Screenshot critical pages for human review
-- Document extraction sources and timestamps
-- Flag missing or incomplete information
-- Verify all extracted values against rendered styles
+**Input**: Official documentation (component library websites)  
+**Output**: 
+- `llms-full.txt` - Complete structured documentation (全量)
+- `llms.txt` - Quick reference summary (精简)
 
 ---
 
-## Usage | 使用方法
+## 📐 Three-Part Structure | 三部分结构
 
-Users invoke this skill with official documentation URLs:
+Based on Ant Design documentation patterns, llms-full.txt should contain:
 
+### Part 1: Semantic Description | 语义化描述
+
+**Purpose**: Component structure and element breakdown
+
+```yaml
+# Schema
+SemanticDescription:
+  summary: string                    # 概述
+  components:
+    - name: string                   # 组件名称
+      elements:
+        - key: string                # 语义化键名
+          description: string        # 样式和用途描述
+      subComponents:                 # 子组件
+        - name: string
+          elements: []
 ```
-@[gen-llms-txt] 帮我生成 [Component Library Name] 的 llms.txt 文档
-官方文档: [URLs]
+
+**Example Output**:
+```txt
+# SEMANTIC DESCRIPTIONS | 语义化描述
+
+TOTAL_COMPONENTS: 65
+
+## Button
+ELEMENTS:
+  - root: Button wrapper container
+  - icon: Icon element inside button
+  - content: Text content area
+  - loading: Loading spinner overlay
+
+## Card
+ELEMENTS:
+  - root: Card container
+  - header: Card header section
+  - body: Main content area
+  - cover: Cover image container
+  - actions: Bottom action buttons
+SUB_COMPONENTS:
+  - Card.Meta:
+    - avatar: Avatar element
+    - title: Title text
+    - description: Description text
 ```
 
-**You will autonomously:**
-1. Navigate to all provided URLs using `browser_subagent`
-2. Extract design tokens, component specs, and examples
-3. Cross-validate information across multiple pages
-4. Generate complete `llms-full.txt` with verified data
-5. Provide screenshots as evidence of accurate extraction
+### Part 2: Resources | 资源文档
 
-**你将自主完成：**
-1. 使用浏览器代理访问所有提供的 URL
-2. 提取设计令牌、组件规范和示例
-3. 跨页面交叉验证信息
-4. 生成包含已验证数据的完整 llms-full.txt
-5. 提供截图作为准确提取的证据
+**Purpose**: Design resources, articles, references
+
+```yaml
+# Schema
+Resources:
+  designResources:
+    - name: string
+      description: string
+      link: url
+      tag: string
+  articles:
+    - title: string
+      link: url
+  references:
+    - name: string
+      description: string
+      link: url
+```
+
+**Example Output**:
+```txt
+# RESOURCES | 资源
+
+## Design Resources
+- Figma UI Kit: https://figma.com/...
+- Sketch Components: https://sketch.com/...
+- Adobe XD: https://xd.adobe.com/...
+
+## Articles
+- Design Principles: https://...
+- Accessibility Guide: https://...
+
+## References
+- Official Docs: https://ant.design
+- GitHub: https://github.com/ant-design/ant-design
+```
+
+### Part 3: Component API Documentation | 组件API文档
+
+**Purpose**: Complete component specifications
+
+```yaml
+# Schema
+ComponentDoc:
+  whenToUse: string[]                # 使用场景
+  examples:
+    - id: string
+      title: string
+  api:
+    version: string                  # 可用版本
+    props:
+      - property: string
+        description: string
+        type: string
+        default: any
+        version: string
+  designToken: reference
+  faq:
+    - question: string
+      answer: string
+```
+
+**Example Output**:
+```txt
+---
+COMPONENT: Button
+IMPORT: import { Button } from 'antd';
+SELECTOR: <Button>
+DOCS: https://ant.design/components/button
+---
+
+WHEN_TO_USE:
+  - Trigger an operation
+  - Submit a form
+  - Navigation between pages
+
+EXAMPLES:
+  - basic: Basic button types
+  - icon: Button with icon
+  - size: Different sizes
+  - loading: Loading state
+  - disabled: Disabled state
+
+API:
+  VERSION: 3.0+
+  PROPS:
+    | Property | Description | Type | Default | Version |
+    |----------|-------------|------|---------|---------|
+    | type | Button type | 'primary' \| 'default' \| 'dashed' \| 'text' \| 'link' | 'default' | - |
+    | size | Button size | 'large' \| 'middle' \| 'small' | 'middle' | - |
+    | disabled | Disabled state | boolean | false | - |
+    | icon | Icon component | ReactNode | - | - |
+    | loading | Loading state | boolean \| { delay: number } | false | - |
+    | onClick | Click handler | (event) => void | - | - |
+
+DESIGN_TOKENS:
+  - colorPrimary: #1677ff
+  - colorPrimaryHover: #4096ff
+  - borderRadius: 6px
+
+FAQ:
+  - Q: How to add icon to button?
+    A: Use icon prop: <Button icon={<SearchOutlined />}>Search</Button>
+```
 
 ---
 
-## Autonomous Workflow | 自主工作流程
+## 📝 Output File Templates | 输出模板
 
-### Phase 1: Discovery & Navigation | 发现与导航
+### llms-full.txt Template
 
-**Step 1.1: Initial Site Exploration**
-```markdown
-1. Navigate to design principles/guidelines page
-2. Take screenshot of core design values
-3. Navigate to color/theme documentation
-4. Take screenshots of color palettes with hex codes
-5. Navigate to typography/font documentation
-6. Capture font family definitions and size scales
-7. Navigate to components section
-8. Identify all available components and categories
-```
-
-**Step 1.2: Component Deep Dive**
-```markdown
-For each high-priority component (Button, Input, Form, Card, etc.):
-1. Open component demo page
-2. Click "API" or "Props" tab if available
-3. Screenshot the props table with types and descriptions
-4. Click "Examples" or "Demo" tab
-5. Extract code examples from the page
-6. Verify component selector/import path
-7. Note any deprecated props or migration warnings
-```
-
-**Automation Pattern:**
-```typescript
-// Example browser_subagent task
-browser_subagent({
-  TaskName: "Extract Button Component API",
-  Task: `
-    1. Navigate to [Button Component URL]
-    2. Click on "API" tab if visible
-    3. Capture screenshot of API table
-    4. Extract all prop names, types, default values, descriptions
-    5. Click on "Demo" tab
-    6. Extract 2-3 code examples showing different use cases
-    7. Return structured data with props and examples
-  `
-})
-```
-
-### Phase 2: Data Extraction & Validation | 数据提取与验证
-
-**Step 2.1: Design Tokens Extraction**
-```markdown
-Extract from design guidelines:
-- Color System:
-  * Primary/Brand colors (with hover/active states)
-  * Semantic colors (success, warning, danger, info)
-  * Text colors (primary, secondary, tertiary, disabled, inverse)
-  * Background colors (page, container, elevated)
-  * Border colors
-  
-- Typography:
-  * Font family stack (primary, code, serif if any)
-  * Font size scale (h1-h6, body, small, xs)
-  * Font weights (normal, medium, semibold, bold)
-  * Line heights
-  
-- Spacing Scale:
-  * xs, sm, md, lg, xl, xxl values
-  
-- Border Radius:
-  * sm, md, lg, full values
-  
-- Shadows:
-  * card, modal, dropdown, popover shadows
-```
-
-**Verification Steps:**
-1. **Cross-check CSS Variables:** Inspect page source for actual CSS custom properties
-2. **Compare Values:** Verify extracted hex codes match rendered colors in screenshots
-3. **Consistency Check:** Ensure design tokens are consistent across different pages
-
-**Step 2.2: Component Specifications Extraction**
-```markdown
-For each component, extract:
-- COMPONENT_NAME: Official component name
-- IMPORT_PATH: Exact import statement
-- SELECTOR: HTML/JSX selector (e.g., <d-button>, <Button>)
-- MODULE: Module name for imports
-- CORE_PROPS: {
-    "propName": "type | possible values",
-    "size": "sm | md | lg",
-    "disabled": "boolean",
-    ...
-  }
-- OUTPUTS/EVENTS: {
-    "eventName": "EventEmitter<Type> | callback signature"
-  }
-- SUB_COMPONENTS: (if applicable)
-- SEMANTIC_NODES: Describe structure (root, header, body, footer, etc.)
-- USAGE_EXAMPLE: Copy from official demo with proper syntax
-- FORBIDDEN: List of deprecated props or anti-patterns
-```
-
-### Phase 3: Quality Assurance | 质量保证
-
-**Step 3.1: Completeness Check**
-```markdown
-✅ Verify all sections are populated:
-- [ ] METADATA (name, version, framework, restriction level)
-- [ ] DESIGN_PRINCIPLES (if available)
-- [ ] AI_GENERATION_CONSTRAINTS (component usage, styling, code standards)
-- [ ] GLOBAL_DESIGN_TOKENS (color, typography, layout)
-- [ ] CORE_COMPONENT_SPECIFICATIONS (at least 10+ high-priority components)
-- [ ] FORBIDDEN_LIST (deprecated APIs, anti-patterns)
-- [ ] UPDATE_LOG (version notes)
-```
-
-**Step 3.2: Accuracy Validation**
-```markdown
-For each extracted value:
-1. Is the hex code verified against screenshot?
-2. Is the font family visible in page source?
-3. Are component props confirmed from API documentation?
-4. Are code examples copy-pasted from official demos?
-5. Are import paths tested or documented in official guides?
-```
-
-**Step 3.3: Evidence Collection**
-```markdown
-Save screenshots for:
-- Design principles/values page
-- Color palette with hex codes
-- Typography/font specifications
-- Each major component's API documentation
-- Code examples from official demos
-
-Store screenshot paths in documentation for traceability.
-```
-
-### Phase 4: Documentation Generation | 文档生成
-
-**Step 4.1: Generate llms-full.txt**
-
-Structure:
-```text
+```txt
 ============================================================
-llms-full.txt - [Component Library Name]
+llms-full.txt - [Library Name] Complete Documentation
 ============================================================
 
 ---
-title: "[Library Name] - Complete Component Library Documentation"
-description: "Verified API specifications, design tokens, usage patterns, and constraints"
-extraction_date: "YYYY-MM-DD"
-source_urls: [list of URLs visited]
-verification_status: "Manually verified with browser automation"
+title: "[Library Name] - AI UI Generation Reference"
+version: "[Version]"
+framework: "[React/Vue/Angular]"
+last_updated: "[Date]"
+source: "[Official URL]"
 ---
 
 # 1. METADATA | 元数据
-PROJECT_NAME: [Extracted from official site]
-FRAMEWORK: [React/Vue/Angular]
-LANGUAGE: TypeScript
-VERSION: [Current version from docs]
-LAST_UPDATE: [Current date]
-RESTRICTION_LEVEL: STRICT
-OFFICIAL_DOCS: [Base URL]
-GITHUB_REPO: [If found]
-NPM_PACKAGE: [Package name]
 
-DESIGN_PRINCIPLES:
-[Extracted principles with descriptions]
+PROJECT_NAME: [Name]
+FRAMEWORK: [Framework]
+VERSION: [Version]
+NPM_PACKAGE: [Package]
+DOCS: [URL]
+GITHUB: [URL]
 
 ---
 
-# 2. AI GENERATION CONSTRAINTS | AI 生成强制约束
-[Standard constraints + library-specific rules]
+# 2. SEMANTIC DESCRIPTIONS | 语义化描述
+
+TOTAL_COMPONENTS: [Number]
+
+## Component Category: General
+[Component semantic structures...]
+
+## Component Category: Layout
+[Component semantic structures...]
+
+## Component Category: Navigation
+[Component semantic structures...]
+
+## Component Category: Data Entry
+[Component semantic structures...]
+
+## Component Category: Data Display
+[Component semantic structures...]
+
+## Component Category: Feedback
+[Component semantic structures...]
 
 ---
 
-# 3. GLOBAL DESIGN TOKENS | 全局设计令牌
+# 3. DESIGN TOKENS | 设计令牌
 
-## 3.1 Color System | 颜色系统
+## 3.1 Color System
 COLOR: {
-  [Verified color tokens with hex codes]
+  "primary": "[hex]",
+  "primaryHover": "[hex]",
+  "success": "[hex]",
+  "warning": "[hex]",
+  "error": "[hex]",
+  "text": "[hex]",
+  "textSecondary": "[hex]",
+  "background": "[hex]",
+  "border": "[hex]"
 }
 
-## 3.2 Typography System | 排版系统
+## 3.2 Typography
 TYPOGRAPHY: {
-  [Verified font families and sizes]
+  "fontFamily": "[font-stack]",
+  "fontSize": "[px]",
+  "fontSizeHeading1": "[px]",
+  "fontSizeHeading2": "[px]",
+  "lineHeight": "[value]"
 }
 
-## 3.3 Layout & Decoration | 布局与装饰
-SPACING: { [Verified spacing scale] }
-BORDER_RADIUS: { [Verified border radius values] }
-BOX_SHADOW: { [Verified shadow definitions] }
+## 3.3 Spacing
+SPACING: {
+  "xs": "[px]",
+  "sm": "[px]",
+  "md": "[px]",
+  "lg": "[px]",
+  "xl": "[px]"
+}
 
-## 3.4 CSS Variables | CSS 变量
-CSS_VARIABLES: {
-  [Actual CSS custom properties from site]
+## 3.4 Border & Shadow
+DECORATION: {
+  "borderRadius": "[px]",
+  "borderRadiusLg": "[px]",
+  "boxShadow": "[value]"
 }
 
 ---
 
-# 4. CORE COMPONENT SPECIFICATIONS | 核心组件规范库
+# 4. RESOURCES | 资源
 
-[For each component:]
+## Design Resources
+[Resource list...]
+
+## Documentation Links
+- Getting Started: [URL]
+- Design Principles: [URL]
+- Theme Customization: [URL]
+
+---
+
+# 5. COMPONENT SPECIFICATIONS | 组件规格
+
+[For each component, following ComponentDoc schema...]
+
 ---
 COMPONENT: [Name]
-IMPORT_PATH: [Verified import]
-SELECTOR: [HTML selector]
-MODULE: [Module name]
-DOCS: [Direct link to component page]
+IMPORT: [Import statement]
+SELECTOR: [HTML/JSX selector]
+DOCS: [Direct URL]
+---
 
-CORE_PROPS: {
-  [Extracted from API table]
-}
+WHEN_TO_USE:
+  [Usage scenarios...]
 
-OUTPUTS: {
-  [Event handlers]
-}
+EXAMPLES:
+  [Example list with IDs and titles...]
 
-SEMANTIC_NODES: [Structural description]
+API:
+  VERSION: [Version]
+  PROPS:
+    [Property table...]
 
-USAGE_EXAMPLE: |
-  [Copy from official demo]
+DESIGN_TOKENS:
+  [Component-specific tokens...]
 
-FORBIDDEN: [
-  [Deprecated props or anti-patterns]
-]
+FAQ:
+  [Common questions and answers...]
 
 ---
 
-# 5. FORBIDDEN LIST | 禁用清单
-[Library-specific forbidden patterns]
+# 6. CONSTRAINTS | 约束
 
-# 6. ENGINEERING VALIDATION RULES | 工程化校验规则
-[Lint rules and validation]
+## Forbidden Patterns
+[Anti-patterns and deprecated APIs...]
 
-# 7. UPDATE LOG | 更新说明
-- [Current Version]: Generated via automated extraction on [Date]
-- Source Verification: All values cross-checked with official documentation
-- Screenshot Evidence: [List screenshot file paths]
+## Known Issues
+[Version-specific bugs or workarounds...]
 
 ---
 
-# EXTRACTION METADATA | 提取元数据
+# 7. CHANGELOG | 更新日志
 
-SOURCES_VISITED:
-- Design Principles: [URL] - Screenshot: [path]
-- Color System: [URL] - Screenshot: [path]
-- Typography: [URL] - Screenshot: [path]
-- Component APIs: [URLs] - Screenshots: [paths]
+[Version history and breaking changes...]
 
-VERIFICATION_METHODS:
-- Browser automation with browser_subagent
-- Screenshot comparison of rendered values
-- CSS source inspection for custom properties
-- API table parsing from documentation
-- Code example extraction from demos
+============================================================
+End of llms-full.txt
+============================================================
+```
 
-QUALITY_SCORE: [X/10]
-COMPLETENESS: [List any missing components or tokens]
-CONFIDENCE_LEVEL: HIGH | MEDIUM | LOW
-HUMAN_REVIEW_REQUIRED: [List items needing manual verification]
+### llms.txt Template (Summary Version)
 
+```txt
+============================================================
+llms.txt - [Library Name] Quick Reference
+============================================================
+
+PROJECT: [Name]
+VERSION: [Version]
+DOCS: [URL]
+
+---
+
+## Component Catalog | 组件目录
+
+### General
+- Button: <Button> - [URL]
+- Icon: <Icon> - [URL]
+- Typography: <Typography> - [URL]
+
+### Layout
+- Space: <Space> - [URL]
+- Divider: <Divider> - [URL]
+- Grid: <Row> <Col> - [URL]
+
+### Navigation
+- Menu: <Menu> - [URL]
+- Breadcrumb: <Breadcrumb> - [URL]
+- Tabs: <Tabs> - [URL]
+
+### Data Entry
+- Input: <Input> - [URL]
+- Select: <Select> - [URL]
+- Form: <Form> - [URL]
+
+### Data Display
+- Table: <Table> - [URL]
+- Card: <Card> - [URL]
+- List: <List> - [URL]
+
+### Feedback
+- Modal: <Modal> - [URL]
+- Message: message.xxx() - [URL]
+- Notification: notification.xxx() - [URL]
+
+---
+
+## Design Tokens Summary | 设计令牌摘要
+
+PRIMARY: [hex]
+SUCCESS: [hex]
+ERROR: [hex]
+TEXT: [hex]
+BG: [hex]
+SPACING_MD: [px]
+FONT_SIZE: [px]
+BORDER_RADIUS: [px]
+
+---
+
+## Quick Links | 快速链接
+
+- Full API: See llms-full.txt
+- Official Docs: [URL]
+- GitHub: [URL]
+- Theme Config: [URL]
+
+---
+
+## Common Mistakes | 常见错误
+
+[List of common anti-patterns and corrections...]
+
+---
+
+For complete API specifications, see llms-full.txt.
 ```
 
 ---
 
-## Verification Checklist | 验证检查清单
+## 🔧 Extraction Workflow | 提取工作流
 
-Before finalizing `llms-full.txt`, verify:
+### Phase 1: Metadata Extraction
 
-**Design Tokens:**
-- [ ] All color hex codes match screenshots
-- [ ] Font family is visible in browser DevTools
-- [ ] Spacing/radius values confirmed in rendered styles
-- [ ] CSS variables exist in page source
-
-**Component APIs:**
-- [ ] Each prop has type and description
-- [ ] Import paths are documented in official guides
-- [ ] Code examples are copied from official demos (not invented)
-- [ ] Deprecated props are flagged
-
-**Code Quality:**
-- [ ] All examples use official components (not native HTML)
-- [ ] No hardcoded colors or dimensions
-- [ ] Examples follow framework conventions
-- [ ] Bilingual labels (EN/CN) where applicable
-
-**Completeness:**
-- [ ] At least 15+ core components documented
-- [ ] All 7 main sections populated
-- [ ] Screenshots saved for evidence
-- [ ] Source URLs documented
-
----
-
-## Error Handling & Edge Cases | 错误处理与边界情况
-
-### Scenario 1: Missing Information
 ```markdown
-If design tokens are not clearly documented:
-1. Inspect CSS variables in browser DevTools
-2. Extract from computed styles of rendered components
-3. Flag as "INFERRED" in documentation
-4. Recommend human verification
+1. Navigate to official documentation home page
+2. Extract:
+   - Library name and version
+   - Framework (React/Vue/Angular)
+   - NPM package name
+   - GitHub repository URL
+   - Total component count
 ```
 
-### Scenario 2: Conflicting Information
+### Phase 2: Semantic Structure Extraction
+
 ```markdown
-If color values differ across pages:
-1. Screenshot both instances
-2. Check which is used in actual component rendering
-3. Prefer values from design system guide over component demos
-4. Document discrepancy in UPDATE_LOG
+For each component:
+1. Navigate to component overview/demo page
+2. Identify semantic elements:
+   - Root container
+   - Header/Body/Footer sections
+   - Interactive elements
+   - Slots/Named areas
+3. Document sub-components if any
+4. Record element descriptions and purposes
 ```
 
-### Scenario 3: Dynamic Documentation
+### Phase 3: Design Token Extraction
+
 ```markdown
-If documentation uses interactive code playgrounds:
-1. Use browser_subagent to interact with controls
-2. Extract default values from playground state
-3. Screenshot different prop combinations
-4. Capture code from "View Source" if available
+1. Navigate to theme/design-token documentation
+2. Extract all token categories:
+   - Colors (brand, semantic, text, background, border)
+   - Typography (family, sizes, weights, line-heights)
+   - Spacing scale
+   - Border radius scale
+   - Shadow definitions
+   - Animation/transition values
+3. Use browser DevTools for CSS variable extraction if needed
 ```
 
-### Scenario 4: Non-English Documentation
+### Phase 4: Component API Extraction
+
 ```markdown
-If documentation is in Chinese/other languages:
-1. Extract technical values (hex codes, px values, code) - language-independent
-2. Use browser translation for descriptive text
-3. Maintain bilingual labels in llms.txt
-4. Flag any unclear translations for review
+For each component:
+1. Navigate to component API documentation
+2. Extract:
+   - When to use scenarios
+   - Example IDs and titles
+   - Props table (property, description, type, default, version)
+   - Events/Callbacks
+   - Component-specific design tokens
+   - FAQ section
+3. Document import path and selector syntax
+```
+
+### Phase 5: Resource Collection
+
+```markdown
+1. Collect design resources (Figma, Sketch, XD links)
+2. Gather related articles and guides
+3. Document external references
+4. Save icon library information if available
 ```
 
 ---
 
-## Best Practices | 最佳实践
+## � Category Organization | 分类组织
 
-### DO ✅
+Standard component categories:
 
-1. **Always use browser_subagent** - Never rely solely on static HTML reading
-2. **Take screenshots at every critical step** - Visual proof of accuracy
-3. **Cross-validate** - Check design tokens in multiple locations (guide + CSS + rendered components)
-4. **Document sources** - Include exact URLs and timestamps
-5. **Copy official examples** - Don't invent code, copy from demos
-6. **Verify hex codes** - Use color picker on screenshots if needed
-7. **Check deprecation notices** - Look for warnings in API docs
-8. **Test import paths** - Verify in "Getting Started" or installation guides
+```txt
+1. General | 通用
+   - Button, Icon, Typography
 
-### DON'T ❌
+2. Layout | 布局
+   - Grid, Space, Divider, Layout
 
-1. **Never invent values** - If not found, mark as "MISSING" not placeholder
-2. **Don't skip validation** - Always verify extracted data
-3. **Don't trust stale docs** - Check version numbers and last update dates
-4. **Don't mix frameworks** - Ensure examples match target framework (React/Vue/Angular)
-5. **Don't ignore warnings** - Document all deprecation notices
-6. **Don't use approximate values** - Get exact hex codes, px values
-7. **Don't skip edge cases** - Document optional props, nullable types
-8. **Don't forget accessibility** - Include ARIA attributes if documented
+3. Navigation | 导航
+   - Menu, Breadcrumb, Pagination, Steps, Tabs
 
----
+4. Data Entry | 数据录入
+   - Form, Input, Select, Checkbox, Radio, DatePicker, Upload
 
-## Advanced Techniques | 高级技巧
+5. Data Display | 数据展示
+   - Table, List, Card, Collapse, Carousel, Tree, Tag
 
-### CSS Variable Extraction
-```typescript
-// Use browser_subagent to execute JavaScript
-browser_subagent({
-  Task: `
-    Execute JavaScript in browser console:
-    const styles = getComputedStyle(document.documentElement);
-    const devuiVars = {};
-    for (let i = 0; i < styles.length; i++) {
-      const prop = styles[i];
-      if (prop.startsWith('--devui-')) {
-        devuiVars[prop] = styles.getPropertyValue(prop).trim();
-      }
-    }
-    console.log(JSON.stringify(devuiVars, null, 2));
-    
-    Copy the JSON output and return it.
-  `
-})
-```
+6. Feedback | 反馈
+   - Alert, Modal, Message, Notification, Progress, Spin
 
-### Component API Table Parsing
-```markdown
-For API tables:
-1. Locate table element by heading "API" or "Props"
-2. Extract table rows
-3. Parse columns: Name | Type | Default | Description
-4. Handle merged cells and multi-line content
-5. Format as structured CORE_PROPS object
-```
-
-### Multi-Tab Navigation
-```markdown
-Navigation strategy for tabbed interfaces:
-1. Identify all tab labels (e.g., "Demo", "API", "Design", "Examples")
-2. Click each tab sequentially
-3. Wait for content to load (check for loading spinners)
-4. Extract content from each tab
-5. Take screenshot after each tab change
+7. Other | 其他
+   - Anchor, BackTop, ConfigProvider
 ```
 
 ---
 
-## Quality Metrics | 质量指标
+## ✅ Quality Checklist | 质量检查
 
-**Completeness Score (out of 100):**
-- Metadata: 10 pts
-- Design Principles: 5 pts
-- Color System: 15 pts (all tokens with hex codes)
-- Typography: 10 pts (font family, sizes, weights)
-- Spacing/Layout: 10 pts
-- Core Components (15+): 40 pts
-- Examples & Forbidden List: 10 pts
+### Completeness
+- [ ] All components documented
+- [ ] All props with types and defaults
+- [ ] When to use scenarios provided
+- [ ] Design tokens extracted
+- [ ] FAQ collected
 
-**Verification Score (out of 100):**
-- Screenshots provided: 30 pts
-- Cross-validation performed: 25 pts
-- CSS variables verified: 20 pts
-- Component APIs matched with demos: 15 pts
-- Source URLs documented: 10 pts
+### Accuracy
+- [ ] Import paths verified
+- [ ] Prop types match official docs
+- [ ] Token values verified via browser
+- [ ] URLs all working
 
-**Target: 90+ on both scores for production-ready llms.txt**
-
----
-
-## Example Execution | 示例执行
-
-User Request:
-```
-@[gen-llms-txt] 
-帮我生成 DevUI 的 llms-full.txt
-https://devui.design/design-cn/principle
-https://devui.design/design-cn/color
-https://devui.design/components/zh-cn/design-font/demo
-```
-
-Your Autonomous Process:
-```markdown
-1. Navigate to principle page → Extract 4 core principles → Screenshot
-2. Navigate to color page → Extract brand color #5E7CE0 → Extract semantic colors → Screenshot
-3. Navigate to font page → Extract font family → Extract size scale → Screenshot
-4. Navigate to button component → Click API tab → Extract props → Click Demo → Copy example → Screenshot
-5. Repeat for 15+ core components
-6. Cross-validate colors in CSS variables
-7. Generate llms-full.txt with all verified data
-8. Include screenshot evidence paths
-9. Present to user with verification summary
-```
+### Structure
+- [ ] Three-part structure followed
+- [ ] Consistent formatting
+- [ ] Semantic descriptions complete
+- [ ] API tables properly formatted
 
 ---
 
-## Continuous Improvement | 持续改进
+## � Maintenance | 维护
 
-After each generation:
-1. **User Feedback Loop** - Ask if any information is inaccurate
-2. **Update Extraction Logic** - Refine browser navigation patterns
-3. **Build Component Template Library** - Cache common component structures
-4. **Improve Validation Heuristics** - Better cross-checking algorithms
-5. **Enhance Screenshot Analysis** - Use vision for color extraction
+### Update Triggers
+- Library major/minor version update
+- New components added
+- Breaking API changes
+- Design token updates
+
+### Update Process
+1. Check official changelog
+2. Update affected component sections
+3. Verify design token values
+4. Update version metadata
+5. Log changes in changelog section
 
 ---
 
-## Final Deliverables | 最终交付物
+## 📚 Framework Adaptations | 框架适配
 
-When you complete the skill, provide:
+### React (Ant Design, Material UI)
+```txt
+IMPORT: import { Button } from 'antd';
+SELECTOR: <Button type="primary">Text</Button>
+PROPS: JSX props (camelCase)
+```
 
-1. **llms-full.txt** - Complete, verified documentation file
-2. **Verification Report** - Summary of sources, completeness, confidence level
-3. **Screenshot Archive** - All evidence images with labeled filenames
-4. **Known Gaps** - List any missing information requiring manual input
-5. **Extraction Log** - Timeline of all URLs visited and data extracted
+### Vue (Element Plus, Vuetify)
+```txt
+IMPORT: import { ElButton } from 'element-plus';
+SELECTOR: <el-button type="primary">Text</el-button>
+PROPS: kebab-case attributes or v-bind
+```
+
+### Angular (ng-zorro, DevUI)
+```txt
+IMPORT: import { NzButtonModule } from 'ng-zorro-antd/button';
+SELECTOR: <button nz-button nzType="primary">Text</button>
+PROPS: Input bindings [property]
+```
 
 ---
 
 **End of SKILL Document**
 
-This skill empowers you to **autonomously generate trustworthy llms.txt files** through systematic web exploration, intelligent extraction, rigorous validation, and transparent documentation. Always prioritize **accuracy over speed** and **verification over assumption**.
+This skill transforms official UI library documentation into structured llms.txt format, enabling AI to efficiently generate UI code with accurate component usage, design tokens, and API specifications.

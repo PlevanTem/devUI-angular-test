@@ -36,18 +36,21 @@
   - **强制使用 Design Token**：所有样式必须引用 `var(--devui-*)` 变量，严禁硬编码颜色和间距。
 - **优点**：高保真还原、系统风格统一、易于维护、视觉鲁棒性强。
 
+![alt text](image-1.png)
+
 ## 📂 实验目录
+Card：基础卡片测试
+Page：云配置向导页
 
 | 实验名称 | 描述 | 代码位置 | 状态 |
 |----------|------|----------|------|
-| **Card V1** | 基础卡片组件还原 | `src/app/card-experiment/` | ✅ 完成 |
-| **Card V2** | 带操作的高级卡片 | `src/app/card-experiment-v2/` | ✅ 完成 |
-| **Card V3** | 实例/服务器卡片 (Hybrid) | `src/app/card-experiment-v3/` | ✅ **新实验** |
-| **Page V1** | 整页布局还原 | `src/app/page-experiment/` | ✅ 完成 |
-| **Page V2** | 仪表盘页面 | `src/app/page-experiment-v2/` | ✅ 完成 |
-| **Page V3** | 云配置向导页 (Hybrid) | `src/app/page-experiment-v3/` | ✅ **新实验** |
+| **Card V1** | 方案1 html vs 方案2 组件方案 | `src/app/card-experiment/` | ✅ 完成 |
+| **Card V2** | 新增融合性方案生成 | `src/app/card-experiment-v2/` | ✅ 完成 |
+| **Card V3** | 基于新版skill | `src/app/card-experiment-v3/` | ✅ **验证skill有效性** |
+| **Page V1** | 方案1 html vs 方案2 组件方案 | `src/app/page-experiment/` | ✅ 完成 |
+| **Page V2** | 新增融合性方案生成 | `src/app/page-experiment-v2/` | ✅ 完成 |
+| **Page V3** | 基于新版llmstxt和Gemini 3 Pro模型 | `src/app/page-experiment-v3/` | ✅ **验证多模态模型和提示词工程有效性** |
 
-![alt text](image-1.png)
 
 ## 🚀 快速开始
 
