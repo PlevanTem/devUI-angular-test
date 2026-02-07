@@ -92,46 +92,165 @@ analysis_dimensions:
     - Contextual: Environment and constraints
 ```
 
-#### For Image Input | 图片输入分析
+#### For Image Input | 图片输入分析 (Enhanced UI Spec Recognition)
+
+**⚠️ 重要提示**: 多模态识别的边距、字体大小、颜色色值不一定完全准确，需要结合设计规范和经验进行优化校正。
 
 ```yaml
 visual_analysis_process:
+  # Step 1: 宏观扫描 (Macro Scan)
   macro_scan:
-    - Identify layout regions (header, sidebar, content, footer)
-    - Detect component patterns (forms, grids, lists, tables)
+    - Identify layout regions (header, sidebar, content, footer, panel)
+    - Detect component patterns (forms, grids, lists, tables, cards)
     - Extract color palette and visual hierarchy
-    - Note spacing patterns and alignment
+    - Note spacing patterns and alignment grid
+    - Identify page type and business context
   
+  # Step 2: 微观提取 (Micro Extraction)  
   micro_extraction:
     - Count and classify interactive elements
     - Identify typography scale and hierarchy
     - Detect state variations (hover, selected, disabled)
+    - Extract exact dimensions where visible
     - Note responsive design hints
+  
+  # Step 3: 规范校正 (Specification Calibration)
+  spec_calibration:
+    - Cross-reference with design system tokens
+    - Apply standard spacing values (8px grid system)
+    - Normalize colors to design token equivalents
+    - Adjust typography to type scale
 ```
 
-### 1.2 Requirement Synthesis | 需求综合
+### 1.2 UI Spec 结构化识别框架 | Structured UI Specification Schema
+
+为确保图生UI的高还原度，需要生成以下结构化 UI Spec：
+
+#### A. UI描述 (UI Description)
+
+```yaml
+ui_description:
+  整体描述: |
+    概述页面的用途、主要组成部分（如导航栏、表单区、元数据面板）及其相互关系
+  
+  核心功能: |
+    定义用户在该页面可执行的关键操作，如创建、编辑、查看、提交等
+  
+  产品场景: |
+    说明该页面适用的行业领域（如项目管理、云服务控制台）及目标使用人群
+  
+  页面类型: [form | dashboard | list | detail | wizard | console | ...]
+```
+
+#### B. 视觉风格 (Visual Style)
+
+```yaml
+visual_style:
+  整体调性: "[简洁/专业/高效/现代/企业级等]"
+  
+  色彩体系:
+    主色调: "[hex] - 用于主要操作、强调元素"
+    背景色: "[hex] - 页面背景、卡片背景"
+    文字色:
+      primary: "[hex]"
+      secondary: "[hex]"
+      placeholder: "[hex]"
+    状态色:
+      success: "[hex]"
+      warning: "[hex]"
+      danger: "[hex]"
+    边框色: "[hex]"
+  
+  # ⚠️ 校正策略：将识别的颜色映射到最近的设计令牌
+  color_calibration:
+    recognized_value: "mapped var(--规范-xxx) token"
+  
+  间距系统:
+    base_unit: "8px"
+    spacing_scale: [4, 8, 12, 16, 24, 32, 48]
+  
+  字体系统:
+    type_scale: [12, 14, 16, 20, 24, 32]
+    font_weights: [400, 500, 600, 700]
+```
+
+#### C. 区域划分 (Region Decomposition)
+
+```yaml
+region_decomposition:
+  - 区域名称: "[如：顶部导航栏/Header]"
+    区域位置: "[grid-area 或 position 描述]"
+    区域尺寸:
+      width: "[固定值/百分比/flex]"
+      height: "[固定值/auto]"
+    背景样式: "[颜色/渐变]"
+    包含组件: [组件详情数组]
+```
+
+#### D. 组件级详细规格 (Component-Level Specification)
+
+```yaml
+component_specification:
+  组件类型: "[Button, TextInput, Select, Form, Tag, Card等]"
+  组件ID: "[唯一标识符]"
+  
+  组件详细说明: "[外观特征和交互行为]"
+  承担的功能: "[业务逻辑作用]"
+  承载的信息: "[展示的数据内容]"
+  
+  组件内的布局样式:
+    display: "[flex | grid | block]"
+    direction: "[row | column]"
+    alignment: "[start | center | end]"
+    gap: "[间距值]"
+  
+  visual_specs:
+    width: "[值]"
+    height: "[值]"
+    padding: "[值]"
+    border_radius: "[值]"
+    background: "[颜色]"
+  
+  typography_specs:
+    font_size: "[值，校正到 type_scale]"
+    font_weight: "[值]"
+    color: "[颜色，校正到设计令牌]"
+  
+  library_mapping:
+    recommended_component: "[规范 组件名]"
+    mapping_confidence: "[high | medium | low]"
+    customization_needed: "[需要的自定义项]"
+```
+
+### 1.3 Requirement Synthesis | 需求综合
 
 Transform raw input into structured specification:
 
 ```yaml
 requirement_spec:
-  page_type: [form | dashboard | list | detail | wizard | ...]
+  page_type: [form | dashboard | list | detail | wizard | console | ...]
   
   layout_model:
-    structure: [sidebar-content | header-content | multi-column | ...]
-    regions: [list of distinct areas]
+    structure: [sidebar-content | header-content | three-column | ...]
+    grid_definition: "[CSS Grid template]"
+    regions: [list of distinct areas with dimensions]
     flow: [visual flow and hierarchy]
   
   component_inventory:
     - type: [generic component category]
       count: [number]
       variants: [list of variations]
-      interactions: [user interactions]
+      library_component: [mapped 规范 component]
+      hybrid_strategy: [library | native | hybrid]
   
   design_language:
     visual_style: [description]
     density: [compact | comfortable | spacious]
-    emphasis: [what stands out]
+    token_palette: [mapped design tokens]
+  
+  fidelity_targets:
+    layout_accuracy: "[目标百分比]"
+    component_coverage: "[规范组件使用率目标]"
 ```
 
 ---
@@ -340,6 +459,80 @@ variant_pattern:
     - "data-layout='horizontal'"
     - "data-size='large'"
     - "data-theme='dark'"
+```
+
+### 3.4 V3 Hybrid 优化最佳实践 | Hybrid Optimization Best Practices
+
+V3 Hybrid 方案的目标是在保持高视觉还原度的同时，最大化利用组件库能力。
+
+#### 3.4.1 表单组件最佳实践
+
+```yaml
+form_hybrid_strategy:
+  field_layout:
+    container: "native <div> with flex"
+    label: "native <label> with token styling"
+    control: "DevUI component (d-text-input, d-select)"
+    
+  css_pattern: |
+    .hybrid-field-row {
+      display: flex;
+      gap: var(--devui-spacing-sm);
+    }
+    .hybrid-field-label {
+      width: 80px;
+      font-size: 12px;
+      color: var(--devui-text-weak);
+    }
+```
+
+#### 3.4.2 工具栏模式
+
+```yaml
+toolbar_hybrid_strategy:
+  structure:
+    container: "native <div> with flexbox"
+    groups: "native <div> for button groups"
+    buttons: "DevUI d-button bsStyle='text'"
+    dividers: "native <span> styled separator"
+    
+  css_pattern: |
+    .hybrid-toolbar-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--devui-dividing-line);
+      margin: 0 var(--devui-spacing-sm);
+    }
+```
+
+#### 3.4.3 侧边栏菜单模式
+
+```yaml
+sidebar_hybrid_strategy:
+  structure:
+    items: "native <div> with hover/active states"
+    icons: "DevUI d-icon"
+    
+  active_state: |
+    .hybrid-menu-item.active {
+      background: var(--devui-list-item-selected-bg);
+      border-left: 3px solid var(--devui-primary);
+    }
+```
+
+#### 3.4.4 组件覆盖率目标
+
+```yaml
+coverage_targets:
+  devui_required:
+    - All form controls: 100%
+    - All buttons: 100%
+    - All tags/icons: 100%
+  
+  native_allowed:
+    - Page layout containers
+    - Toolbar grouping containers
+    - Menu item containers
 ```
 
 ---

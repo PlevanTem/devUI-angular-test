@@ -53,6 +53,13 @@
         <p>DevUI 还原实验 V4：Dashboard with Sidebar, Header, Metrics</p>
         <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
       </div>
+
+      <div class="menu-card" (click)="showPageComparisonV5()">
+        <div class="card-icon">📝</div>
+        <h2>工作项表单 (V5) [Hybrid] [NEW]</h2>
+        <p>DevUI 还原实验 V5：Work Item Form - 三种方案对比</p>
+        <d-button bsStyle="primary" bsSize="md">查看实验</d-button>
+      </div>
     </div>
   </div>
 </div>
@@ -118,5 +125,14 @@
     <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()">← 返回菜单</d-button>
   </div>
   <app-page-comparison-v4></app-page-comparison-v4>
+</div>
+}
+
+@if (currentView() === 'page-v5') {
+<div class="view-container">
+  <div class="back-button">
+    <d-button bsStyle="common" bsSize="sm" (btnClick)="showMenu()"> ���ز˵�</d-button>
+  </div>
+  <app-page-comparison-v5></app-page-comparison-v5>
 </div>
 }

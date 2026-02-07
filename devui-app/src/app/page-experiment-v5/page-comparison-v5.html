@@ -1,0 +1,783 @@
+<div class="page-v5-comparison-container">
+    <!-- Tab Navigation -->
+    <div class="comparison-tabs">
+        <button class="tab-button" [class.active]="currentView() === 'v1'" (click)="setView('v1')">
+            <span class="tab-number">V1</span>
+            <span class="tab-label">图生UI还原性生成</span>
+            <span class="tab-description">Pixel-Perfect Restoration (100% 还原)</span>
+        </button>
+        <button class="tab-button" [class.active]="currentView() === 'v2'" (click)="setView('v2')">
+            <span class="tab-number">V2</span>
+            <span class="tab-label">图生UI规范</span>
+            <span class="tab-description">DevUI Standard (规范组件)</span>
+        </button>
+        <button class="tab-button" [class.active]="currentView() === 'v3'" (click)="setView('v3')">
+            <span class="tab-number">V3</span>
+            <span class="tab-label">Hybrid融合性生成</span>
+            <span class="tab-description">Hybrid Fusion (兼容规范+灵活性) ✅</span>
+        </button>
+    </div>
+
+    <!-- V1: Pixel-Perfect Restoration -->
+    @if (currentView() === 'v1') {
+    <div class="implementation-v1">
+        <div class="v1-page-layout">
+            <!-- Header -->
+            <div class="v1-header">
+                <div class="v1-header-left">
+                    <div class="v1-logo">HUAWEI CLOUD</div>
+                    <div class="v1-divider"></div>
+                    <div class="v1-console">Console</div>
+                </div>
+                <div class="v1-header-center">
+                    <div class="v1-region">AP-Singapore ▼</div>
+                </div>
+                <div class="v1-header-right">
+                    <div class="v1-icon-btn">🏠</div>
+                    <div class="v1-icon-btn">💼</div>
+                    <div class="v1-icon-btn">⚙️</div>
+                    <div class="v1-icon-btn">🔔</div>
+                    <div class="v1-icon-btn">❓</div>
+                    <div class="v1-icon-btn">⚡</div>
+                    <div class="v1-icon-btn">👤</div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="v1-sidebar">
+                <div class="v1-project-selector">
+                    <div class="v1-project-icon">📁</div>
+                    <div class="v1-project-name">Nodejs_Project ▼</div>
+                </div>
+                @for (item of sidebarMenuItems; track item.id) {
+                <div class="v1-menu-item" [class.active]="item.active">
+                    <span class="v1-menu-icon">{{ item.icon }}</span>
+                    <span class="v1-menu-label">{{ item.label }}</span>
+                </div>
+                }
+            </div>
+
+            <!-- Main Content -->
+            <div class="v1-main-content">
+                <!-- Breadcrumb -->
+                <div class="v1-breadcrumb">
+                    <span>Homepage / Nodejs_Project / Work Items / Create work item</span>
+                </div>
+
+                <!-- Tabs -->
+                <div class="v1-tabs">
+                    @for (tab of tabItems; track tab.id) {
+                    <div class="v1-tab" [class.active]="activeTab === tab.id">
+                        {{ tab.label }}
+                    </div>
+                    }
+                </div>
+
+                <!-- Form Area -->
+                <div class="v1-form-area">
+                    <!-- Title Input -->
+                    <div class="v1-title-input">
+                        <input type="text" value="Functions" placeholder="Title" />
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="v1-tags-area">
+                        @for (tag of workItemForm.tags; track tag.id) {
+                        <span class="v1-tag" [attr.data-style]="tag.labelStyle">
+                            {{ tag.tag }} ×
+                        </span>
+                        }
+                        <button class="v1-add-tag">+ Add a tag</button>
+                    </div>
+
+                    <!-- Rich Text Toolbar -->
+                    <div class="v1-toolbar">
+                        <div class="v1-toolbar-group">
+                            <button class="v1-toolbar-btn">📝</button>
+                            <button class="v1-toolbar-btn">📎</button>
+                            <button class="v1-toolbar-btn">▼</button>
+                        </div>
+                        <div class="v1-toolbar-group">
+                            <button class="v1-toolbar-btn"><strong>B</strong></button>
+                            <button class="v1-toolbar-btn"><em>I</em></button>
+                            <button class="v1-toolbar-btn"><u>U</u></button>
+                            <button class="v1-toolbar-btn"><s>S</s></button>
+                            <button class="v1-toolbar-btn">A</button>
+                            <button class="v1-toolbar-btn">▼</button>
+                        </div>
+                        <div class="v1-toolbar-group">
+                            <button class="v1-toolbar-btn">⋮</button>
+                            <button class="v1-toolbar-btn">≡</button>
+                            <button class="v1-toolbar-btn">☰</button>
+                            <button class="v1-toolbar-btn">≡</button>
+                            <button class="v1-toolbar-btn">📋</button>
+                            <button class="v1-toolbar-btn">📝</button>
+                            <button class="v1-toolbar-btn">🔗</button>
+                            <button class="v1-toolbar-btn">⋯</button>
+                        </div>
+                    </div>
+
+                    <!-- User Story Label -->
+                    <div class="v1-story-label">As a user</div>
+
+                    <!-- Textarea -->
+                    <div class="v1-textarea-container">
+                        <textarea
+                            placeholder="I want to be able to create an account, log in and reset my password on the Node.js demo application."
+                            rows="8">{{ workItemForm.description }}</textarea>
+                    </div>
+
+                    <!-- Character Count -->
+                    <div class="v1-char-count">{{ getCharacterCountText() }}</div>
+
+                    <!-- File Upload -->
+                    <div class="v1-file-upload">
+                        <span class="v1-upload-icon">+</span> Click to select a file, or drag and drop a file.
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="v1-actions">
+                        <button class="v1-btn-save">Save</button>
+                        <button class="v1-btn-cancel">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Metadata Panel -->
+            <div class="v1-right-panel">
+                <div class="v1-form-field">
+                    <label>Type:</label>
+                    <span class="v1-badge-epic">Epic</span>
+                </div>
+                <div class="v1-form-field">
+                    <label>* Status:</label>
+                    <input type="text" value="New" />
+                </div>
+                <div class="v1-form-field">
+                    <label>* Assigned To:</label>
+                    <input type="text" value="mehmtalu@calgul" />
+                </div>
+                <div class="v1-form-field">
+                    <label>Module:</label>
+                    <select>
+                        <option>--Select--</option>
+                    </select>
+                </div>
+                <div class="v1-form-field">
+                    <label>Start Date:</label>
+                    <input type="text" value="Sep 11, 2023" />
+                </div>
+                <div class="v1-form-field">
+                    <label>Due Date:</label>
+                    <input type="text" value="Oct 09, 2023" />
+                </div>
+                <div class="v1-form-field">
+                    <label>Order:</label>
+                    <input type="number" value="1" />
+                </div>
+                <div class="v1-form-field">
+                    <label>* Priority:</label>
+                    <input type="text" value="High" />
+                </div>
+                <div class="v1-form-field">
+                    <label>* Severity:</label>
+                    <input type="text" value="Major" />
+                </div>
+                <div class="v1-form-field">
+                    <label>Notify:</label>
+                    <select>
+                        <option>--Select--</option>
+                    </select>
+                </div>
+                <div class="v1-form-field">
+                    <label>Domain:</label>
+                    <input type="text" value="Function" />
+                </div>
+                <div class="v1-show-more">Show More</div>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- V2: DevUI Standard -->
+    @if (currentView() === 'v2') {
+    <div class="implementation-v2">
+        <d-layout class="v2-page-layout">
+            <!-- Header -->
+            <d-header class="v2-header">
+                <div class="v2-header-content">
+                    <div class="v2-header-left">
+                        <span class="v2-logo">HUAWEI CLOUD</span>
+                        <span class="v2-console">Console</span>
+                    </div>
+                    <div class="v2-header-right">
+                        <d-button bsStyle="text" bsSize="sm">🏠</d-button>
+                        <d-button bsStyle="text" bsSize="sm">💼</d-button>
+                        <d-button bsStyle="text" bsSize="sm">⚙️</d-button>
+                        <d-button bsStyle="text" bsSize="sm">🔔</d-button>
+                        <d-button bsStyle="text" bsSize="sm">👤</d-button>
+                    </div>
+                </div>
+            </d-header>
+
+            <d-layout class="v2-body-layout">
+                <!-- Sidebar -->
+                <d-aside class="v2-sidebar" width="200px">
+                    <div class="v2-project-selector">
+                        <d-icon icon="icon-folder"></d-icon>
+                        <span>Nodejs_Project</span>
+                    </div>
+                    <nav class="v2-nav">
+                        @for (item of sidebarMenuItems; track item.id) {
+                        <div class="v2-menu-item" [class.active]="item.active">
+                            <d-icon [icon]="item.icon"></d-icon>
+                            <span>{{ item.label }}</span>
+                        </div>
+                        }
+                    </nav>
+                </d-aside>
+
+                <!-- Main Content -->
+                <d-content class="v2-main-content">
+                    <!-- Breadcrumb -->
+                    <d-breadcrumb class="v2-breadcrumb">
+                        @for (bc of breadcrumbItems; track bc.label) {
+                        <d-breadcrumb-item>
+                            <a [href]="bc.link">{{ bc.label }}</a>
+                        </d-breadcrumb-item>
+                        }
+                    </d-breadcrumb>
+
+                    <!-- Content Area -->
+                    <div class="v2-content-area">
+                        <div class="v2-main-section">
+                            <!-- Form -->
+                            <form class="v2-work-item-form">
+                                <d-form-item>
+                                    <d-form-control>
+                                        <d-text-input [(ngModel)]="workItemForm.title" name="title"
+                                            placeholder="Functions" size="lg">
+                                        </d-text-input>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <!-- Tags -->
+                                <d-form-item>
+                                    <d-form-control>
+                                        <div class="v2-tags-container">
+                                            @for (tag of workItemForm.tags; track tag.id) {
+                                            <d-tag [tag]="tag.tag" [labelStyle]="tag.labelStyle" [deletable]="true">
+                                            </d-tag>
+                                            }
+                                            <d-button bsStyle="text" bsSize="sm" (btnClick)="onAddTag()">
+                                                + Add a tag
+                                            </d-button>
+                                        </div>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <!-- Rich Text Editor -->
+                                <d-form-item>
+                                    <d-form-control>
+                                        <div class="v2-editor-toolbar">
+                                            <d-button bsStyle="text" bsSize="sm"><strong>B</strong></d-button>
+                                            <d-button bsStyle="text" bsSize="sm"><em>I</em></d-button>
+                                            <d-button bsStyle="text" bsSize="sm"><u>U</u></d-button>
+                                            <d-button bsStyle="text" bsSize="sm"><s>S</s></d-button>
+                                        </div>
+                                        <div class="v2-story-label">As a user</div>
+                                        <d-textarea [(ngModel)]="workItemForm.description" name="description"
+                                            placeholder="I want to...">
+                                        </d-textarea>
+                                        <div class="v2-char-count">{{ getCharacterCountText() }}</div>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <!-- File Upload -->
+                                <d-form-item>
+                                    <d-form-control>
+                                        <div class="v2-file-upload" (click)="onFileSelect()">
+                                            + Click to select a file, or drag and drop a file.
+                                        </div>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <!-- Actions -->
+                                <d-form-item>
+                                    <d-form-control>
+                                        <d-button bsStyle="primary" (btnClick)="onSave()">Save</d-button>
+                                        <d-button bsStyle="common" (btnClick)="onCancel()">Cancel</d-button>
+                                    </d-form-control>
+                                </d-form-item>
+                            </form>
+                        </div>
+
+                        <!-- Right Panel -->
+                        <div class="v2-metadata-panel">
+                            <form class="v2-metadata-form">
+                                <d-form-item>
+                                    <d-form-label>Type:</d-form-label>
+                                    <d-form-control>
+                                        <d-tag tag="Epic" labelStyle="primary"></d-tag>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>* Status:</d-form-label>
+                                    <d-form-control>
+                                        <d-select [(ngModel)]="workItemForm.status" name="status"
+                                            [options]="statusOptions" size="sm">
+                                        </d-select>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>* Assigned To:</d-form-label>
+                                    <d-form-control>
+                                        <d-text-input [(ngModel)]="workItemForm.assignedTo" name="assignedTo" size="sm">
+                                        </d-text-input>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>Module:</d-form-label>
+                                    <d-form-control>
+                                        <d-select [(ngModel)]="workItemForm.module" name="module"
+                                            placeholder="--Select--" size="sm">
+                                        </d-select>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>Start Date:</d-form-label>
+                                    <d-form-control>
+                                        <d-text-input [(ngModel)]="workItemForm.startDate" name="startDate" size="sm">
+                                        </d-text-input>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>Due Date:</d-form-label>
+                                    <d-form-control>
+                                        <d-text-input [(ngModel)]="workItemForm.dueDate" name="dueDate" size="sm">
+                                        </d-text-input>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>Order:</d-form-label>
+                                    <d-form-control>
+                                        <d-input-number [(ngModel)]="workItemForm.order" name="order" size="sm">
+                                        </d-input-number>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>* Priority:</d-form-label>
+                                    <d-form-control>
+                                        <d-select [(ngModel)]="workItemForm.priority" name="priority"
+                                            [options]="priorityOptions" size="sm">
+                                        </d-select>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>* Severity:</d-form-label>
+                                    <d-form-control>
+                                        <d-select [(ngModel)]="workItemForm.severity" name="severity"
+                                            [options]="severityOptions" size="sm">
+                                        </d-select>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <d-form-item>
+                                    <d-form-label>Domain:</d-form-label>
+                                    <d-form-control>
+                                        <d-select [(ngModel)]="workItemForm.domain" name="domain"
+                                            [options]="domainOptions" size="sm">
+                                        </d-select>
+                                    </d-form-control>
+                                </d-form-item>
+
+                                <div class="v2-show-more" (click)="toggleShowMore()">
+                                    Show More
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </d-content>
+            </d-layout>
+        </d-layout>
+    </div>
+    }
+
+    <!-- V3: Hybrid Fusion (Enhanced) -->
+    @if (currentView() === 'v3') {
+    <div class="implementation-v3">
+        <div class="hybrid-page-layout">
+            <!-- Header -->
+            <header class="hybrid-header">
+                <div class="hybrid-header-left">
+                    <div class="hybrid-logo-group">
+                        <d-icon icon="icon-menu" cssClass="hybrid-menu-icon"></d-icon>
+                        <span class="hybrid-logo">HUAWEI CLOUD</span>
+                    </div>
+                    <span class="hybrid-divider"></span>
+                    <span class="hybrid-console">Console</span>
+                    <span class="hybrid-divider"></span>
+                    <div class="hybrid-region-selector">
+                        <d-icon icon="icon-deploy" cssClass="hybrid-region-icon"></d-icon>
+                        <span>AP-Singapore</span>
+                        <d-icon icon="icon-chevron-down" cssClass="hybrid-dropdown-icon"></d-icon>
+                    </div>
+                </div>
+                <div class="hybrid-header-right">
+                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-header-btn">
+                        <d-icon icon="icon-home"></d-icon>
+                        <span>Homepage</span>
+                    </d-button>
+                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-header-btn">
+                        <d-icon icon="icon-folder"></d-icon>
+                        <span>Workspace</span>
+                    </d-button>
+                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-header-btn">
+                        <d-icon icon="icon-setting"></d-icon>
+                        <span>Services</span>
+                    </d-button>
+                    <span class="hybrid-divider"></span>
+                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-icon-btn">
+                        <d-icon icon="icon-notification"></d-icon>
+                    </d-button>
+                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-icon-btn">
+                        <d-icon icon="icon-help"></d-icon>
+                    </d-button>
+                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-icon-btn">
+                        <d-icon icon="icon-user"></d-icon>
+                    </d-button>
+                </div>
+            </header>
+
+            <!-- Sidebar -->
+            <aside class="hybrid-sidebar">
+                <div class="hybrid-project-selector">
+                    <div class="hybrid-project-icon">
+                        <d-icon icon="icon-folder" color="var(--devui-primary)"></d-icon>
+                    </div>
+                    <span class="hybrid-project-name">Nodejs_Project</span>
+                    <d-icon icon="icon-chevron-down" cssClass="hybrid-chevron"></d-icon>
+                </div>
+                <nav class="hybrid-nav">
+                    <div class="hybrid-menu-item active">
+                        <d-icon icon="icon-work"></d-icon>
+                        <span class="hybrid-menu-label">Work</span>
+                        <d-icon icon="icon-chevron-right" cssClass="hybrid-expand-icon"></d-icon>
+                    </div>
+                    <div class="hybrid-menu-item">
+                        <d-icon icon="icon-code"></d-icon>
+                        <span class="hybrid-menu-label">Code</span>
+                        <d-icon icon="icon-chevron-right" cssClass="hybrid-expand-icon"></d-icon>
+                    </div>
+                    <div class="hybrid-menu-item">
+                        <d-icon icon="icon-pipeline"></d-icon>
+                        <span class="hybrid-menu-label">CICD</span>
+                        <d-icon icon="icon-chevron-right" cssClass="hybrid-expand-icon"></d-icon>
+                    </div>
+                    <div class="hybrid-menu-item">
+                        <d-icon icon="icon-archive"></d-icon>
+                        <span class="hybrid-menu-label">Artifact</span>
+                        <d-icon icon="icon-chevron-right" cssClass="hybrid-expand-icon"></d-icon>
+                    </div>
+                    <div class="hybrid-menu-item">
+                        <d-icon icon="icon-test"></d-icon>
+                        <span class="hybrid-menu-label">Testing</span>
+                        <d-icon icon="icon-chevron-right" cssClass="hybrid-expand-icon"></d-icon>
+                    </div>
+                    <div class="hybrid-menu-item">
+                        <d-icon icon="icon-book"></d-icon>
+                        <span class="hybrid-menu-label">Documentation</span>
+                        <d-icon icon="icon-chevron-right" cssClass="hybrid-expand-icon"></d-icon>
+                    </div>
+                    <div class="hybrid-menu-item">
+                        <d-icon icon="icon-setting"></d-icon>
+                        <span class="hybrid-menu-label">Settings</span>
+                        <d-icon icon="icon-chevron-down" cssClass="hybrid-expand-icon"></d-icon>
+                    </div>
+                    <div class="hybrid-menu-subitem">
+                        <span class="hybrid-menu-label">General</span>
+                    </div>
+                    <div class="hybrid-menu-subitem">
+                        <span class="hybrid-menu-label">Work</span>
+                    </div>
+                    <div class="hybrid-menu-subitem">
+                        <span class="hybrid-menu-label">Testing</span>
+                    </div>
+                </nav>
+                <div class="hybrid-sidebar-collapse">
+                    <d-icon icon="icon-chevron-left"></d-icon>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="hybrid-main-content">
+                <!-- Breadcrumb -->
+                <d-breadcrumb class="hybrid-breadcrumb">
+                    <d-breadcrumb-item>
+                        <a href="#">Homepage</a>
+                    </d-breadcrumb-item>
+                    <d-breadcrumb-item>
+                        <a href="#">Nodejs_Project</a>
+                    </d-breadcrumb-item>
+                    <d-breadcrumb-item>
+                        <a href="#">Work Items</a>
+                    </d-breadcrumb-item>
+                    <d-breadcrumb-item>
+                        <span>Create work item</span>
+                    </d-breadcrumb-item>
+                </d-breadcrumb>
+
+                <!-- Tabs -->
+                <div class="hybrid-tabs">
+                    <div class="hybrid-tab">Plans</div>
+                    <div class="hybrid-tab active">Work Items</div>
+                    <div class="hybrid-tab">Sprints</div>
+                    <div class="hybrid-tab">Statistics</div>
+                    <div class="hybrid-tab">Reports</div>
+                </div>
+
+                <!-- Work Item Form Card -->
+                <div class="hybrid-form-card">
+                    <form class="hybrid-work-item-form">
+                        <!-- Title Input -->
+                        <div class="hybrid-title-row">
+                            <d-text-input [(ngModel)]="workItemForm.title" name="title" placeholder="Functions"
+                                cssClass="hybrid-title-input" [ngModelOptions]="{standalone: true}">
+                            </d-text-input>
+                        </div>
+
+                        <!-- Tags Row -->
+                        <div class="hybrid-tags-row">
+                            @for (tag of workItemForm.tags; track tag.id) {
+                            <d-tag [tag]="tag.tag" [labelStyle]="tag.labelStyle" [deletable]="true">
+                            </d-tag>
+                            }
+                            <span class="hybrid-add-tag-link" (click)="onAddTag()">Add a tag</span>
+                        </div>
+
+                        <!-- Rich Text Editor -->
+                        <div class="hybrid-editor-container">
+                            <!-- Enhanced Toolbar matching original image -->
+                            <div class="hybrid-editor-toolbar">
+                                <div class="hybrid-toolbar-group">
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-edit"></d-icon>
+                                    </d-button>
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-image"></d-icon>
+                                    </d-button>
+                                </div>
+                                <span class="hybrid-toolbar-divider"></span>
+                                <div class="hybrid-toolbar-group">
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn dropdown">
+                                        <span>Nor...</span>
+                                        <d-icon icon="icon-chevron-down" cssClass="dropdown-arrow"></d-icon>
+                                    </d-button>
+                                </div>
+                                <span class="hybrid-toolbar-divider"></span>
+                                <div class="hybrid-toolbar-group format-group">
+                                    <d-button bsStyle="text" bsSize="sm"
+                                        cssClass="hybrid-tool-btn"><strong>B</strong></d-button>
+                                    <d-button bsStyle="text" bsSize="sm"
+                                        cssClass="hybrid-tool-btn"><em>I</em></d-button>
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn"><u>U</u></d-button>
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn"><s>S</s></d-button>
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <span class="color-a">A</span>
+                                        <d-icon icon="icon-chevron-down" cssClass="dropdown-arrow"></d-icon>
+                                    </d-button>
+                                </div>
+                                <span class="hybrid-toolbar-divider"></span>
+                                <div class="hybrid-toolbar-group">
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-link"></d-icon>
+                                    </d-button>
+                                </div>
+                                <span class="hybrid-toolbar-divider"></span>
+                                <div class="hybrid-toolbar-group list-group">
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-menu"></d-icon>
+                                    </d-button>
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-menu"></d-icon>
+                                    </d-button>
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-check-list"></d-icon>
+                                    </d-button>
+                                </div>
+                                <span class="hybrid-toolbar-divider"></span>
+                                <div class="hybrid-toolbar-group">
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-go-table"></d-icon>
+                                    </d-button>
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-code"></d-icon>
+                                    </d-button>
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-link"></d-icon>
+                                    </d-button>
+                                </div>
+                                <span class="hybrid-toolbar-divider"></span>
+                                <div class="hybrid-toolbar-group">
+                                    <d-button bsStyle="text" bsSize="sm" cssClass="hybrid-tool-btn">
+                                        <d-icon icon="icon-more-oper"></d-icon>
+                                    </d-button>
+                                </div>
+                            </div>
+
+                            <!-- User Story Content -->
+                            <div class="hybrid-story-content">
+                                <div class="hybrid-story-label">As a <strong>user</strong></div>
+                                <div class="hybrid-story-text">
+                                    <p><strong>I want</strong> to be able to create an account, log in and reset my
+                                        password on the Node.js demo application.</p>
+                                </div>
+                            </div>
+
+                            <!-- Character Count -->
+                            <div class="hybrid-char-count">{{ getCharacterCountText() }}</div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="hybrid-file-upload" (click)="onFileSelect()">
+                            <span class="hybrid-upload-icon">+</span>
+                            <span class="hybrid-upload-text">Click to select a file, or drag and drop a file.</span>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="hybrid-form-actions">
+                            <d-button bsStyle="primary" bsSize="md" (btnClick)="onSave()">Save</d-button>
+                            <d-button bsStyle="common" bsSize="md" (btnClick)="onCancel()">Cancel</d-button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+
+            <!-- Right Metadata Panel -->
+            <aside class="hybrid-metadata-panel">
+                <form class="hybrid-metadata-form">
+                    <!-- Type -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label">Type:</label>
+                        <div class="hybrid-field-value">
+                            <d-tag tag="Epic" labelStyle="primary" cssClass="hybrid-type-badge"></d-tag>
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label"><span class="required">*</span> Status:</label>
+                        <div class="hybrid-field-value">
+                            <d-select [(ngModel)]="workItemForm.status" name="status" [options]="statusOptions"
+                                size="sm">
+                            </d-select>
+                        </div>
+                    </div>
+
+                    <!-- Assigned To -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label"><span class="required">*</span> Assigned To:</label>
+                        <div class="hybrid-field-value">
+                            <d-text-input [(ngModel)]="workItemForm.assignedTo" name="assignedTo" size="sm"
+                                [ngModelOptions]="{standalone: true}">
+                            </d-text-input>
+                        </div>
+                    </div>
+
+                    <!-- Module -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label">Module:</label>
+                        <div class="hybrid-field-value">
+                            <d-select [(ngModel)]="workItemForm.module" name="module" placeholder="--Select--"
+                                size="sm">
+                            </d-select>
+                        </div>
+                    </div>
+
+                    <!-- Start Date -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label">Start Date:</label>
+                        <div class="hybrid-field-value">
+                            <d-text-input [(ngModel)]="workItemForm.startDate" name="startDate" size="sm"
+                                [ngModelOptions]="{standalone: true}">
+                            </d-text-input>
+                        </div>
+                    </div>
+
+                    <!-- Due Date -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label">Due Date:</label>
+                        <div class="hybrid-field-value">
+                            <d-text-input [(ngModel)]="workItemForm.dueDate" name="dueDate" size="sm"
+                                [ngModelOptions]="{standalone: true}">
+                            </d-text-input>
+                        </div>
+                    </div>
+
+                    <!-- Order -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label">Order:</label>
+                        <div class="hybrid-field-value">
+                            <d-input-number [(ngModel)]="workItemForm.order" name="order" size="sm">
+                            </d-input-number>
+                        </div>
+                    </div>
+
+                    <!-- Priority -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label"><span class="required">*</span> Priority:</label>
+                        <div class="hybrid-field-value">
+                            <d-select [(ngModel)]="workItemForm.priority" name="priority" [options]="priorityOptions"
+                                size="sm">
+                            </d-select>
+                        </div>
+                    </div>
+
+                    <!-- Severity -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label"><span class="required">*</span> Severity:</label>
+                        <div class="hybrid-field-value">
+                            <d-select [(ngModel)]="workItemForm.severity" name="severity" [options]="severityOptions"
+                                size="sm">
+                            </d-select>
+                        </div>
+                    </div>
+
+                    <!-- Notify -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label">Notify:</label>
+                        <div class="hybrid-field-value">
+                            <d-select [(ngModel)]="workItemForm.notify" name="notify" placeholder="--Select--"
+                                size="sm">
+                            </d-select>
+                        </div>
+                    </div>
+
+                    <!-- Domain -->
+                    <div class="hybrid-field-row">
+                        <label class="hybrid-field-label">Domain:</label>
+                        <div class="hybrid-field-value">
+                            <d-select [(ngModel)]="workItemForm.domain" name="domain" [options]="domainOptions"
+                                size="sm">
+                            </d-select>
+                        </div>
+                    </div>
+
+                    <!-- Show More -->
+                    <div class="hybrid-show-more" (click)="toggleShowMore()">
+                        Show More
+                    </div>
+                </form>
+            </aside>
+        </div>
+    </div>
+    }
+</div>
