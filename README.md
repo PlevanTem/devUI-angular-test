@@ -46,6 +46,7 @@
 
 | 实验名称 | 描述 | 代码位置 | 状态 |
 |----------|------|----------|------|
+| **Card V1** | 基础卡片 - 初版对比实验 | `src/app/card-experiment/` | ✅ 完成 |
 | **Card V2** | 对比 HTML 原生 vs 组件库 vs 融合方案 | `src/app/card-experiment-v2/` | ✅ 完成 |
 | **Card V3** | 基于 Hybrid UI Generator Skill 重构 | `src/app/card-experiment-v3/` | ✅ **验证 Skill 有效性** |
 | **Page V1** | 云配置向导页 - 初版对比实验 | `src/app/page-experiment/` | ✅ 完成 |

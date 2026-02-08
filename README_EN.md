@@ -46,6 +46,7 @@ This project contains two main experiment series:
 
 | Experiment | Description | Location | Status |
 |------------|-------------|----------|--------|
+| **Card V1** | Basic Card - Initial Comparison | `src/app/card-experiment/` | ✅ Done |
 | **Card V2** | Comparison: HTML Native vs Library vs Hybrid | `src/app/card-experiment-v2/` | ✅ Done |
 | **Card V3** | Refactored with Hybrid UI Generator Skill | `src/app/card-experiment-v3/` | ✅ **Validates Skill Effectiveness** |
 | **Page V1** | Cloud Config Wizard - Initial Comparison | `src/app/page-experiment/` | ✅ Done |
