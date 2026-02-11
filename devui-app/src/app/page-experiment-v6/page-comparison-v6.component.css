@@ -1,0 +1,216 @@
+/* 业务规则配置页 - Hybrid 方案，严格使用 Design Tokens */
+
+.rules-config-page {
+  min-height: 100vh;
+  background: var(--devui-bg-page);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== 顶部导航栏 ========== */
+.page-header {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--devui-spacing-lg);
+  height: 56px;
+  background: var(--devui-bg-container);
+  border-bottom: 1px solid var(--devui-dividing-line);
+}
+
+.header-brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--devui-spacing-sm);
+  margin-right: var(--devui-spacing-xl);
+}
+
+.brand-main {
+  font-size: var(--devui-font-size-h4);
+  font-weight: var(--devui-font-weight-bold);
+  color: var(--devui-text-primary);
+}
+
+.brand-sub {
+  font-size: var(--devui-font-size);
+  color: var(--devui-text-secondary);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-lg);
+  flex: 1;
+}
+
+.nav-link {
+  font-size: var(--devui-font-size);
+  color: var(--devui-text-secondary);
+  text-decoration: none;
+  padding: var(--devui-spacing-sm) 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--devui-text-primary);
+}
+
+.nav-link.active {
+  color: var(--devui-primary);
+  font-weight: var(--devui-font-weight-medium);
+  border-bottom-color: var(--devui-primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-md);
+}
+
+.header-search {
+  width: 200px;
+}
+
+.header-icon-wrap {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-icon {
+  font-size: 18px;
+  color: var(--devui-text-secondary);
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-xs);
+  cursor: pointer;
+}
+
+.user-chevron {
+  font-size: 12px;
+  color: var(--devui-text-tertiary);
+}
+
+/* ========== 主内容区 ========== */
+.page-main {
+  flex: 1;
+  padding: var(--devui-spacing-lg);
+  overflow-y: auto;
+}
+
+.page-title {
+  font-size: var(--devui-font-size-h2);
+  font-weight: var(--devui-font-weight-bold);
+  color: var(--devui-text-primary);
+  margin: 0 0 var(--devui-spacing-lg);
+}
+
+/* ========== 场景列表 ========== */
+.scenario-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--devui-spacing-md);
+}
+
+.scenario-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--devui-spacing-md);
+  padding: var(--devui-spacing-md) 0;
+  border-bottom: 1px solid var(--devui-dividing-line);
+}
+
+.scenario-row:last-child {
+  border-bottom: none;
+}
+
+.scenario-name {
+  flex-shrink: 0;
+  width: 180px;
+  font-size: var(--devui-font-size);
+  font-weight: var(--devui-font-weight-medium);
+  color: var(--devui-text-primary);
+  padding-top: var(--devui-spacing-sm);
+}
+
+.scenario-flow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  min-height: 80px;
+}
+
+.scenario-flow.collapsed {
+  display: none;
+}
+
+/* 卡片之间的连接线 */
+.flow-connector {
+  flex-shrink: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--devui-info);
+  opacity: 0.6;
+  margin: 0 var(--devui-spacing-xs);
+}
+
+/* 规则卡片 */
+.rule-card {
+  flex-shrink: 0;
+  width: 240px;
+  border-radius: var(--devui-border-radius-md);
+  box-shadow: var(--devui-shadow-card);
+  border: 1px solid var(--devui-dividing-line);
+}
+
+.rule-card d-card-header,
+.rule-card d-card-title {
+  font-size: var(--devui-font-size);
+  font-weight: var(--devui-font-weight-medium);
+  color: var(--devui-text-primary);
+}
+
+.rule-card d-card-content {
+  padding-top: var(--devui-spacing-sm);
+}
+
+.rule-desc {
+  font-size: var(--devui-font-size-small);
+  color: var(--devui-text-secondary);
+  margin: 0;
+  line-height: var(--devui-line-height-base);
+}
+
+/* 占位符（虚线框） */
+.flow-placeholder {
+  flex-shrink: 0;
+  width: 120px;
+  height: 72px;
+  border: 1px dashed var(--devui-line);
+  border-radius: var(--devui-border-radius-md);
+  background: var(--devui-bg-page);
+}
+
+.collapse-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--devui-text-tertiary);
+  cursor: pointer;
+  border-radius: var(--devui-border-radius-md);
+}
+
+.collapse-btn:hover {
+  background: var(--devui-bg-hover);
+  color: var(--devui-text-secondary);
+}

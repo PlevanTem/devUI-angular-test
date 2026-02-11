@@ -1,0 +1,41 @@
+# 设计稿常见语义 → DevUI 图标名 (d-icon icon="xxx")
+# 用于图生 UI 时从多模态/设计描述中映射到实际组件库图标，减少漏写或错写
+# 使用方式：生成代码时查表填充侧栏/导航的 icon 属性
+
+navigation:
+  首页: icon-home
+  工作台: icon-menu
+  效能看板: icon-standard
+  服务: icon-folder
+  开源镜像站: icon-window  # 若无则用 icon-menu
+  设置: icon-setting
+  搜索: icon-search
+  通知: icon-notification
+  帮助: icon-help
+  用户: icon-user
+  添加: icon-add
+  删除: icon-delete
+  关闭: icon-close
+  下拉: icon-chevron-down
+  右箭头: icon-chevron-right
+
+sidebar_console:
+  通用配置: icon-setting
+  项目设置: icon-folder
+  代码托管: icon-git
+  代码检查: icon-code
+  流水线: icon-pipeline
+  编译构建: icon-code
+  部署: icon-run
+  发布: icon-upload
+  运维: icon-standard
+  测试: icon-test
+  服务配置: icon-menu
+  测试用例配置: icon-document
+  自动任务和脚本: icon-run
+  其他: icon-more-oper
+  wiki: icon-book
+  文档: icon-document
+  私有依赖库: icon-archive
+  资源池管理: icon-database
+  安全: icon-info

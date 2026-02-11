@@ -1,0 +1,23 @@
+# 多模态模型输出 Spec 模板
+# 由视觉大模型（Gemini/Claude/GPT-4V 等）根据设计稿图片生成的结构化描述，
+# 与 parse_ui_image / OmniParser 的解析结果一起参与「双源对比评估」。
+# 填写或由 API 返回后保存为 multimodal_spec_xxx.yaml，供 compare_parser_vs_multimodal.py 使用。
+
+ui_description:
+  整体描述: ""
+  核心功能: ""
+  产品场景: ""
+  页面类型: ""  # form | dashboard | list | detail | wizard | console
+
+region_decomposition:
+  - 区域名称: ""
+    区域位置: ""
+    包含组件: []  # 组件类型或简短描述列表
+    文案摘要: []   # 该区域内可见的主要文案（用于与 OCR 对比）
+
+component_specification: []
+  # 每项建议包含（可与 Hybrid UI Generator Skill 的 component_specification 对齐）:
+  # - 组件类型: Button | TextInput | Toggle | Table | Card | ...
+  # - 所在区域: 对应 region 名称
+  # - 承载信息: 文案/placeholder
+  # - 可选: library_mapping.recommended_component, mapping_confidence

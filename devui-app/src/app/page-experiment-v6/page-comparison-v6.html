@@ -1,0 +1,66 @@
+<div class="rules-config-page">
+  <!-- 顶部导航栏 -->
+  <header class="page-header">
+    <div class="header-brand">
+      <span class="brand-main">HUAWEI</span>
+      <span class="brand-sub">华为 SaaS</span>
+    </div>
+    <nav class="header-nav">
+      @for (item of navItems; track item.label) {
+        <a class="nav-link" [class.active]="item.active" href="#">{{ item.label }}</a>
+      }
+    </nav>
+    <div class="header-actions">
+      <d-search
+        placeholder="请输入"
+        [delay]="300"
+        (searchFn)="onSearch($event)"
+        cssClass="header-search">
+      </d-search>
+      <div class="header-icon-wrap">
+        <d-badge [count]="notificationCount" [status]="'danger'">
+          <d-icon icon="icon-notification" class="header-icon"></d-icon>
+        </d-badge>
+      </div>
+      <div class="header-user">
+        <d-avatar name="用户" [width]="28" [height]="28"></d-avatar>
+        <d-icon icon="icon-chevron-down" class="user-chevron"></d-icon>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="page-main">
+    <h1 class="page-title">业务规则配置</h1>
+
+    <div class="scenario-list">
+      @for (row of scenarios; track row.name) {
+        <div class="scenario-row">
+          <div class="scenario-name">{{ row.name }}</div>
+          <div class="scenario-flow" [class.collapsed]="row.collapsed">
+            @for (node of row.nodes; track $index) {
+              @if ($index > 0) {
+                <div class="flow-connector"></div>
+              }
+              @if (isCard(node)) {
+                <d-card class="rule-card">
+                  <d-card-header>
+                    <d-card-title>{{ node.title }}</d-card-title>
+                  </d-card-header>
+                  <d-card-content>
+                    <p class="rule-desc">{{ node.rules }}</p>
+                  </d-card-content>
+                </d-card>
+              } @else {
+                <div class="flow-placeholder"></div>
+              }
+            }
+          </div>
+          <button type="button" class="collapse-btn" (click)="toggleRow(row)" [attr.aria-expanded]="!row.collapsed">
+            <d-icon [icon]="row.collapsed ? 'icon-chevron-down' : 'icon-chevron-up'"></d-icon>
+          </button>
+        </div>
+      }
+    </div>
+  </main>
+</div>

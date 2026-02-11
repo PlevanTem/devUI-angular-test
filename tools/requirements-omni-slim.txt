@@ -1,0 +1,20 @@
+# OmniParser 精简依赖（仅供参考）
+# 完整安装请使用 tools/OmniParser/requirements.txt，并建议 Python 3.12 环境。
+# 本文件省略 paddlepaddle / paddleocr（在部分平台或 Python 版本上不可用）。
+# 注意：OmniParser 源码在顶层 import paddleocr，因此仅安装本文件无法直接运行完整 OmniParser；
+# 可用于单独使用 torch / easyocr / opencv 做轻量截图解析或实验。
+
+torch
+torchvision
+easyocr
+supervision>=0.18.0
+opencv-python
+opencv-python-headless
+numpy>=1.26.0,<3.0.0
+transformers
+ultralytics>=8.3.0
+gradio
+dill
+accelerate
+timm
+einops>=0.8.0

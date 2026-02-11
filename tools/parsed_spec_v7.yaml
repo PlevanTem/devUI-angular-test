@@ -1,0 +1,332 @@
+ui_description:
+  整体描述: 由 parse_ui_image 从设计稿 OCR 生成的区域与文案摘要，供 Hybrid UI Generator 作为意图理解输入。
+  页面类型: console
+  source_image_size:
+    width: 1920
+    height: 1080
+region_decomposition:
+- 区域名称: 顶部导航栏
+  区域位置: 顶部全宽
+  包含文案数: 12
+  text_samples:
+  - 新功能
+  - MINh
+  - 华为云
+  - 控制台
+  - 华北-北京四
+  - 萏页
+  - 工怍台
+  - 效能看板
+  - 服务
+  - 开源镜像站
+  - 项目设置
+  - 测试用例配置
+- 区域名称: 左侧边栏
+  区域位置: 左侧纵向
+  包含文案数: 19
+  text_samples:
+  - DigitalCity 智薏域市
+  - 通用配置
+  - 项曰设置
+  - 代码托管
+  - 代码裣查
+  - 流水线
+  - 编译构建
+  - 部署
+  - 发布
+  - 运维
+  - 测试
+  - 服务配置
+  - 测试用例配置
+  - 自动任务和脚本
+  - 其他
+  - WIKI
+  - 文档
+  - 私有依赖库
+  - 资源池管理
+- 区域名称: 主内容区
+  区域位置: 中部右侧
+  包含文案数: 40
+  text_samples:
+  - Summary
+  - Thisis
+  - test test. Thisis a
+  - 功能控制
+  - test test. Thisis
+  - testtest
+  - 权限
+  - 开启用例权限
+  - 标记结果
+  - 允许手动标记结果
+  - 标记用例失败时必须输入原因
+  - 关闭后
+  - 迭代用例列表上将不支持标记结朵
+  - 必须通辽自动化任务或者手工任务标记结朵
+  - 精准测试
+  - 开启精准测试
+  - 精准测试可以说朋说朋说朋说明
+  - 自定义选项
+  - 可选枚举值。用于限定用户选择范围
+  - 字段名
+  - 字段类型
+  - 字段值
+  - goodbad wating
+  - feld2
+  - 1.2.3,4,51
+  - 十  添加
+  - 保存
+  - 取消
+  - 自定义字段
+  - 可配笠定制化中英文名祢。配*后
+  - 项日下所有的微服务范围内,
+  - 将显示定制化中英文字段名
+  - 字段中文
+  - 字段英文
+  - 应用平台
+  - Application Platform
+  - 十  添加
+  - 保存
+  - 取消
+  - '+395'
+ocr_elements_count: 71
+ocr_elements_sample:
+- text: 新功能
+  bbox_xyxy:
+  - 1587.0
+  - 3.0
+  - 1629.0
+  - 21.0
+  confidence: 0.707
+  center_y: 12.0
+- text: MINh
+  bbox_xyxy:
+  - 46.0
+  - 26.0
+  - 74.0
+  - 32.0
+  confidence: 0.0
+  center_y: 29.0
+- text: 华为云
+  bbox_xyxy:
+  - 82.0
+  - 8.0
+  - 136.0
+  - 32.0
+  confidence: 0.995
+  center_y: 20.0
+- text: 控制台
+  bbox_xyxy:
+  - 163.0
+  - 11.0
+  - 209.0
+  - 29.0
+  confidence: 0.652
+  center_y: 20.0
+- text: 华北-北京四
+  bbox_xyxy:
+  - 259.0
+  - 13.0
+  - 331.0
+  - 29.0
+  confidence: 0.975
+  center_y: 21.0
+- text: 萏页
+  bbox_xyxy:
+  - 407.0
+  - 11.0
+  - 439.0
+  - 31.0
+  confidence: 0.006
+  center_y: 21.0
+- text: 工怍台
+  bbox_xyxy:
+  - 485.0
+  - 11.0
+  - 531.0
+  - 31.0
+  confidence: 0.701
+  center_y: 21.0
+- text: 效能看板
+  bbox_xyxy:
+  - 581.0
+  - 11.0
+  - 641.0
+  - 31.0
+  confidence: 0.411
+  center_y: 21.0
+- text: 服务
+  bbox_xyxy:
+  - 689.0
+  - 11.0
+  - 721.0
+  - 31.0
+  confidence: 0.843
+  center_y: 21.0
+- text: 开源镜像站
+  bbox_xyxy:
+  - 809.0
+  - 11.0
+  - 885.0
+  - 31.0
+  confidence: 0.67
+  center_y: 21.0
+- text: 项目设置
+  bbox_xyxy:
+  - 64.0
+  - 60.0
+  - 134.0
+  - 84.0
+  confidence: 0.768
+  center_y: 72.0
+- text: 测试用例配置
+  bbox_xyxy:
+  - 304.0
+  - 52.0
+  - 432.0
+  - 82.0
+  confidence: 0.948
+  center_y: 67.0
+- text: DigitalCity 智薏域市
+  bbox_xyxy:
+  - 67.0
+  - 87.0
+  - 175.0
+  - 103.0
+  confidence: 0.046
+  center_y: 95.0
+- text: Summary
+  bbox_xyxy:
+  - 1694.0
+  - 76.0
+  - 1771.0
+  - 97.0
+  confidence: 0.999
+  center_y: 86.5
+- text: Thisis
+  bbox_xyxy:
+  - 1695.0
+  - 107.0
+  - 1739.0
+  - 125.0
+  confidence: 0.847
+  center_y: 116.0
+- text: test test. Thisis a
+  bbox_xyxy:
+  - 1749.0
+  - 107.0
+  - 1865.0
+  - 125.0
+  confidence: 0.49
+  center_y: 116.0
+- text: 功能控制
+  bbox_xyxy:
+  - 324.0
+  - 112.0
+  - 396.0
+  - 136.0
+  confidence: 0.94
+  center_y: 124.0
+- text: 通用配置
+  bbox_xyxy:
+  - 65.0
+  - 125.0
+  - 125.0
+  - 145.0
+  confidence: 0.712
+  center_y: 135.0
+- text: test test. Thisis
+  bbox_xyxy:
+  - 1695.0
+  - 129.0
+  - 1799.0
+  - 147.0
+  confidence: 0.554
+  center_y: 138.0
+- text: testtest
+  bbox_xyxy:
+  - 1809.0
+  - 133.0
+  - 1869.0
+  - 147.0
+  confidence: 0.991
+  center_y: 140.0
+- text: 项曰设置
+  bbox_xyxy:
+  - 65.0
+  - 165.0
+  - 125.0
+  - 185.0
+  confidence: 0.372
+  center_y: 175.0
+- text: 权限
+  bbox_xyxy:
+  - 325.0
+  - 157.0
+  - 359.0
+  - 177.0
+  confidence: 0.892
+  center_y: 167.0
+- text: 开启用例权限
+  bbox_xyxy:
+  - 368.0
+  - 195.0
+  - 458.0
+  - 215.0
+  confidence: 0.899
+  center_y: 205.0
+- text: 代码托管
+  bbox_xyxy:
+  - 65.0
+  - 205.0
+  - 125.0
+  - 225.0
+  confidence: 0.981
+  center_y: 215.0
+- text: 代码裣查
+  bbox_xyxy:
+  - 65.0
+  - 245.0
+  - 127.0
+  - 265.0
+  confidence: 0.655
+  center_y: 255.0
+- text: 标记结果
+  bbox_xyxy:
+  - 325.0
+  - 237.0
+  - 387.0
+  - 257.0
+  confidence: 0.834
+  center_y: 247.0
+- text: 允许手动标记结果
+  bbox_xyxy:
+  - 370.0
+  - 274.0
+  - 486.0
+  - 294.0
+  confidence: 0.713
+  center_y: 284.0
+- text: 流水线
+  bbox_xyxy:
+  - 65.0
+  - 285.0
+  - 113.0
+  - 305.0
+  confidence: 0.991
+  center_y: 295.0
+- text: 标记用例失败时必须输入原因
+  bbox_xyxy:
+  - 370.0
+  - 308.0
+  - 556.0
+  - 328.0
+  confidence: 0.63
+  center_y: 318.0
+- text: 编译构建
+  bbox_xyxy:
+  - 65.0
+  - 325.0
+  - 125.0
+  - 345.0
+  confidence: 0.934
+  center_y: 335.0

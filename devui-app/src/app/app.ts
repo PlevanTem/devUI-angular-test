@@ -7,16 +7,18 @@ import { PageComparisonV3Component } from './page-experiment-v3/page-comparison-
 import { CardComparisonV3Component } from './card-experiment-v3/card-comparison-v3.component';
 import { PageComparisonV4Component } from './page-experiment-v4/page-comparison-v4.component';
 import { PageComparisonV5Component } from './page-experiment-v5/page-comparison-v5.component';
+import { PageComparisonV6Component } from './page-experiment-v6/page-comparison-v6.component';
+import { PageComparisonV7Component } from './page-experiment-v7/page-comparison-v7.component';
 import { ButtonModule } from 'ng-devui/button';
 
 @Component({
   selector: 'app-root',
-  imports: [CardComparisonComponent, PageComparisonComponent, CardComparisonV2Component, PageComparisonV2Component, PageComparisonV3Component, CardComparisonV3Component, PageComparisonV4Component, PageComparisonV5Component, ButtonModule],
+  imports: [CardComparisonComponent, PageComparisonComponent, CardComparisonV2Component, PageComparisonV2Component, PageComparisonV3Component, CardComparisonV3Component, PageComparisonV4Component, PageComparisonV5Component, PageComparisonV6Component, PageComparisonV7Component, ButtonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  currentView = signal<'menu' | 'card' | 'page' | 'card-v2' | 'page-v2' | 'page-v3' | 'card-v3' | 'page-v4' | 'page-v5'>('menu');
+  currentView = signal<'menu' | 'card' | 'page' | 'card-v2' | 'page-v2' | 'page-v3' | 'card-v3' | 'page-v4' | 'page-v5' | 'page-v6' | 'page-v7'>('menu');
 
   showCardComparison() {
     this.currentView.set('card');
@@ -48,6 +50,14 @@ export class App {
 
   showPageComparisonV5() {
     this.currentView.set('page-v5');
+  }
+
+  showPageComparisonV6() {
+    this.currentView.set('page-v6');
+  }
+
+  showPageComparisonV7() {
+    this.currentView.set('page-v7');
   }
 
   showMenu() {

@@ -1,0 +1,474 @@
+/* 测试用例配置页 - Hybrid 方案
+ * [自定义] 本文件均为自定义样式，使用 Design Token (var(--devui-*))，非组件库自带样式。
+ * 布局容器（.page-header, .sidebar, .main-content 等）为原生结构样式；
+ * 库组件（d-button, d-toggle, d-text-input 等）使用其默认样式，此处仅做布局/间距配合。
+ */
+
+.test-config-page {
+  min-height: 100vh;
+  background: var(--devui-bg-page);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== [自定义] 顶部导航：原生 header 布局 ========== */
+.page-header {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--devui-spacing-lg);
+  height: 56px;
+  background: var(--devui-bg-container);
+  border-bottom: 1px solid var(--devui-dividing-line);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-sm);
+  margin-right: var(--devui-spacing-lg);
+}
+
+.brand-text {
+  font-size: var(--devui-font-size-h4);
+  font-weight: var(--devui-font-weight-bold);
+  color: var(--devui-text-primary);
+}
+
+.brand-console {
+  font-size: var(--devui-font-size);
+  color: var(--devui-text-secondary);
+}
+
+.header-region {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--devui-spacing-xs);
+  font-size: var(--devui-font-size-small);
+  color: var(--devui-text-secondary);
+  margin-left: var(--devui-spacing-sm);
+  cursor: pointer;
+}
+
+.region-chevron {
+  font-size: 12px;
+  color: var(--devui-text-tertiary);
+}
+
+.nav-link,
+.nav-dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--devui-spacing-xs);
+}
+
+.nav-link-icon {
+  font-size: 16px;
+  color: var(--devui-text-secondary);
+}
+
+.nav-link-chevron {
+  font-size: 12px;
+  color: var(--devui-text-tertiary);
+}
+
+.header-user-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--devui-spacing-xs);
+  cursor: pointer;
+}
+
+.user-chevron {
+  font-size: 12px;
+  color: var(--devui-text-tertiary);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-md);
+  flex: 1;
+}
+
+.nav-link,
+.nav-dropdown {
+  font-size: var(--devui-font-size);
+  color: var(--devui-text-secondary);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--devui-primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-sm);
+}
+
+.header-search {
+  width: 160px;
+}
+
+.header-icon {
+  font-size: 18px;
+  color: var(--devui-text-secondary);
+  cursor: pointer;
+}
+
+/* ========== [自定义] 主体布局：flex 侧栏+内容 ========== */
+.page-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ========== [自定义] 侧栏：原生 aside 样式 ========== */
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--devui-bg-container);
+  border-right: 1px solid var(--devui-dividing-line);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.sidebar-project {
+  padding: var(--devui-spacing-lg);
+  border-bottom: 1px solid var(--devui-dividing-line);
+}
+
+.sidebar-project-label {
+  display: inline-block;
+  font-size: var(--devui-font-size-small);
+  color: var(--devui-text-tertiary);
+}
+
+.sidebar-project-search {
+  float: right;
+  font-size: 14px;
+  color: var(--devui-text-tertiary);
+  cursor: pointer;
+}
+
+.sidebar-project-name {
+  display: block;
+  font-size: var(--devui-font-size);
+  font-weight: var(--devui-font-weight-medium);
+  color: var(--devui-text-primary);
+  margin-top: var(--devui-spacing-xs);
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-sm);
+  padding: var(--devui-spacing-sm) var(--devui-spacing-lg);
+  font-size: var(--devui-font-size);
+  color: var(--devui-text-secondary);
+  text-decoration: none;
+}
+
+.sidebar-item-icon {
+  flex-shrink: 0;
+  font-size: 16px;
+  color: var(--devui-text-tertiary);
+}
+
+.sidebar-item-text {
+  flex: 1;
+}
+
+.sidebar-item-arrow {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--devui-text-tertiary);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: var(--devui-spacing-sm) 0;
+}
+
+.sidebar-item {
+  display: block;
+  padding: var(--devui-spacing-sm) var(--devui-spacing-lg);
+  font-size: var(--devui-font-size);
+  color: var(--devui-text-secondary);
+  text-decoration: none;
+}
+
+.sidebar-item:hover {
+  background: var(--devui-bg-hover);
+  color: var(--devui-text-primary);
+}
+
+.sidebar-item:hover .sidebar-item-icon,
+.sidebar-item:hover .sidebar-item-arrow {
+  color: var(--devui-text-secondary);
+}
+
+.sidebar-item.active {
+  background: var(--devui-primary);
+  color: var(--devui-text-white);
+  font-weight: var(--devui-font-weight-medium);
+  border-left: 3px solid var(--devui-primary-active);
+  margin-left: 0;
+  padding-left: calc(var(--devui-spacing-lg) - 3px);
+}
+
+.sidebar-item.active .sidebar-item-icon,
+.sidebar-item.active .sidebar-item-arrow {
+  color: var(--devui-text-white);
+}
+
+.sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-sm);
+  padding: var(--devui-spacing-md) var(--devui-spacing-lg);
+  border-top: 1px solid var(--devui-dividing-line);
+}
+
+.sidebar-setting {
+  font-size: 18px;
+  color: var(--devui-text-tertiary);
+  cursor: pointer;
+}
+
+.sidebar-footer-arrow {
+  font-size: 12px;
+  color: var(--devui-text-tertiary);
+}
+
+/* ========== [自定义] 主内容区 ========== */
+.main-content {
+  flex: 1;
+  padding: var(--devui-spacing-lg);
+  overflow-y: auto;
+}
+
+.content-title {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-sm);
+  font-size: var(--devui-font-size-h3);
+  font-weight: var(--devui-font-weight-bold);
+  color: var(--devui-text-primary);
+  margin: 0 0 var(--devui-spacing-lg);
+}
+
+.title-icon {
+  font-size: 20px;
+  color: var(--devui-text-tertiary);
+}
+
+/* ========== [自定义] 配置区块卡片容器 ========== */
+.config-section {
+  background: var(--devui-bg-container);
+  border-radius: var(--devui-border-radius-lg);
+  padding: var(--devui-spacing-lg);
+  margin-bottom: var(--devui-spacing-lg);
+  box-shadow: var(--devui-shadow-card);
+  border: 1px solid var(--devui-dividing-line);
+}
+
+.section-title {
+  font-size: var(--devui-font-size-h4);
+  font-weight: var(--devui-font-weight-medium);
+  color: var(--devui-text-primary);
+  margin: 0 0 var(--devui-spacing-md);
+}
+
+.section-desc {
+  font-size: var(--devui-font-size-small);
+  color: var(--devui-text-secondary);
+  margin: 0 0 var(--devui-spacing-md);
+  line-height: var(--devui-line-height-base);
+}
+
+.subsection {
+  margin-bottom: var(--devui-spacing-lg);
+}
+
+.subsection:last-of-type {
+  margin-bottom: 0;
+}
+
+.subsection-title {
+  font-size: var(--devui-font-size);
+  font-weight: var(--devui-font-weight-medium);
+  color: var(--devui-text-primary);
+  margin: 0 0 var(--devui-spacing-sm);
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: var(--devui-spacing-md);
+  margin-bottom: var(--devui-spacing-sm);
+}
+
+.toggle-label {
+  flex: 1;
+  font-size: var(--devui-font-size);
+  color: var(--devui-text-primary);
+}
+
+.subsection-desc {
+  font-size: var(--devui-font-size-small);
+  color: var(--devui-text-tertiary);
+  margin: var(--devui-spacing-sm) 0 0;
+  line-height: var(--devui-line-height-base);
+}
+
+/* ========== [自定义] 表格：原生 table + 配合 d-text-input 布局 ========== */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: var(--devui-spacing-md);
+}
+
+.config-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--devui-font-size);
+}
+
+.config-table th,
+.config-table td {
+  padding: var(--devui-spacing-sm) var(--devui-spacing-md);
+  text-align: left;
+  border-bottom: 1px solid var(--devui-dividing-line);
+}
+
+.config-table th {
+  font-weight: var(--devui-font-weight-medium);
+  color: var(--devui-text-secondary);
+  background: var(--devui-bg-page);
+}
+
+.config-table td .col-action,
+.col-action {
+  width: 48px;
+  text-align: center;
+}
+
+.config-table d-text-input {
+  width: 100%;
+  min-width: 120px;
+}
+
+.config-table d-text-input:focus-within,
+.config-table .devui-form-control:focus-within {
+  outline: none;
+}
+
+.config-table input:focus {
+  border-color: var(--devui-primary);
+  box-shadow: 0 0 0 2px rgba(94, 124, 224, 0.2);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--devui-text-tertiary);
+  cursor: pointer;
+  border-radius: var(--devui-border-radius-md);
+}
+
+.btn-icon:hover:not(:disabled) {
+  background: var(--devui-bg-hover);
+  color: var(--devui-danger);
+}
+
+.btn-icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.section-actions {
+  display: flex;
+  gap: var(--devui-spacing-sm);
+  margin-top: var(--devui-spacing-md);
+}
+
+/* ========== [自定义] Toast 容器（非 d-toast 组件，自定义实现） ========== */
+.toast {
+  position: fixed;
+  top: var(--devui-spacing-lg);
+  right: var(--devui-spacing-lg);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--devui-spacing-sm);
+  padding: var(--devui-spacing-md) var(--devui-spacing-lg);
+  background: var(--devui-bg-container);
+  border-radius: var(--devui-border-radius-md);
+  box-shadow: var(--devui-shadow-modal);
+  border: 1px solid var(--devui-dividing-line);
+  z-index: 1000;
+  max-width: 360px;
+}
+
+.toast-success {
+  background: var(--devui-success);
+  border-color: var(--devui-success);
+}
+
+.toast-success .toast-icon {
+  color: var(--devui-text-white);
+}
+
+.toast-success .toast-title,
+.toast-success .toast-content {
+  color: var(--devui-text-white);
+}
+
+.toast-success .toast-close {
+  color: var(--devui-text-white);
+}
+
+.toast-icon {
+  font-size: 20px;
+  color: var(--devui-success);
+  flex-shrink: 0;
+}
+
+.toast-body {
+  flex: 1;
+}
+
+.toast-title {
+  font-size: var(--devui-font-size);
+  font-weight: var(--devui-font-weight-medium);
+  color: var(--devui-text-primary);
+  margin-bottom: var(--devui-spacing-xs);
+}
+
+.toast-content {
+  font-size: var(--devui-font-size-small);
+  color: var(--devui-text-secondary);
+  line-height: var(--devui-line-height-base);
+}
+
+.toast-close {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--devui-text-tertiary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-close:hover {
+  color: var(--devui-text-primary);
+}

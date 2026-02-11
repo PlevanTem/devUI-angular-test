@@ -1,0 +1,20 @@
+# Python 虚拟环境
+.venv/
+.venv-omni/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# OmniParser 模型权重（体积大，按需下载）
+tools/OmniParser/weights/
+
+# IDE / OS
+.idea/
+.DS_Store
+*.swp
+*.swo
+tools/OmniParser

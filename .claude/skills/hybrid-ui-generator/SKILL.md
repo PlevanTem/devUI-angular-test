@@ -96,6 +96,16 @@ analysis_dimensions:
 
 **⚠️ 重要提示**: 多模态识别的边距、字体大小、颜色色值不一定完全准确，需要结合设计规范和经验进行优化校正。
 
+**可选视觉辅助：OmniParser / 轻量解析**  
+本项目在 `tools/OmniParser` 中集成了 [Microsoft OmniParser](https://github.com/microsoft/OmniParser)，用于对设计稿截图做**结构化解析**（布局区域、可交互元素、图标描述、OCR 文案等）。另提供不依赖 Paddle 的轻量脚本 `tools/parse_ui_image.py`（EasyOCR + OpenCV），输出与 Skill 对齐的 `region_decomposition` 与文案样本。环境与用法见项目内 `tools/README.md`。
+
+**双源验证：解析器 + 多模态**  
+解析器（OmniParser 或 parse_ui_image）**无法正确识别部分组件信息**（如组件类型、交互控件种类），且 OCR 存在误识（如「工怍台」「智薏域市」）。建议将**解析器输出**与**多模态模型**（Gemini/Claude/GPT-4V 等）对同一设计稿的识别结果**一起做评估与合并**：
+1. **输出格式统一**：多模态按本 Skill 的 `region_decomposition`、`component_specification` 输出结构化 Spec（模板见 `tools/spec_schema/multimodal_spec_template.yaml`）。
+2. **对比评估**：运行 `tools/compare_parser_vs_multimodal.py <解析器 Spec> <多模态 Spec> --output report.md`，得到区域一致度、文案重叠率、仅解析器/仅多模态的差异与冲突。
+3. **合并策略**：区域划分以多模态为主，用解析器 `text_samples` 补全/校正漏识或错识文案；组件规格采用多模态的 `component_specification`，用解析器 OCR 校验按钮/输入框等承载文案；冲突项经人工确认后写入最终 UI Spec。
+4. **报告示例**：`tools/eval_report_v7.md` 为同一设计稿的双源对比示例。
+
 ```yaml
 visual_analysis_process:
   # Step 1: 宏观扫描 (Macro Scan)
@@ -663,6 +673,24 @@ documentation:
     - Token dependencies
     - Known limitations
 ```
+
+### 4.4 Code Commenting Convention | 代码注释规范（区分库组件与自定义）
+
+**生成代码时必须在模板与样式中加入注释**，便于区分「前端组件库调用」与「自定义/原生实现」：
+
+- **`[库组件]`**：直接使用组件库的标签/组件（如 `d-button`、`d-toggle`、`d-text-input`、`d-icon`、`d-search`、`d-avatar`、`d-card` 等）。注释格式示例：
+  - HTML：`<!-- [库组件] DevUI d-button -->` 或紧贴在该标签上一行。
+  - 若同一块内连续多个库组件，可合并为：`<!-- [库组件] d-button, d-icon, d-search -->`。
+- **`[自定义]`**：原生 HTML 容器、自定义布局、自定义样式类、或仅用 Design Token 的自写结构。注释格式示例：
+  - HTML：`<!-- [自定义] 顶部导航容器，原生 header + flex 布局 -->`
+  - CSS：`/* [自定义] 使用 Design Token，非组件库样式 */` 或 `/* [自定义] 侧栏布局 */`
+
+**规则**：
+- 每个主要区块（header、sidebar、main、section、table 容器等）至少有一处注明 `[自定义]` 或 `[库组件]`。
+- 库组件与自定义混合时，在区块开头用注释说明整体（如「[自定义] 容器 + [库组件] 内部 d-toggle」），内部可对关键库组件再标 `[库组件]`。
+- 样式文件中，对「仅用 var(--devui-*) 的自定义布局/间距」标 `[自定义]`，对「覆盖或配合库组件的样式」可标 `[自定义] 覆盖/配合 d-xxx`。
+
+这样在阅读与后续维护时，可快速区分哪些依赖组件库、哪些为自行实现的 Hybrid 部分。
 
 ---
 

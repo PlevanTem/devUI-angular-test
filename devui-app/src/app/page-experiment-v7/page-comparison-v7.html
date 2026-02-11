@@ -1,0 +1,193 @@
+<!-- [自定义] 页面根容器，Hybrid 布局：原生结构 + 下方库组件 -->
+<div class="test-config-page">
+  <!-- [自定义] 顶部导航：原生 header + flex，内部右侧为库组件 -->
+  <header class="page-header">
+    <div class="header-brand">
+      <span class="brand-text">华为云</span>
+      <span class="brand-console">控制台</span>
+      <!-- [自定义] 区域下拉样式；[库组件] 可用 d-select 替代 -->
+      <span class="header-region">
+        华北-北京四
+        <d-icon icon="icon-chevron-down" class="region-chevron"></d-icon>
+      </span>
+    </div>
+    <nav class="header-nav">
+      <a class="nav-link" href="#"><d-icon icon="icon-home" class="nav-link-icon"></d-icon>首页</a>
+      <a class="nav-link" href="#"><d-icon icon="icon-menu" class="nav-link-icon"></d-icon>工作台</a>
+      <a class="nav-link" href="#"><d-icon icon="icon-standard" class="nav-link-icon"></d-icon>效能看板</a>
+      <span class="nav-dropdown"><d-icon icon="icon-folder" class="nav-link-icon"></d-icon>服务<d-icon icon="icon-chevron-down" class="nav-link-chevron"></d-icon></span>
+      <a class="nav-link" href="#"><d-icon icon="icon-menu" class="nav-link-icon"></d-icon>开源镜像站</a>
+    </nav>
+    <div class="header-actions">
+      <d-button bsStyle="danger" bsSize="sm">新功能</d-button>
+      <d-icon icon="icon-add" class="header-icon"></d-icon>
+      <d-search placeholder="搜索" [delay]="300" cssClass="header-search"></d-search>
+      <d-icon icon="icon-notification" class="header-icon"></d-icon>
+      <d-icon icon="icon-help" class="header-icon"></d-icon>
+      <span class="header-user-wrap">
+        <d-avatar name="用户" [width]="28" [height]="28"></d-avatar>
+        <d-icon icon="icon-chevron-down" class="user-chevron"></d-icon>
+      </span>
+    </div>
+  </header>
+
+  <!-- [自定义] 主体：原生 flex 布局，左侧边栏 + 主内容 -->
+  <div class="page-body">
+    <!-- [自定义] 左侧边栏：原生 aside + nav，仅底部图标用库组件 -->
+    <aside class="sidebar">
+      <div class="sidebar-project">
+        <span class="sidebar-project-label">项目设置</span>
+        <d-icon icon="icon-search" class="sidebar-project-search"></d-icon>
+        <span class="sidebar-project-name">DigitalCity智慧城市</span>
+      </div>
+      <nav class="sidebar-nav">
+        @for (item of sidebarMenus; track item.label) {
+          <a class="sidebar-item" [class.active]="item.active" href="#">
+            <d-icon [icon]="item.icon" class="sidebar-item-icon"></d-icon>
+            <span class="sidebar-item-text">{{ item.label }}</span>
+            <d-icon icon="icon-chevron-right" class="sidebar-item-arrow"></d-icon>
+          </a>
+        }
+      </nav>
+      <div class="sidebar-footer">
+        <d-icon icon="icon-setting" class="sidebar-setting"></d-icon>
+        <d-icon icon="icon-chevron-right" class="sidebar-footer-arrow"></d-icon>
+      </div>
+    </aside>
+
+    <!-- [自定义] 主内容区：原生 main + section，内部控件为库组件 -->
+    <main class="main-content">
+      <h1 class="content-title">
+        <!-- [库组件] DevUI d-icon -->
+        <d-icon icon="icon-search" class="title-icon"></d-icon>
+        测试用例配置
+      </h1>
+
+      <!-- [自定义] 功能控制区块容器；内部开关为库组件 -->
+      <section class="config-section">
+        <h2 class="section-title">功能控制</h2>
+        <div class="subsection">
+          <h3 class="subsection-title">权限</h3>
+          <div class="toggle-row">
+            <span class="toggle-label">开启用例权限</span>
+            <!-- [库组件] DevUI d-toggle -->
+            <d-toggle [(ngModel)]="enableCasePermission"></d-toggle>
+          </div>
+        </div>
+        <div class="subsection">
+          <h3 class="subsection-title">标记结果</h3>
+          <div class="toggle-row">
+            <span class="toggle-label">允许手动标记结果</span>
+            <d-toggle [(ngModel)]="allowManualMarkResult"></d-toggle>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">标记用例失败时必须输入原因</span>
+            <d-toggle [(ngModel)]="requireReasonOnFail"></d-toggle>
+          </div>
+          <p class="subsection-desc">关闭后，迭代用例列表上将不支持标记结果，必须通过自动化任务或者手工任务标记结果。</p>
+        </div>
+        <div class="subsection">
+          <h3 class="subsection-title">精准测试</h3>
+          <div class="toggle-row">
+            <span class="toggle-label">开启精准测试</span>
+            <d-toggle [(ngModel)]="enablePreciseTest"></d-toggle>
+          </div>
+          <p class="subsection-desc">精准测试可以说明说明说明说明。</p>
+        </div>
+      </section>
+
+      <!-- [自定义] 自定义选项区块：原生 table 布局，单元格内为库组件 -->
+      <section class="config-section">
+        <h2 class="section-title">自定义选项</h2>
+        <p class="section-desc">可选枚举值，用于限定用户选择范围。</p>
+        <div class="table-wrap">
+          <table class="config-table">
+            <thead>
+              <tr>
+                <th>字段名</th>
+                <th>字段类型</th>
+                <th>字段值</th>
+                <th class="col-action"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of customOptions; track $index) {
+                <tr>
+                  <!-- [库组件] DevUI d-text-input -->
+                  <td><d-text-input [(ngModel)]="row.fieldName" placeholder="字段名" [disabled]="row.fieldName === 'tags'"></d-text-input></td>
+                  <td><d-text-input [(ngModel)]="row.fieldType" placeholder="枚举"></d-text-input></td>
+                  <td><d-text-input [(ngModel)]="row.fieldValue" placeholder="字段值"></d-text-input></td>
+                  <td class="col-action">
+                    <!-- [自定义] 原生 button；[库组件] 内嵌 d-icon -->
+                    <button type="button" class="btn-icon" (click)="removeCustomOption($index)" [disabled]="customOptions.length <= 1">
+                      <d-icon icon="icon-delete"></d-icon>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <!-- [库组件] DevUI d-button + d-icon -->
+        <d-button bsStyle="common" bsSize="sm" (btnClick)="addCustomOption()">
+          <d-icon icon="icon-add"></d-icon> 添加
+        </d-button>
+        <div class="section-actions">
+          <d-button bsStyle="primary" (btnClick)="saveOptions()">保存</d-button>
+          <d-button bsStyle="common">取消</d-button>
+        </div>
+      </section>
+
+      <!-- [自定义] 自定义字段区块：原生 table，单元格内库组件 -->
+      <section class="config-section">
+        <h2 class="section-title">自定义字段</h2>
+        <p class="section-desc">可配置定制化中英文名称，配置后，项目下所有的微服务范围内，将显示定制化中英文字段名。</p>
+        <div class="table-wrap">
+          <table class="config-table">
+            <thead>
+              <tr>
+                <th>字段中文</th>
+                <th>字段英文</th>
+                <th class="col-action"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of customFields; track $index) {
+                <tr>
+                  <td><d-text-input [(ngModel)]="row.fieldZh" placeholder="字段中文"></d-text-input></td>
+                  <td><d-text-input [(ngModel)]="row.fieldEn" placeholder="字段英文"></d-text-input></td>
+                  <td class="col-action">
+                    <button type="button" class="btn-icon" (click)="removeCustomField($index)" [disabled]="customFields.length <= 1">
+                      <d-icon icon="icon-delete"></d-icon>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <d-button bsStyle="common" bsSize="sm" (btnClick)="addCustomField()">
+          <d-icon icon="icon-add"></d-icon> 添加
+        </d-button>
+        <div class="section-actions">
+          <d-button bsStyle="primary" (btnClick)="saveFields()">保存</d-button>
+          <d-button bsStyle="common">取消</d-button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- [自定义] Toast 容器；[库组件] 内嵌 d-icon -->
+  @if (showToast) {
+    <div class="toast toast-success">
+      <d-icon icon="icon-success" class="toast-icon"></d-icon>
+      <div class="toast-body">
+        <div class="toast-title">Summary</div>
+        <div class="toast-content">This is a test test. This is a test test. This is a test test.</div>
+      </div>
+      <button type="button" class="toast-close" (click)="showToast = false">
+        <d-icon icon="icon-close"></d-icon>
+      </button>
+    </div>
+  }
+</div>
